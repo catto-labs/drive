@@ -1,0 +1,11 @@
+{
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+
+  "cSpell.language": "en",
+  "cSpell.words": [
+    "catto",
+    "Supabase"
+  ]
+}
