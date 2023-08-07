@@ -1,6 +1,15 @@
-import { defineConfig } from "unocss";
+import { defineConfig, presetUno } from "unocss";
+
+import presetRemToPx from "@unocss/preset-rem-to-px";
+import transformerVariantGroup from "@unocss/transformer-variant-group";
 
 export default defineConfig({
-  // ...UnoCSS options
-});
+  presets: [
+    presetUno(),
+    presetRemToPx()
+  ],
 
+  transformers: [
+    transformerVariantGroup()
+  ]
+});
