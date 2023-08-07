@@ -1,5 +1,6 @@
 // @refresh reload
 import "virtual:uno.css";
+import "@unocss/reset/tailwind.css";
 
 import { Suspense } from "solid-js";
 import {
@@ -11,7 +12,7 @@ import {
   Meta,
   Routes,
   Scripts,
-  Title
+  Title,
 } from "solid-start";
 
 export default function Root() {
@@ -35,4 +36,3 @@ export default function Root() {
     </Html>
   );
 }
-

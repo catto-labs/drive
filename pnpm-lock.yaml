@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -11,6 +11,9 @@ dependencies:
   '@solidjs/router':
     specifier: ^0.8.2
     version: 0.8.2(solid-js@1.7.8)
+  '@unocss/reset':
+    specifier: ^0.54.2
+    version: 0.54.2
   solid-js:
     specifier: ^1.7.8
     version: 1.7.8
@@ -1871,7 +1874,6 @@ packages:
 
   /@unocss/reset@0.54.2:
     resolution: {integrity: sha512-awM74dNKWjl6p9mGqCGIzy3ivy8YJTX7OfQ4CywjyRjrhqZKTgEVV5W7lAr58cOCvariuskWtgfVcyM55uWM3Q==}
-    dev: true
 
   /@unocss/scope@0.54.2:
     resolution: {integrity: sha512-P5jTWGqyCVL5vtgulvwXm7EdoG78PLZhwwIO2pTDu7ODHxpVYE48G27EvTsjPN/Yr5WLcC4C7TXoWbv9bt3Khg==}
