@@ -17,6 +17,7 @@
     "vite": "^4.4.6"
   },
   "dependencies": {
+    "@kobalte/core": "^0.9.8",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
     "@supabase/supabase-js": "^2.32.0",
