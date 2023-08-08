@@ -43,6 +43,9 @@ devDependencies:
   unocss:
     specifier: ^0.54.2
     version: 0.54.2(postcss@8.4.27)(rollup@3.27.2)(vite@4.4.6)
+  unocss-catppuccin:
+    specifier: ^0.2.0
+    version: 0.2.0
   unplugin-icons:
     specifier: ^0.16.5
     version: 0.16.5
@@ -1179,6 +1182,10 @@ packages:
       '@babel/helper-string-parser': 7.22.5
       '@babel/helper-validator-identifier': 7.22.5
       to-fast-properties: 2.0.0
+
+  /@catppuccin/palette@0.2.0:
+    resolution: {integrity: sha512-PoAMQMEbL8fBEO80eusB+XQg+1i2kxQHw6COwBRC4bVWxWuRroZjm3K6bOdqPHNHKikDIV7wLi9hSG4NoD1FEQ==}
+    dev: true
 
   /@esbuild/android-arm64@0.17.19:
     resolution: {integrity: sha512-KBMWvEZooR7+kzY0BtbTQn0OAYY7CsiydT63pVEaPtVYF0hXbUaOyZog37DKxK7NF3XacBJOpYT4adIJh+avxA==}
@@ -3563,6 +3570,13 @@ packages:
   /universalify@2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
     engines: {node: '>= 10.0.0'}
+
+  /unocss-catppuccin@0.2.0:
+    resolution: {integrity: sha512-kP2NCwih04J0RPhThXTbWoA65RTRRGZhX/xKWUjaTnBH4gCpatChGos4lhOXGuYWHun79d5/tvjfy7Ji0qGIXA==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@catppuccin/palette': 0.2.0
+    dev: true
 
   /unocss@0.54.2(postcss@8.4.27)(rollup@3.27.2)(vite@4.4.6):
     resolution: {integrity: sha512-a3l1xAyIP59REem85IHSA+vDu4qovD7HwhUcEbUSX/NKmOZrm1OhUNKbSIzuQQWGdBa8ffagFBNfyXk2b8qSEg==}

@@ -1,4 +1,5 @@
 import { defineConfig, presetUno } from "unocss";
+import { extendCatppuccin } from "unocss-catppuccin";
 
 import presetRemToPx from "@unocss/preset-rem-to-px";
 import transformerVariantGroup from "@unocss/transformer-variant-group";
@@ -6,10 +7,9 @@ import transformerVariantGroup from "@unocss/transformer-variant-group";
 export default defineConfig({
   presets: [
     presetUno(),
-    presetRemToPx()
+    presetRemToPx(),
+    extendCatppuccin({ prefix: "", defaultVariant: "macchiato" }),
   ],
 
-  transformers: [
-    transformerVariantGroup()
-  ]
+  transformers: [transformerVariantGroup()],
 });
