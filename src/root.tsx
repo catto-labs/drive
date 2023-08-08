@@ -18,7 +18,7 @@ import {
   Title,
 } from "solid-start";
 
-export default function Root () {
+export default function Root() {
   onMount(async () => {
     const { data } = await supabase.auth.getSession();
     setAuth({ loading: false, session: data.session });
@@ -31,7 +31,7 @@ export default function Root () {
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Body>
+      <Body class="bg-[url(https://source.unsplash.com/collection/11649432)] bg-cover bg-center bg-crust">
         <Suspense>
           <ErrorBoundary>
             <Routes>
