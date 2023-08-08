@@ -8,7 +8,7 @@
     "jsxImportSource": "solid-js",
     "jsx": "preserve",
     "strict": true,
-    "types": ["solid-start/env"],
+    "types": ["solid-start/env", "unplugin-icons/types/solid"],
     "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]

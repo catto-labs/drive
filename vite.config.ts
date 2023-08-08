@@ -6,22 +6,26 @@ import solid from "solid-start/vite";
 // @ts-expect-error
 import netlify from "solid-start-netlify";
 
+import Icons from "unplugin-icons/vite";
+
 import unocss from "unocss/vite";
 
 export default defineConfig({
   plugins: [
     unocss(),
-    solid({ ssr: false, adapter: netlify() })
+    solid({ ssr: false, adapter: netlify() }),
+    Icons({
+      /* options */
+    }),
   ],
 
   server: {
-    strictPort: true
+    strictPort: true,
   },
 
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src")
-    }
-  }
+      "@": path.resolve(__dirname, "src"),
+    },
+  },
 });
-
