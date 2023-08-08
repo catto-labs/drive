@@ -6,11 +6,13 @@
   },
   "type": "module",
   "devDependencies": {
+    "@iconify-json/mdi": "^1.1.54",
     "@unocss/preset-rem-to-px": "^0.54.2",
     "@unocss/transformer-variant-group": "^0.54.2",
     "solid-start-netlify": "^0.2.30",
     "typescript": "^4.9.4",
     "unocss": "^0.54.2",
+    "unplugin-icons": "^0.16.5",
     "vite": "^4.4.6"
   },
   "dependencies": {
