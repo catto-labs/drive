@@ -2,7 +2,10 @@
 import "virtual:uno.css";
 import "@unocss/reset/tailwind.css";
 
-import { Suspense } from "solid-js";
+import { Suspense, onMount } from "solid-js";
+import { supabase } from "@/supabase/client";
+import { setAuth } from "./stores/auth";
+
 import {
   Body,
   ErrorBoundary,
@@ -15,7 +18,12 @@ import {
   Title,
 } from "solid-start";
 
-export default function Root() {
+export default function Root () {
+  onMount(async () => {
+    const { data } = await supabase.auth.getSession();
+    setAuth({ loading: false, session: data.session });
+  });
+
   return (
     <Html lang="en">
       <Head>
