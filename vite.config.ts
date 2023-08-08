@@ -14,9 +14,7 @@ export default defineConfig({
   plugins: [
     unocss(),
     solid({ ssr: false, adapter: netlify() }),
-    Icons({
-      /* options */
-    }),
+    Icons({ compiler: "solid" }),
   ],
 
   server: {
