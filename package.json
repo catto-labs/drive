@@ -17,6 +17,7 @@
     "vite": "^4.4.6"
   },
   "dependencies": {
+    "@julr/unocss-preset-forms": "^0.0.5",
     "@kobalte/core": "^0.9.8",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
