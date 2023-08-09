@@ -127,7 +127,7 @@ const Page: Component = () => {
                     setState("confirm_password", event.currentTarget.value)
                   }
                   placeholder="Confirm your password again."
-                  name="password"
+                  name="confirm_password"
                   class="py-2 px-4 rounded-xl bg-subtext1 border border-subtext0 focus-border-subtext1 text-base placeholder-text-surface0"
                 />
 
