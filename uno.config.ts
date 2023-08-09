@@ -9,7 +9,7 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetRemToPx(),
-    extendCatppuccin({ prefix: "", defaultVariant: "macchiato" }),
+    extendCatppuccin({ defaultVariant: "macchiato" }),
     presetForms(),
   ],
 
