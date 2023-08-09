@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@iconify-json/fa6-brands':
+    specifier: ^1.1.13
+    version: 1.1.13
   '@iconify-json/svg-spinners':
     specifier: ^1.1.2
     version: 1.1.2
@@ -1603,6 +1606,12 @@ packages:
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
     dependencies:
       '@hapi/hoek': 9.3.0
+
+  /@iconify-json/fa6-brands@1.1.13:
+    resolution: {integrity: sha512-7toccM334NO1jIsfnqTK9Bo12CIuE4ClnfW9SyRFKFax7b/oKOsgnvokgCAtQgomiQ6ODjC1zWCpzSDidtBUXw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
 
   /@iconify-json/mdi@1.1.54:
     resolution: {integrity: sha512-3QAsxte90EalbN2e8J30OqSSZz9qN2x+kmykQwsPahoW2dOtSvj+BR9YdiUd9A5XKk2nuU4UH5Gj/cq6WZ6CzQ==}
