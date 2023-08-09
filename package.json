@@ -17,6 +17,7 @@
     "vite": "^4.4.6"
   },
   "dependencies": {
+    "@iconify-json/svg-spinners": "^1.1.2",
     "@kobalte/core": "^0.9.8",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
