@@ -14,12 +14,6 @@ export default function Header() {
         >
           Command-line Client
         </A>
-        <A
-          href="/dashboard"
-          class="text-crust inline-flex gap-x-1 bg-text hover:bg-subtext0 border border-subtext0 px-4 py-2 rounded-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
-        >
-          Dashboard
-        </A>
 
         <Show
           when={isAuthenticated()}
@@ -40,6 +34,13 @@ export default function Header() {
             </div>
           }
         >
+          <A
+            href="/dashboard"
+            class="text-crust inline-flex gap-x-1 bg-text hover:bg-subtext0 border border-subtext0 px-4 py-2 rounded-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
+          >
+            Dashboard
+          </A>
+
           <A
             href="/"
             class="text-crust inline-flex gap-x-1 bg-text hover:bg-subtext0 border border-subtext0 pl-3 pr-4 py-2 rounded-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
