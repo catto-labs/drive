@@ -140,8 +140,12 @@ const Page: Component = () => {
                       <p class="my-auto text-base">
                         Meow! You need to enter a password!
                       </p>
+                    ) : state.error === "passwords not matching." ? (
+                      <p class="my-auto text-base">
+                        Your passwords aren't matching!
+                      </p>
                     ) : (
-                      <p>There was an error: {state.error}</p>
+                      <p>{state.error}</p>
                     )}
                   </div>
                 </Show>
