@@ -16,7 +16,7 @@ export default function Header() {
         </A>
         <A
           href="/dashboard"
-          class="text-crust mr-6 inline-flex gap-x-1 bg-text hover:bg-subtext0 border border-subtext0 px-4 py-2 rounded-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
+          class="text-crust inline-flex gap-x-1 bg-text hover:bg-subtext0 border border-subtext0 px-4 py-2 rounded-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
         >
           Dashboard
         </A>
