@@ -76,9 +76,9 @@ const Page: Component = () => {
           <Title>Check your email - Register - Drive</Title>
           <main class="h-screen w-screen relative text-sm">
             <Header />
-            <div class="bg-text border border-subtext0 rounded-lg shadow-xl w-fit h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
-              <div class="flex gap-x-3">
-                <div class="flex flex-col gap-y-4 bg-text">
+            <div class="bg-text border border-subtext0 rounded-lg shadow-xl w-96 h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
+              <div class="flex gap-x-3 w-full">
+                <div class="flex flex-col gap-y-4 bg-text w-full">
                   <h1 class="text-xl font-semibold text-crust">
                     Please verify your account.
                   </h1>
@@ -103,9 +103,9 @@ const Page: Component = () => {
       <Title>Register - Drive</Title>
       <main class="h-screen w-screen relative text-sm">
         <Header />
-        <div class="bg-text border border-subtext0 rounded-lg shadow-xl w-fit h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
-          <div class="flex gap-x-3">
-            <div class="flex flex-col gap-y-4 bg-text">
+        <div class="bg-text border border-subtext0 rounded-lg shadow-xl w-96 h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
+          <div class="flex gap-x-3 w-full">
+            <div class="flex flex-col gap-y-4 bg-text w-full">
               <h1 class="text-xl font-semibold text-crust">
                 We're glad to see you.
               </h1>
