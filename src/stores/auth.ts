@@ -1,5 +1,6 @@
 import type { AuthSession as Session } from "@supabase/supabase-js";
 import { createStore } from "solid-js/store";
+import { supabase } from "@/supabase/client";
 
 /**
  * On first load, this is the default values for
@@ -35,4 +36,10 @@ export const [auth, setAuth] = createStore<AuthStore>({
 export const isAuthenticated = (): boolean => {
   if (auth.session?.user) return true;
   return false;
+};
+
+/** Utility function to log out user. */
+export const logOutUser = async (): Promise<void> => {
+  await supabase.auth.signOut();
+  setAuth({ loading: false, session: null });
 };
