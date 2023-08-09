@@ -122,7 +122,7 @@ const Page: Component = () => {
                 <input
                   type="password"
                   disabled={state.loading}
-                  value={state.password}
+                  value={state.confirm_password}
                   onInput={(event) =>
                     setState("confirm_password", event.currentTarget.value)
                   }
