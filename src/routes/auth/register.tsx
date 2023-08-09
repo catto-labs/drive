@@ -74,9 +74,28 @@ const Page: Component = () => {
       fallback={
         <>
           <Title>Check your email - Register - Drive</Title>
-          <main>
-            <h1>check your email now!</h1>
-            <p>we sent you a confirm email, please check and confirm !</p>
+          <main class="h-screen w-screen relative text-sm">
+            <Header />
+            <div class="bg-text border border-subtext0 rounded-lg shadow-xl w-fit h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
+              <div class="flex gap-x-3">
+                <div class="flex flex-col gap-y-4 bg-text">
+                  <h1 class="text-xl font-semibold text-crust">
+                    Please verify your account.
+                  </h1>
+                  <div class="flex flex-col gap-y-1">
+                    <p>Our cattos have sent you a verification e-mail.</p>
+                    <p>If it isn't there, please check your spam folder.</p>
+                  </div>
+
+                  <A
+                    href="/auth/login"
+                    class="text-base underline decoration-dotted hover:decoration-solid mx-12"
+                  >
+                    All done? Let's log in!
+                  </A>
+                </div>
+              </div>
+            </div>
           </main>
         </>
       }
