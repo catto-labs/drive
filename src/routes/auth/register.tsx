@@ -87,7 +87,9 @@ const Page: Component = () => {
         <div class="bg-text border border-subtext0 rounded-lg shadow-xl w-fit h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
           <div class="flex gap-x-3">
             <div class="flex flex-col gap-y-4 bg-text">
-              <h1 class="text-xl font-semibold text-crust">Welcome back!</h1>
+              <h1 class="text-xl font-semibold text-crust">
+                We're glad to see you.
+              </h1>
               <form
                 onSubmit={credentialsRegisterHandler}
                 class="flex flex-col bg-text gap-y-2"
