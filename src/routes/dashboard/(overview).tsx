@@ -9,9 +9,6 @@ import {
 import { Title, useNavigate } from "solid-start";
 import { auth, logOutUser } from "@/stores/auth";
 
-import cattoDriveBox from "@/assets/icon/box.png";
-import cattoDriveCatto from "@/assets/icon/catto.png";
-
 import IconPower from "~icons/mdi/power";
 import IconDotsHorizontalCircleOutline from "~icons/mdi/dots-horizontal-circle-outline";
 import IconStarOutline from "~icons/mdi/star-outline";
@@ -21,7 +18,7 @@ import IconCheck from "~icons/mdi/check";
 import IconFolderUploadOutline from "~icons/mdi/folder-upload-outline";
 import IconFileUploadOutline from "~icons/mdi/file-upload-outline";
 
-import SpinnerRingResize from "~icons/svg-spinners/ring-resize";
+import FullscreenLoader from "@/components/FullscreenLoader";
 
 import { DropdownMenu } from "@kobalte/core";
 
@@ -117,28 +114,10 @@ const Page: Component = () => {
       <Show
         when={files()}
         fallback={
-          <div class="bg-surface0 w-screen h-screen relative flex items-center justify-center">
-            <img
-              src={cattoDriveBox}
-              class="absolute mx-auto my-auto w-48 z-10"
-            />
-            <img
-              src={cattoDriveCatto}
-              class="absolute mx-auto my-auto w-41 -mt-10 transition-all"
-              classList={{ "-mt-48": Boolean(files()) }}
-            />
-            <div class="mt-56 text-center">
-              <div class="inline-flex gap-x-2 mt-1">
-                <SpinnerRingResize class="my-auto text-text" />
-                <h1 class="text-lg font-semibold my-auto text-text">
-                  Loading catto drive...
-                </h1>
-              </div>
-              <p class="text-subtext0">
-                Please wait, our cats are finding your files!
-              </p>
-            </div>
-          </div>
+          <FullscreenLoader
+            message="Please wait, our cats are finding your files !"
+            finished={files() !== null}
+          />
         }
       >
         <div class="backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
