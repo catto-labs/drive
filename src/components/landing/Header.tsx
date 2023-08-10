@@ -6,7 +6,7 @@ import IconAccount from "~icons/mdi/account";
 
 export default function Header() {
   return (
-    <header class="bg-gradient-to-b bg-gradient-from-crust h-64 p-8 flex justify-end">
+    <header class="bg-gradient-to-b bg-gradient-from-[#292a2e] h-64 p-8 flex justify-end">
       <div class="flex gap-x-4 h-fit">
         <A
           href="https://github.com/catto-labs/drive"
