@@ -94,18 +94,18 @@ const Page: Component = () => {
       <Title>Dashboard - Drive</Title>
 
       <div class="backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
-        <div class="bg-text opacity-50 w-1/5 p-4 shrink-0" />
+        <div class="bg-surface0 opacity-50 w-1/5 p-4 shrink-0" />
 
-        <div class="flex flex-col h-full bg-text border-l border-subtext0 w-4/5 z-20">
-          <header class="shrink-0 sticky top-0 bg-subtext1 border-b border-subtext0 w-full h-1/12 flex flex-row justify-between shadow-sm">
+        <div class="flex flex-col h-full bg-surface0 border-l border-surface2 w-4/5 z-20">
+          <header class="shrink-0 sticky top-0 bg-surface1 border-b border-surface2 w-full h-1/12 flex flex-row justify-between shadow-sm">
             <h1 class="border-base font-semibold h-full justify-center flex flex-col ml-4">
               My Files
             </h1>
             <div class="flex flex-row gap-x-2 mr-4 items-center">
               <button
                 type="button"
-                title="Share the selected items items"
-                class="hover:text-surface0 text-surface2 hover:text-surface0 transition  hover:bg-subtext0 p-1.5 h-fit rounded-lg"
+                title="Share the selected items"
+                class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
               >
                 <IconShareVariantOutline class="text-xl" />
                 {/* this should change to a filled star when a file is starred */}
@@ -113,7 +113,7 @@ const Page: Component = () => {
               <button
                 type="button"
                 title="Toggle favorite"
-                class="hover:text-surface0 text-surface2 hover:text-surface0 transition  hover:bg-subtext0 p-1.5 h-fit rounded-lg"
+                class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
               >
                 <IconStarOutline class="text-xl" />
                 {/* this should change to a filled star when a file is starred */}
@@ -123,48 +123,48 @@ const Page: Component = () => {
                   <button
                     type="button"
                     title="Perform tasks with the selected items"
-                    class="hover:text-surface0 text-surface2 hover:text-surface0 transition  hover:bg-subtext0 p-1.5 h-fit rounded-lg"
+                    class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
                   >
                     <IconDotsHorizontalCircleOutline class="text-xl" />
                   </button>
                 </DropdownMenu.Trigger>
                 <DropdownMenu.Portal>
-                  <DropdownMenu.Content class="overview-dropdown-content bg-text border border-subtext0 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
-                    <DropdownMenu.Item class="px-4 py-1 hover:bg-sapphire rounded-md w-full flex justify-between">
-                      New Folder <span class="text-surface2">⌘ N</span>
+                  <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                    <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md w-full flex justify-between">
+                      New Folder <span class="text-subtext1">⌘ N</span>
                     </DropdownMenu.Item>
-                    <DropdownMenu.Item class="px-4 py-1 hover:bg-sapphire rounded-md">
+                    <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md">
                       Open in New Tab
                     </DropdownMenu.Item>
                     <DropdownMenu.Separator class="border border-overlay0 my-1 opacity-50 border-dashed" />
-                    <DropdownMenu.Item class="px-4 py-1 hover:bg-sapphire rounded-md w-full flex justify-between">
+                    <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md w-full flex justify-between">
                       <div class="inline-flex ">
                         Quick Look{" "}
                         <blockquote class="ml-1">My Files</blockquote>
                       </div>{" "}
-                      <span class="text-surface2">Space</span>
+                      <span class="text-subtext1">Space</span>
                     </DropdownMenu.Item>
-                    <DropdownMenu.Item class="px-4 py-1 hover:bg-sapphire rounded-md">
+                    <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md">
                       Get Info
                     </DropdownMenu.Item>
                     <DropdownMenu.Separator class="border border-overlay0 my-1 opacity-50 border-dashed" />
-                    <DropdownMenu.Item class="px-4 py-1 hover:bg-sapphire rounded-md w-full flex justify-between">
+                    <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md w-full flex justify-between">
                       Use Groups
                     </DropdownMenu.Item>
                     <DropdownMenu.Sub overlap gutter={4} shift={-8}>
-                      <DropdownMenu.SubTrigger class="px-4 py-1 hover:bg-sapphire hover:bg-opacity-50 rounded-md flex justify-between w-full overview-dropdown-submenu">
+                      <DropdownMenu.SubTrigger class="px-4 py-1 hover:bg-lavender hover:bg-opacity-50 rounded-md flex justify-between w-full overview-dropdown-submenu">
                         Sort By...
-                        <IconChevronRight class="text-surface2 text-lg my-auto" />
+                        <IconChevronRight class="text-subtext1 text-lg my-auto" />
                       </DropdownMenu.SubTrigger>
                       <DropdownMenu.Portal>
-                        <DropdownMenu.SubContent class="overview-dropdown-content bg-text border border-subtext0 p-2 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                        <DropdownMenu.SubContent class="overview-dropdown-content bg-surface0 border border-surface2 p-2 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
                           <DropdownMenu.RadioGroup
                             value={view()}
                             onChange={setView}
                             class="flex flex-col w-40 text-sm"
                           >
                             <DropdownMenu.RadioItem
-                              class="inline-flex pr-4 pl-5 py-1 hover:bg-sapphire rounded-md"
+                              class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender rounded-md"
                               value="name"
                             >
                               <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -173,7 +173,7 @@ const Page: Component = () => {
                               <p class="ml-1">Name</p>
                             </DropdownMenu.RadioItem>
                             <DropdownMenu.RadioItem
-                              class="inline-flex pr-4 pl-5 py-1 hover:bg-sapphire rounded-md"
+                              class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender rounded-md"
                               value="date-modified"
                             >
                               <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -182,7 +182,7 @@ const Page: Component = () => {
                               <p class="ml-1">Date modified</p>
                             </DropdownMenu.RadioItem>
                             <DropdownMenu.RadioItem
-                              class="inline-flex pr-4 pl-5 py-1 hover:bg-sapphire rounded-md"
+                              class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender rounded-md"
                               value="kind"
                             >
                               <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -191,7 +191,7 @@ const Page: Component = () => {
                               <p class="ml-1">Kind</p>
                             </DropdownMenu.RadioItem>
                             <DropdownMenu.RadioItem
-                              class="inline-flex pr-4 pl-5 py-1 hover:bg-sapphire rounded-md"
+                              class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender rounded-md"
                               value="size"
                             >
                               <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -203,7 +203,7 @@ const Page: Component = () => {
                         </DropdownMenu.SubContent>
                       </DropdownMenu.Portal>
                     </DropdownMenu.Sub>
-                    <DropdownMenu.Item class="px-4 py-1 hover:bg-sapphire rounded-md">
+                    <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md">
                       Show View Options
                     </DropdownMenu.Item>
                   </DropdownMenu.Content>
@@ -214,7 +214,7 @@ const Page: Component = () => {
                 placeholder="Search..."
                 name="search"
                 autofocus
-                class="py-1 px-4 rounded-xl w-84 mx-4 bg-subtext1 transition border-2 border-overlay2 hover:bg-subtext0 focus-border-subtext1 text-surface0 placeholder-text-surface2"
+                class="py-1 px-4 rounded-xl w-84 mx-4 bg-surface2 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
               />
               <button
                 type="button"
@@ -223,7 +223,7 @@ const Page: Component = () => {
                   navigate("/");
                 }}
                 title="Logs you out of catto drive"
-                class="hover:text-surface0 text-surface2 hover:text-surface0 transition  hover:bg-subtext0 p-1.5 h-fit rounded-lg"
+                class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
               >
                 <IconPower class="text-xl" />
               </button>
@@ -233,7 +233,7 @@ const Page: Component = () => {
           <main class="overflow-auto">
             <section class="p-4 h-[200px] flex flex-col gap-1 items-center justify-center">
               <button
-                class="text-2xl font-medium text-crust bg-text hover:bg-subtext0 border border-crust px-4 py-2 rounded-md duration-150"
+                class="text-2xl font-medium text-text bg-surface0 hover:bg-subtext0 border border-text px-4 py-2 rounded-md duration-150"
                 type="button"
                 onClick={() => createFileUpload(fileUploadHandler)}
               >
@@ -245,7 +245,7 @@ const Page: Component = () => {
               <Show when={files()} fallback={<p>Loading files...</p>}>
                 <For each={files()!}>
                   {(file) => (
-                    <div class="max-w-60 h-auto rounded-md p-2 flex flex-col gap-1 border border-crust hover:bg-subtext0">
+                    <div class="max-w-60 h-auto rounded-md p-2 flex flex-col gap-1 border border-text hover:bg-subtext0">
                       <p class="text-sm">{file.file_name}</p>
                       <button
                         type="button"

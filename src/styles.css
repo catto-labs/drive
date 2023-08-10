@@ -17,7 +17,7 @@ blockquote:before {
 }
 
 .overview-dropdown-submenu[data-expanded] {
-  background-color: rgba(125, 196, 228, 0.5);
+  background-color: rgba(114, 135, 253, 0.5);
 }
 
 @keyframes contentShow {
