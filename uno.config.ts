@@ -8,7 +8,7 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetRemToPx(),
-    extendCatppuccin({ prefix: "", defaultVariant: "macchiato" }),
+    extendCatppuccin({ prefix: "", defaultVariant: "latte" }),
   ],
 
   transformers: [transformerVariantGroup()],
