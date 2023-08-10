@@ -297,7 +297,7 @@ const Page: Component = () => {
                 <For each={files()!}>
                   {(file) => (
                     <div class="max-w-60 h-auto rounded-md p-2 flex flex-col gap-1 border border-text hover:bg-subtext0">
-                      <p class="text-sm">{file.file_name}</p>
+                      <p class="text-sm">{file.name}</p>
                       <button
                         type="button"
                         onClick={async () => {
@@ -314,7 +314,7 @@ const Page: Component = () => {
                           const url = json.data.url;
 
                           // find something better ?
-                          downloadFile(url, file.file_name);
+                          downloadFile(url, file.name);
                         }}
                       >
                         Download
