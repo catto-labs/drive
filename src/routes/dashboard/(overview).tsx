@@ -6,7 +6,7 @@ import {
   Show,
   For,
 } from "solid-js";
-import { Title, useNavigate } from "solid-start";
+import { A, Title, useNavigate } from "solid-start";
 import { auth, logOutUser } from "@/stores/auth";
 
 import IconPower from "~icons/mdi/power";
@@ -16,6 +16,12 @@ import IconShareVariantOutline from "~icons/mdi/share-variant-outline";
 import IconChevronRight from "~icons/mdi/chevron-right";
 import IconCheck from "~icons/mdi/check";
 import IconFileUploadOutline from "~icons/mdi/file-upload-outline";
+import IconPlus from "~icons/mdi/plus"
+import IconFolderAccountOutine from "~icons/mdi/folder-account-outline"
+import IconAccountMultipleOutline from "~icons/mdi/account-multiple-outline"
+import IconTrashCanOutline from "~icons/mdi/trash-can-outline"
+
+import cattoDriveLogo from "@/assets/icon/logo.png"
 
 import FullscreenLoader from "@/components/FullscreenLoader";
 
@@ -119,7 +125,37 @@ const Page: Component = () => {
         }
       >
         <div class="backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
-          <div class="bg-surface0 opacity-50 w-1/5 p-4 shrink-0" />
+          <div class="text-text bg-surface0 opacity-80 w-1/5 p-4 shrink-0">
+            <div class="flex flex-row gap-3 mb-4">
+              <img src={cattoDriveLogo} class="w-10 h-10" />
+              <span class="text-lg"><span class="font-bold text-2xl">Drive </span>by catto labs</span>
+            </div>
+            <button 
+              onClick={() => createFileUpload(fileUploadHandler)} 
+              class="mb-4 pl-2 pr-4 py-2 flex flex-row gap-1 text-crust bg-lavender hover:bg-[#5f72d9] transition rounded-md"
+            >
+              <IconPlus class="h-6 w-6" />
+              <span>Upload</span>
+            </button>
+            <div class="flex flex-col gap-0.5">
+              <A href="/dashboard" class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md">
+                <IconFolderAccountOutine class="w-6 h-6" />
+                <span>My workspace</span>
+              </A>
+              <A href="/dashboard/shared" class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md">
+                <IconAccountMultipleOutline class="w-6 h-6" />
+                <span>Shared with me</span>
+              </A>
+              <A href="/dashboard/favorites" class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md">
+                <IconStarOutline class="w-6 h-6" />
+                <span>Favorites</span>
+              </A>
+              <A href="/dashboard/trash" class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md">
+                <IconTrashCanOutline class="w-6 h-6" />
+                <span>Recycle bin</span>
+              </A>
+            </div>
+          </div>
 
           <div class="flex flex-col h-full bg-surface0 border-l border-surface2 w-4/5 z-20">
             <header class="shrink-0 sticky top-0 bg-surface1 border-b border-surface2 w-full h-1/12 flex flex-row justify-between shadow-sm">
@@ -127,7 +163,7 @@ const Page: Component = () => {
                 My Files
               </h1>
               <div class="flex flex-row gap-x-2 mr-4 items-center">
-                <button
+                {/*<button
                   type="button"
                   title="Upload a file"
                   onClick={() => createFileUpload(fileUploadHandler)}
@@ -135,6 +171,7 @@ const Page: Component = () => {
                 >
                   <IconFileUploadOutline class="text-xl" />
                 </button>
+                */}
                 {/* <button
                 type="button"
                 title="Upload a folder"
