@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main class="h-screen w-screen relative text-sm">
       <Header />
-      <div class="bg-surface0 border border-surface2 rounded-lg shadow-xl w-96 h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
+      <div class="bg-base/30 border border-surface0 rounded-lg shadow-xl w-96 h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0 backdrop-blur-lg">
         <div class="flex gap-x-3 py-16 pl-8 justify-start">
           <div class="flex flex-row gap-x-6">
             <div class="rounded-full p-2 aspect-square m-auto bg-lavender cursor-pointer hover:bg-[#5f72d9] transition-colors duration-200">
