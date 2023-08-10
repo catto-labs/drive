@@ -10,7 +10,7 @@ export default function Header() {
       <div class="flex gap-x-4 h-fit">
         <A
           href="https://github.com/catto-labs/drive"
-          class="text-crust inline-flex gap-x-1 bg-text hover:bg-subtext0 border border-subtext0 px-4 py-2 rounded-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
+          class="text-text inline-flex gap-x-1 bg-surface0 hover:bg-surface1 border border-surface1 px-4 py-2 rounded-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
         >
           Command-line Client
         </A>
@@ -21,13 +21,13 @@ export default function Header() {
             <div class="flex h-fit">
               <A
                 href="/auth/login"
-                class="text-crust inline-flex gap-x-1 bg-text hover:bg-subtext0 border border-subtext0 px-4 py-2 rounded-l-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
+                class="text-text inline-flex gap-x-1 bg-surface0 hover:bg-surface1 border border-surface1 px-4 py-2 rounded-l-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
               >
                 Login
               </A>
               <A
                 href="/auth/register"
-                class="text-crust inline-flex gap-x-1 bg-text hover:bg-subtext0 border border-subtext0 px-4 py-2 rounded-r-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
+                class="text-text inline-flex gap-x-1 bg-surface0 hover:bg-surface1 border border-surface1 px-4 py-2 rounded-r-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
               >
                 Register
               </A>
