@@ -12,6 +12,7 @@ import IconExclamation from "~icons/mdi/exclamation";
 import IconDiscord from "~icons/fa6-brands/discord";
 import IconGoogle from "~icons/fa6-brands/google";
 import IconGithub from "~icons/fa6-brands/github";
+import { Provider } from "@supabase/supabase-js";
 
 const Page: Component = () => {
   const navigate = useNavigate();
@@ -57,6 +58,18 @@ const Page: Component = () => {
       setState("loading", false);
     }
   };
+
+  const signInWithOAuthProvider = async (event: Event, provider: Provider) => {
+    event.preventDefault();
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: provider,
+      options: {
+        redirectTo: window.location.origin + "/dashboard",
+      },
+    });
+  
+    if (error) alert(error.message);
+  }
 
   return (
     <>
@@ -135,13 +148,13 @@ const Page: Component = () => {
                 </p>
 
                 <div class="grid grid-cols-3 gap-x-4">
-                  <button class="px-4 py-2 border-2 rounded-lg border-[#5865F2] group hover:bg-[#5865F2] transition flex justify-center">
+                  <button onClick={async (e: Event) => await signInWithOAuthProvider(e, 'discord')} class="px-4 py-2 border-2 rounded-lg border-[#5865F2] group hover:bg-[#5865F2] transition flex justify-center">
                     <IconDiscord class="group-hover:text-base text-lg text-text" />
                   </button>
-                  <button class="px-4 py-2 border-2 rounded-lg border-[#4285F4] group hover:bg-[#4285F4] transition flex justify-center">
+                  <button onClick={async (e: Event) => await signInWithOAuthProvider(e, 'google')} class="px-4 py-2 border-2 rounded-lg border-[#4285F4] group hover:bg-[#4285F4] transition flex justify-center">
                     <IconGoogle class="group-hover:text-base text-lg text-text" />
                   </button>
-                  <button class="px-4 py-2 border-2 rounded-lg border-[#333] group hover:bg-[#333] transition flex justify-center">
+                  <button onClick={async (e: Event) => await signInWithOAuthProvider(e, 'github')} class="px-4 py-2 border-2 rounded-lg border-[#333] group hover:bg-[#333] transition flex justify-center">
                     <IconGithub class="group-hover:text-base text-lg text-text" />
                   </button>
                 </div>
