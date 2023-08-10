@@ -18,7 +18,7 @@ import {
   Scripts,
   Title,
 } from "solid-start";
-import FullscreenLoader from "./components/FullscreenLoader";
+import FullscreenLoader, { FullscreenLoaderEntry } from "./components/FullscreenLoader";
 
 export default function Root() {
   onMount(async () => {
@@ -46,9 +46,10 @@ export default function Root() {
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Body class="min-h-screen h-full bg-[url(https://source.unsplash.com/collection/175083)] bg-no-repeat bg-cover bg-center bg-crust">
+        <FullscreenLoaderEntry />
+
         <Suspense fallback={
           <FullscreenLoader
-            finished={false}
             message="Our cats are trying their best to get your page loading quick !"
           />
         }>

@@ -116,7 +116,6 @@ const Page: Component = () => {
         fallback={
           <FullscreenLoader
             message="Please wait, our cats are finding your files !"
-            finished={files() !== null}
           />
         }
       >
