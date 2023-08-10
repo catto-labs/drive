@@ -64,11 +64,12 @@ async function downloadFile(url: string, filename: string) {
 const Page: Component = () => {
   const [view, setView] = createSignal<string>("name");
 
+  const [currentWorkspaceId, setCurrentWorkspaceId] = createSignal(auth.profile!.root_workspace_id);
   const [files, setFiles] = createSignal<any[] | null>(null);
   const navigate = useNavigate();
 
   onMount(async () => {
-    const response = await fetch("/api/files", {
+    const response = await fetch(`/api/files?workspace_id=${currentWorkspaceId()}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${auth.session!.access_token}`,
@@ -81,6 +82,8 @@ const Page: Component = () => {
 
   const fileUploadHandler = async (files: FileList) => {
     const formData = new FormData();
+    formData.set("workspace_id", currentWorkspaceId());
+    formData.set("private", "1");
 
     for (const file of files) {
       formData.append("files", file);

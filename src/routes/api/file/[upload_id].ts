@@ -2,7 +2,7 @@ import { type APIEvent, json } from "solid-start"
 import { supabase, getUser } from "@/supabase/server";
 
 export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
-  const upload_id = params.id as string;
+  const { upload_id } = params;
 
   let token = request.headers.get("Authorization");
   if (!token) return json({
@@ -28,9 +28,16 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     message: "File doesn't exist."
   }, { status: 404 })
 
-  if (file_data.creator !== user.id) return json({
+  const { data: workspace_data } = await supabase
+    .from("workspaces")
+    .select()
+    .eq("id", file_data.workspace_id)
+    .limit(1)
+    .single();
+  
+  if (!workspace_data || workspace_data.creator !== user.id) return json({
     success: false,
-    message: "Not allowed to see that file."
+    message: "Not allowed to get items from this workspace."
   }, { status: 403 });
 
   const file_extension = file_data.file_name.substring(file_data.file_name.lastIndexOf(".") + 1);

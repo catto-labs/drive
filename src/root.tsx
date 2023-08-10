@@ -5,7 +5,7 @@ import "@/styles.css";
 
 import { Suspense, onMount } from "solid-js";
 import { supabase } from "@/supabase/client";
-import { setAuth } from "./stores/auth";
+import { UserProfile, setAuth } from "./stores/auth";
 
 import {
   Body,
@@ -22,7 +22,19 @@ import {
 export default function Root() {
   onMount(async () => {
     const { data } = await supabase.auth.getSession();
-    setAuth({ loading: false, session: data.session });
+    if (data.session) {
+      const { data: _profile } = await supabase.from("profiles")
+        .select()
+        .eq("user_id", data.session.user.id)
+        .limit(1)
+        .single();
+      
+      let user_profile = _profile as UserProfile;
+      setAuth({ loading: false, session: data.session, profile: user_profile });
+    }
+    else {
+      setAuth({ loading: false, session: null, profile: null });
+    }
   });
 
   return (
