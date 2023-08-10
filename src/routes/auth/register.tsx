@@ -76,10 +76,10 @@ const Page: Component = () => {
           <Title>Check your email - Register - Drive</Title>
           <main class="h-screen w-screen relative text-sm">
             <Header />
-            <div class="bg-text border border-subtext0 rounded-lg shadow-xl w-96 h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
+            <div class="text-text bg-base border border-subtext0 rounded-lg shadow-xl w-96 h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
               <div class="flex gap-x-3 w-full">
-                <div class="flex flex-col gap-y-4 bg-text w-full">
-                  <h1 class="text-xl font-semibold text-crust">
+                <div class="flex flex-col gap-y-4 w-full">
+                  <h1 class="text-xl font-semibold">
                     Please verify your account.
                   </h1>
                   <div class="flex flex-col gap-y-1">
@@ -103,15 +103,15 @@ const Page: Component = () => {
       <Title>Register - Drive</Title>
       <main class="h-screen w-screen relative text-sm">
         <Header />
-        <div class="bg-text border border-subtext0 rounded-lg shadow-xl w-96 h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
+        <div class="text-text bg-base border border-surface0 rounded-lg shadow-xl w-96 h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
           <div class="flex gap-x-3 w-full">
-            <div class="flex flex-col gap-y-4 bg-text w-full">
-              <h1 class="text-xl font-semibold text-crust">
+            <div class="flex flex-col gap-y-4 w-full">
+              <h1 class="text-xl font-semibold">
                 We're glad to see you.
               </h1>
               <form
                 onSubmit={credentialsRegisterHandler}
-                class="flex flex-col bg-text gap-y-2"
+                class="flex flex-col gap-y-2"
               >
                 <input
                   type="email"
@@ -123,7 +123,7 @@ const Page: Component = () => {
                   placeholder="What's your e-mail?"
                   name="email"
                   autofocus
-                  class="py-2 px-4 rounded-xl bg-subtext1 border border-subtext0 focus-border-subtext1 text-base placeholder-text-surface0"
+                  class="py-2 px-4 rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
                 />
 
                 <input
@@ -135,7 +135,7 @@ const Page: Component = () => {
                   }
                   placeholder="What about your password?"
                   name="password"
-                  class="py-2 px-4 rounded-xl bg-subtext1 border border-subtext0 focus-border-subtext1 text-base placeholder-text-surface0"
+                  class="py-2 px-4 rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
                 />
 
                 <input
@@ -147,7 +147,7 @@ const Page: Component = () => {
                   }
                   placeholder="Confirm your password again."
                   name="confirm_password"
-                  class="py-2 px-4 rounded-xl bg-subtext1 border border-subtext0 focus-border-subtext1 text-base placeholder-text-surface0"
+                  class="py-2 px-4 rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
                 />
 
                 <Show when={state.error}>
@@ -156,11 +156,11 @@ const Page: Component = () => {
                       <IconExclamation class="text-mantle" />
                     </div>
                     {state.error === "Signup requires a valid password" ? (
-                      <p class="my-auto text-base">
+                      <p class="my-auto text-text">
                         Meow! You need to enter a password!
                       </p>
                     ) : state.error === "passwords not matching." ? (
-                      <p class="my-auto text-base">
+                      <p class="my-auto text-text">
                         Your passwords aren't matching!
                       </p>
                     ) : (
@@ -169,7 +169,7 @@ const Page: Component = () => {
                   </div>
                 </Show>
 
-                <div class="rounded-xl bg-subtext0 hover:bg-subtext1 duration-150 border border-subtext0 transform text-base placeholder-text-overlay0">
+                <div class="rounded-xl bg-lavender hover:bg-[#596dde] duration-150 transform text-base placeholder-text-overlay0">
                   <button
                     type="submit"
                     disabled={state.loading}
@@ -186,28 +186,28 @@ const Page: Component = () => {
                   </button>
                 </div>
 
-                <div class="border border-overlay2 mt-4 mb-3"></div>
+                <div class="border border-surface1 mt-4 mb-3"></div>
 
-                <p class="text-center text-base">
+                <p class="text-center text-subtext0">
                   Alternatively, you can register with...
                 </p>
 
                 <div class="grid grid-cols-3 gap-x-4">
                   <button class="px-4 py-2 border-2 rounded-lg border-[#5865F2] group hover:bg-[#5865F2] transition flex justify-center">
-                    <IconDiscord class="group-hover:text-text text-lg text-base" />
+                    <IconDiscord class="group-hover:text-base text-lg text-text" />
                   </button>
                   <button class="px-4 py-2 border-2 rounded-lg border-[#4285F4] group hover:bg-[#4285F4] transition flex justify-center">
-                    <IconGoogle class="group-hover:text-text text-lg text-base" />
+                    <IconGoogle class="group-hover:text-base text-lg text-text" />
                   </button>
                   <button class="px-4 py-2 border-2 rounded-lg border-[#333] group hover:bg-[#333] transition flex justify-center">
-                    <IconGithub class="group-hover:text-text text-lg text-base" />
+                    <IconGithub class="group-hover:text-base text-lg text-text" />
                   </button>
                 </div>
               </form>
 
               <A
                 href="/auth/login"
-                class="text-base underline decoration-dotted hover:decoration-solid mx-12"
+                class="text-center underline decoration-dotted hover:decoration-solid"
               >
                 Have an account? Log in instead.
               </A>
