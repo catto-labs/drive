@@ -1,6 +1,7 @@
 // @refresh reload
 import "virtual:uno.css";
 import "@unocss/reset/tailwind.css";
+import "@/styles.css";
 
 import { Suspense, onMount } from "solid-js";
 import { supabase } from "@/supabase/client";

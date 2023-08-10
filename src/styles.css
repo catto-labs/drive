@@ -1,0 +1,9 @@
+blockquote:after {
+  content: close-quote;
+  vertical-align: bottom;
+}
+
+blockquote:before {
+  content: open-quote;
+  vertical-align: top;
+}
