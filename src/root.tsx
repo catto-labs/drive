@@ -48,11 +48,7 @@ export default function Root() {
       <Body class="min-h-screen h-full bg-[url(https://source.unsplash.com/collection/175083)] bg-no-repeat bg-cover bg-center bg-crust">
         <FullscreenLoaderEntry />
 
-        <Suspense fallback={
-          <FullscreenLoader
-            message="Our cats are trying their best to get your page loading quick !"
-          />
-        }>
+        <Suspense>
           <ErrorBoundary>
             <Routes>
               <FileRoutes />
