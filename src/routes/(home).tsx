@@ -1,7 +1,6 @@
 import IconPlus from "~icons/mdi/plus";
 import Header from "@/components/landing/Header";
-import { Ref, Show, createSignal, onMount } from "solid-js";
-
+import { Show, createSignal, onMount } from "solid-js";
 
 export default function Home() {
   const [dropzoneVisible, setDropzoneVisible] = createSignal(false);

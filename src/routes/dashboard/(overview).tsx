@@ -15,7 +15,6 @@ import IconStarOutline from "~icons/mdi/star-outline";
 import IconShareVariantOutline from "~icons/mdi/share-variant-outline";
 import IconChevronRight from "~icons/mdi/chevron-right";
 import IconCheck from "~icons/mdi/check";
-import IconFolderUploadOutline from "~icons/mdi/folder-upload-outline";
 import IconFileUploadOutline from "~icons/mdi/file-upload-outline";
 
 import FullscreenLoader from "@/components/FullscreenLoader";

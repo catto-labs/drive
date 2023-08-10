@@ -1,11 +1,9 @@
 // @refresh reload
-import "virtual:uno.css";
 import "@unocss/reset/tailwind.css";
+import "virtual:uno.css";
 import "@/styles.css";
 
 import { Suspense, onMount } from "solid-js";
-import { supabase } from "@/supabase/client";
-import { UserProfile, setAuth } from "./stores/auth";
 
 import {
   Body,
@@ -18,7 +16,10 @@ import {
   Scripts,
   Title,
 } from "solid-start";
-import FullscreenLoader, { FullscreenLoaderEntry } from "./components/FullscreenLoader";
+
+import { FullscreenLoaderEntry } from "@/components/FullscreenLoader";
+import { UserProfile, setAuth } from "@/stores/auth";
+import { supabase } from "@/supabase/client";
 
 export default function Root() {
   onMount(async () => {
