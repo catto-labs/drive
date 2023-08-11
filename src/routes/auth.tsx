@@ -5,14 +5,13 @@ import FullscreenLoader from "@/components/FullscreenLoader";
 
 const Layout: Component = () => {
   return (
-    <Show when={!auth.loading} fallback={
-      <FullscreenLoader
-        message="Please wait, our cats are getting ready !"
-      />
-    }>
-      <Show when={!isAuthenticated()}
-        fallback={<Navigate href="/dashboard" />}
-      >
+    <Show
+      when={!auth.loading}
+      fallback={
+        <FullscreenLoader message="Please wait, our cats are getting ready!" />
+      }
+    >
+      <Show when={!isAuthenticated()} fallback={<Navigate href="/dashboard" />}>
         <Outlet />
       </Show>
     </Show>

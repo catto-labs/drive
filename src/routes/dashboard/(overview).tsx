@@ -80,7 +80,7 @@ const Page: Component = () => {
       <Show
         when={files()}
         fallback={
-          <FullscreenLoader message="Please wait, our cats are finding your files !" />
+          <FullscreenLoader message="Please wait, our cats are finding your files!" />
         }
       >
         <div class="backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
