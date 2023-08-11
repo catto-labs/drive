@@ -1,16 +1,7 @@
 import type { AuthSession as Session } from "@supabase/supabase-js";
 import { createStore } from "solid-js/store";
 import { supabase } from "@/supabase/client";
-
-export interface UserProfile {
-  id: string
-  user_id: string;
-  username: string;
-  first_name: string;
-  last_name: string;
-  api_token: string;
-  root_workspace_id: string;
-}
+import type { UserProfile } from "@/types/api";
 
 /**
  * On first load, this is the default values for
