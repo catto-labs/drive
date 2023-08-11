@@ -57,6 +57,7 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     }
   
     const file_extension = file_data.name.substring(file_data.name.lastIndexOf(".") + 1);
+    console.log(file_extension, "POGOGOGOGO");
     const file_content_type = mime_type(file_extension);
 
     // Create a download URL, only available for 15s.
@@ -69,6 +70,7 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     headers.set("location", data!.signedUrl);
     headers.set("Cache-Control", "300");
     headers.set("Content-Disposition", `attachment; filename="${file_data.name}"`);
+    headers.set("Link", `<https://drive.cattolabs.com/api/file/${file_data.id}>; rel="canonical"`)
     
     if (file_content_type) {
       headers.set("content-type", file_content_type);
