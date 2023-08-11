@@ -1,4 +1,5 @@
-import { type APIEvent, json, redirect } from "solid-start"
+import { type APIEvent, json } from "solid-start";
+
 import { supabase, getUserProfile } from "@/supabase/server";
 import { UploadedFile, UserProfile } from "@/types/api";
 
@@ -61,7 +62,7 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
       .from("uploads")
       .createSignedUrl(`${file_data.creator ?? "anon"}/${file_data.id}.${file_extension}`, 3600);
   
-    return redirect(data!.signedUrl);
+    return Response.redirect(data!.signedUrl, 301);
   }
   catch (error) {
     console.error(error);
