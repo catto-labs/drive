@@ -1,4 +1,6 @@
-export const createFileUpload = (onFileUploaded: (files: FileList) => unknown) => {
+import { auth } from "@/stores/auth";
+
+export const createFileImporter = (onFileUploaded: (files: FileList) => unknown) => {
   const input = document.createElement("input");
   input.setAttribute("multiple", "true");
   input.setAttribute("hidden", "true");
@@ -15,4 +17,58 @@ export const createFileUpload = (onFileUploaded: (files: FileList) => unknown) =
 
   document.body.appendChild(input);
   input.click();
-}
+};
+
+/**
+ * Upload `files` to the API.
+ * 
+ * `options.workspace_id` is where the file will be placed.
+ * If not given, it'll take root workspace of current logged in user.
+ * If not logged in, then it's an anonymous upload and so we don't need any workspace.
+ * 
+ * `options.private` is whether the upload should be accessible
+ * to everyone who have the API link or no.
+ * When authenticated, it defaults to `true`.
+ * Concerning anonymous uploads, they're ALWAYS public, meaning
+ * that modifying this property won't change anything and always default to `false`. 
+ */
+export const makeFileUpload = async (files: FileList | Array<File>, options?: {
+  workspace_id?: string
+  private?: boolean
+}) => {
+  const body = new FormData();
+  body.set("workspace_id", options?.workspace_id ?? auth.profile?.root_workspace_id ?? "");
+  body.set("private", (options?.private ? "1" : "0") ?? "1");
+  // We append the files to the form.
+  for (const file of files) {
+    body.append("files", file);
+  }
+
+  // Only add headers for authenticated users.
+  const headers = new Headers();
+  if (auth.profile) {
+    headers.set("authorization", auth.profile.api_token);
+  }
+
+  // Let's upload!
+  const response = await fetch("/api/files", {
+    method: "PUT",
+    headers,
+    body
+  });
+
+  const json = await response.json() as (
+    | { success: false, message: string }
+    | { success: true, data: {
+      uploaded: any[]
+    }}
+  )
+
+  // Aww... something went wrong :'(
+  if (!json.success) {
+    throw new Error(json.message);
+  }
+
+  // All's good, we send back the new rows in `uploads` table.
+  return json.data.uploaded;
+};

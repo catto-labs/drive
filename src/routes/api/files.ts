@@ -1,21 +1,19 @@
 import { type APIEvent, json } from "solid-start"
-import { supabase, getUser } from "@/supabase/server";
+import { supabase, getUserProfile } from "@/supabase/server";
+import { UserProfile } from "@/stores/auth";
 
 export const GET = async ({ request }: APIEvent): Promise<Response> => {
-  let token = request.headers.get("Authorization");
+  let api_token = request.headers.get("authorization");
+
+  let user_profile: UserProfile | undefined;
+  if (api_token) (user_profile = await getUserProfile(api_token));
+  
+  if (!user_profile) return json({
+    success: false,
+    message: "API key should be wrong."
+  }, { status: 403 });
+
   const workspace_id = new URL(request.url).searchParams.get("workspace_id");
-
-  if (!token) return json({
-    success: false,
-    message: "Missing supabase token."
-  }, { status: 403 });
-
-  const user = await getUser(token);
-  if (!user) return json({
-    success: false,
-    message: "User doesn't exist."
-  }, { status: 403 });
-
   const { data: workspace_data } = await supabase
     .from("workspaces")
     .select()
@@ -23,7 +21,7 @@ export const GET = async ({ request }: APIEvent): Promise<Response> => {
     .limit(1)
     .single();
   
-  if (!workspace_data || workspace_data.creator !== user.id) return json({
+  if (!workspace_data || workspace_data.creator !== user_profile.user_id) return json({
     success: false,
     message: "Not allowed to get that workspace."
   }, { status: 403 });
@@ -47,17 +45,10 @@ export const GET = async ({ request }: APIEvent): Promise<Response> => {
  * `private?: "0" | "1"` is the accessibility of the file, where `0` means `public` and `1` means private.
  */
 export const PUT = async ({ request }: APIEvent): Promise<Response> => {
-  let token = request.headers.get("Authorization");
-  if (!token) return json({
-    success: false,
-    message: "Missing supabase token."
-  }, { status: 403 });
+  let api_token = request.headers.get("authorization");
 
-  const user = await getUser(token);
-  if (!user) return json({
-    success: false,
-    message: "User doesn't exist."
-  }, { status: 403 });
+  let user_profile: UserProfile | undefined;
+  if (api_token) (user_profile = await getUserProfile(api_token));
 
   const formData = await request.formData();
   const formDataFiles = formData.getAll("files") as File[];
@@ -74,8 +65,9 @@ export const PUT = async ({ request }: APIEvent): Promise<Response> => {
     const { data } = await supabase
       .from("uploads")
       .insert({
-        creator: user.id,
-        private: Boolean(isPrivate),
+        creator: user_profile?.user_id ?? null,
+        // Always public for anonymous uploads.
+        private: user_profile ? Boolean(isPrivate) : false,
         shared_with: [],
         workspace_id: workspaceId,
         name: file.name
@@ -87,7 +79,7 @@ export const PUT = async ({ request }: APIEvent): Promise<Response> => {
     
     await supabase.storage
       .from('uploads')
-      .upload(`${user.id}/${upload_id}.${file_extension}`, file, {
+      .upload(`${user_profile?.user_id ?? "anon"}/${upload_id}.${file_extension}`, file, {
         cacheControl: '3600',
         upsert: true
       });
@@ -95,6 +87,6 @@ export const PUT = async ({ request }: APIEvent): Promise<Response> => {
 
   return json({
     success: true,
-    data: { new_uploads: newUploadsInDatabase }
+    data: { uploaded: newUploadsInDatabase }
   });
 }

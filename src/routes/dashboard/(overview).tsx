@@ -27,7 +27,7 @@ import FullscreenLoader from "@/components/FullscreenLoader";
 
 import { DropdownMenu } from "@kobalte/core";
 
-import { createFileUpload } from "@/utils/files";
+import { createFileImporter, makeFileUpload } from "@/utils/files";
 
 async function downloadFile(url: string, filename: string) {
   try {
@@ -73,9 +73,7 @@ const Page: Component = () => {
   onMount(async () => {
     const response = await fetch(`/api/files?workspace_id=${currentWorkspaceId()}`, {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${auth.session!.access_token}`,
-      },
+      headers: { authorization: auth.profile!.api_token }
     });
 
     const json = await response.json();
@@ -83,25 +81,12 @@ const Page: Component = () => {
   });
 
   const fileUploadHandler = async (files: FileList) => {
-    const formData = new FormData();
-    formData.set("workspace_id", currentWorkspaceId());
-    formData.set("private", "1");
-
-    for (const file of files) {
-      formData.append("files", file);
-    }
-
     try {
-      const response = await fetch("/api/files", {
-        method: "PUT",
-        body: formData,
-        headers: {
-          Authorization: `Bearer ${auth.session!.access_token}`,
-        },
+      const new_uploads = await makeFileUpload(files, {
+        workspace_id: currentWorkspaceId(),
+        private: true
       });
 
-      const json = await response.json();
-      const new_uploads = json.data.new_uploads as any[];
       setFiles((files) => (files ? [...files, ...new_uploads] : new_uploads));
     } catch (error) {
       console.error(error);
@@ -131,7 +116,7 @@ const Page: Component = () => {
               <span class="text-lg"><span class="font-bold text-2xl">Drive </span>by catto labs</span>
             </div>
             <button 
-              onClick={() => createFileUpload(fileUploadHandler)} 
+              onClick={() => createFileImporter(fileUploadHandler)} 
               class="mb-4 pl-2 pr-4 py-2 flex flex-row gap-1 text-crust bg-lavender hover:bg-[#5f72d9] transition rounded-md"
             >
               <IconPlus class="h-6 w-6" />
@@ -317,17 +302,12 @@ const Page: Component = () => {
                         onClick={async () => {
                           const response = await fetch("/api/file/" + file.id, {
                             method: "GET",
-                            headers: {
-                              Authorization: `Bearer ${
-                                auth.session!.access_token
-                              }`,
-                            },
+                            headers: { authorization: auth.profile!.api_token }
                           });
 
                           const json = await response.json();
                           const url = json.data.url;
 
-                          // find something better ?
                           downloadFile(url, file.name);
                         }}
                       >

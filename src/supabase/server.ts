@@ -1,3 +1,4 @@
+import { type UserProfile } from "@/stores/auth";
 import { createClient } from "@supabase/supabase-js";
 
 export const supabase = createClient(
@@ -8,20 +9,12 @@ export const supabase = createClient(
   }
 );
 
-// Create a single Supabase client for interacting with your database
-export const retrieveSupabaseClient = (token: string) => createClient(
-  import.meta.env.VITE_SUPABASE_PROJECT_URL as string,
-  import.meta.env.VITE_SUPABASE_ANON_KEY as string,
-  {
-    auth: { persistSession: false },
-    global: {
-      headers: { "Authorization": token }
-    }
-  }
-);
+export const getUserProfile = async (token: string) => {
+  const { data: user_profile } = await supabase.from("profiles")
+    .select()
+    .eq("api_token", token)
+    .limit(1)
+    .single();
 
-export const getUser = async (token: string) => {
-  const client = retrieveSupabaseClient(token);
-  const { data: { user } } = await client.auth.getUser();
-  return user;
+  return user_profile as UserProfile;
 };

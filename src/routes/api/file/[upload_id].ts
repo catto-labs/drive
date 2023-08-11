@@ -1,21 +1,17 @@
 import { type APIEvent, json } from "solid-start"
-import { supabase, getUser } from "@/supabase/server";
+import { supabase, getUserProfile } from "@/supabase/server";
 
 export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
   try {
     const { upload_id } = params;
   
-    let token = request.headers.get("Authorization");
+    let token = request.headers.get("authorization");
     if (!token) return json({
       success: false,
-      message: "Missing supabase token."
+      message: "Missing API token."
     }, { status: 403 });
   
-    const user = await getUser(token);
-    if (!user) return json({
-      success: false,
-      message: "User doesn't exist."
-    }, { status: 403 });
+    const user_profile = await getUserProfile(token);
   
     const { data: file_data } = await supabase
       .from("uploads")
@@ -36,7 +32,7 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
       .limit(1)
       .single();
     
-    if (!workspace_data || workspace_data.creator !== user.id) return json({
+    if (!workspace_data || workspace_data.creator !== user_profile.user_id) return json({
       success: false,
       message: "Not allowed to get items from this workspace."
     }, { status: 403 });
@@ -46,7 +42,7 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     // Create a download URL, only available for one minute.
     const { data } = await supabase.storage
       .from("uploads")
-      .createSignedUrl(`${user.id}/${file_data.id}.${file_extension}`, 60)
+      .createSignedUrl(`${user_profile.user_id}/${file_data.id}.${file_extension}`, 60)
   
     return json({
       success: true,
