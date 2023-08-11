@@ -59,7 +59,7 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     // Create a download URL, only available for 15s.
     const { data } = await supabase.storage
       .from("uploads")
-      .createSignedUrl(`${file_data.creator ?? "anon"}/${file_data.id}.${file_extension}`, 15);
+      .createSignedUrl(`${file_data.creator ?? "anon"}/${file_data.id}.${file_extension}`, 3600);
   
     return redirect(data!.signedUrl);
   }
