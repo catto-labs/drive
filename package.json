@@ -7,6 +7,7 @@
   "type": "module",
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.54",
+    "@types/mime-types": "^2.1.1",
     "@unocss/preset-rem-to-px": "^0.54.2",
     "@unocss/transformer-variant-group": "^0.54.2",
     "solid-start-vercel": "^0.2.30",
@@ -25,6 +26,7 @@
     "@solidjs/router": "^0.8.2",
     "@supabase/supabase-js": "^2.32.0",
     "@unocss/reset": "^0.54.2",
+    "mime-types": "^2.1.35",
     "solid-js": "^1.7.8",
     "solid-start": "^0.2.30"
   },

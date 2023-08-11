@@ -1,5 +1,6 @@
 import { type APIEvent, json } from "solid-start";
-
+import { contentType as mime_type } from "mime-types";
+ 
 import { supabase, getUserProfile } from "@/supabase/server";
 import { UploadedFile, UserProfile } from "@/types/api";
 
@@ -56,18 +57,24 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     }
   
     const file_extension = file_data.name.substring(file_data.name.lastIndexOf(".") + 1);
-  
+    const file_content_type = mime_type(file_extension);
+
     // Create a download URL, only available for 15s.
     const { data } = await supabase.storage
       .from("uploads")
       .createSignedUrl(`${file_data.creator ?? "anon"}/${file_data.id}.${file_extension}`, 3600);
   
+    const headers = new Headers();
+    headers.set("access-control-allow-origin", "*");
+    headers.set("location", data!.signedUrl);
+    
+    if (file_content_type) {
+      headers.set("content-type", file_content_type);
+    }
+
     const response = new Response(null, {
       status: 301,
-      headers: {
-        location: data!.signedUrl,
-        "access-control-allow-origin": "*"
-      }
+      headers
     });
 
     return response;
