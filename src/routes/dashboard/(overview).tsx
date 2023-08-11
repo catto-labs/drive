@@ -84,49 +84,56 @@ const Page: Component = () => {
         }
       >
         <div class="backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
-          <div class="text-text bg-surface0 opacity-80 min-w-64 w-1/5 p-4 shrink-0">
-            <div class="flex flex-row gap-3 mb-4">
-              <img src={cattoDriveLogo} class="w-10 h-10" />
-              <span class="text-lg">
-                <span class="font-bold text-2xl">Drive </span>by catto labs
-              </span>
-            </div>
-            <button
-              onClick={() => createFileImporter(fileUploadHandler)}
-              class="mb-4 pl-2 pr-4 py-2 flex flex-row gap-1 text-crust bg-lavender hover:bg-[#5f72d9] transition rounded-md"
-            >
-              <IconPlus class="h-6 w-6" />
-              <span>Upload</span>
-            </button>
-            <div class="flex flex-col gap-0.5">
-              <A
-                href="/dashboard"
-                class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+          <div class="text-text bg-surface0 opacity-80 min-w-64 w-1/5 shrink-0">
+            <header class="shrink-0 sticky top-0 w-full h-1/12 flex flex-row justify-between bg-surface1">
+              <div class="flex flex-row gap-[10px] items-center justify-center w-full">
+                <img src={cattoDriveLogo} class="w-10 h-10 -ml-1" />
+                <span class="text-lg">
+                  <span class="font-bold text-2xl -mt-2">Drive </span>
+                  <span class="-mt-2 mr-[10px] font-light text-[15px]">
+                    by catto labs
+                  </span>
+                </span>
+              </div>
+            </header>
+            <div class="p-4 ">
+              <button
+                onClick={() => createFileImporter(fileUploadHandler)}
+                class="mb-4 pl-2 pr-4 py-2 flex flex-row gap-1 text-crust bg-lavender hover:bg-[#5f72d9] transition rounded-md"
               >
-                <IconFolderAccountOutline class="w-6 h-6" />
-                <span>My workspace</span>
-              </A>
-              <A
-                href="/dashboard/shared"
-                class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
-              >
-                <IconAccountMultipleOutline class="w-6 h-6" />
-                <span>Shared with me</span>
-              </A>
-              <A
-                href="/dashboard/favorites"
-                class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
-              >
-                <IconStarOutline class="w-6 h-6" />
-                <span>Favorites</span>
-              </A>
-              <A
-                href="/dashboard/trash"
-                class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
-              >
-                <IconTrashCanOutline class="w-6 h-6" />
-                <span>Recycle bin</span>
-              </A>
+                <IconPlus class="h-6 w-6" />
+                <span>Upload</span>
+              </button>
+              <div class="flex flex-col gap-0.5">
+                <A
+                  href="/dashboard"
+                  class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+                >
+                  <IconFolderAccountOutline class="w-6 h-6" />
+                  <span>My workspace</span>
+                </A>
+                <A
+                  href="/dashboard/shared"
+                  class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+                >
+                  <IconAccountMultipleOutline class="w-6 h-6" />
+                  <span>Shared with me</span>
+                </A>
+                <A
+                  href="/dashboard/favorites"
+                  class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+                >
+                  <IconStarOutline class="w-6 h-6" />
+                  <span>Favorites</span>
+                </A>
+                <A
+                  href="/dashboard/trash"
+                  class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+                >
+                  <IconTrashCanOutline class="w-6 h-6" />
+                  <span>Recycle bin</span>
+                </A>
+              </div>
             </div>
           </div>
 
