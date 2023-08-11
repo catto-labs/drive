@@ -138,7 +138,7 @@ const Page: Component = () => {
           <div class="flex flex-col h-full bg-surface0 border-l border-surface2 w-4/5 z-20">
             <header class="shrink-0 sticky top-0 bg-surface1 border-b border-surface2 w-full h-16 flex flex-row justify-between shadow-sm">
               <h1 class="border-base font-semibold h-full justify-center flex flex-col ml-4 text-text">
-                My Files
+                My Workspace
               </h1>
               <div class="flex flex-row gap-x-2 mr-4 items-center">
                 <button
