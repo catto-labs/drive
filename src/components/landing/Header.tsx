@@ -9,7 +9,7 @@ import cattoDriveLogo from "@/assets/icon/logo.png"
 export default function Header() {
   return (
     <header class="flex justify-between p-8 bg-gradient-to-b bg-gradient-from-[#2d303d]">
-      <img src={cattoDriveLogo} class="w-12 h-12" alt="drive by catto labs logo" />
+      <A href="/"><img src={cattoDriveLogo} class="w-12 h-12" alt="drive by catto labs logo" /></A>
       <nav class="h-64 flex justify-end">
         <div class="flex gap-x-4 h-fit">
           <A
