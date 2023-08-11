@@ -84,8 +84,8 @@ const Page: Component = () => {
         }
       >
         <div class="backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
-          <div class="text-text bg-surface0 bg-opacity-80 min-w-64 w-1/5 shrink-0">
-            <header class="shrink-0 sticky top-0 w-full h-14 flex flex-row flex flex-row gap-[10px] items-center justify-center w-full">
+          <div class="text-text bg-surface0/65 min-w-64 w-1/5 shrink-0">
+            <header class="px-4 pt-6 pb-2 shrink-0 sticky top-0 w-full h-14 flex flex-row flex flex-row gap-[10px] items-center w-full">
               <img src={cattoDriveLogo} class="w-10 h-10 -ml-1 mt-1" />
               <span class="text-lg">
                 <span class="font-bold text-2xl">Drive </span>
@@ -105,28 +105,28 @@ const Page: Component = () => {
               <div class="flex flex-col gap-0.5 text-text">
                 <A
                   href="/dashboard"
-                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 bg-lavender bg-opacity-25 transition rounded-md"
+                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 bg-gradient-to-r from-lavender/30 to-mauve/20 transition rounded-md"
                 >
                   <IconFolderAccountOutline class="w-6 h-6" />
                   <span>My Workspace</span>
                 </A>
                 <A
                   href="/dashboard/shared"
-                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
                 >
                   <IconAccountMultipleOutline class="w-6 h-6" />
                   <span>Shared</span>
                 </A>
                 <A
                   href="/dashboard/favorites"
-                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
                 >
                   <IconStarOutline class="w-6 h-6" />
                   <span>Favourites</span>
                 </A>
                 <A
                   href="/dashboard/trash"
-                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
                 >
                   <IconTrashCanOutline class="w-6 h-6" />
                   <span>Recycle Bin</span>
@@ -135,8 +135,8 @@ const Page: Component = () => {
             </div>
           </div>
 
-          <div class="flex flex-col h-full bg-surface0 border-l border-surface2 w-4/5 z-20">
-            <header class="shrink-0 sticky top-0 bg-surface1 border-b border-surface2 w-full h-16 flex flex-row justify-between shadow-sm">
+          <div class="flex flex-col h-full bg-base border-l border-surface2 w-4/5 z-20">
+            <header class="shrink-0 sticky top-0 bg-surface0 border-b border-surface1 w-full h-16 flex flex-row justify-between shadow-sm">
               <h1 class="border-base font-semibold h-full justify-center flex flex-col ml-4 text-text">
                 My Workspace
               </h1>
@@ -252,7 +252,7 @@ const Page: Component = () => {
                   placeholder="Search..."
                   name="search"
                   autofocus
-                  class="py-1 px-4 rounded-xl w-84 mx-4 bg-surface2 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
+                  class="py-1 px-4 rounded-xl w-84 mx-4 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
                 />
                 <button
                   type="button"
