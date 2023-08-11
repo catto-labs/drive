@@ -1,4 +1,4 @@
-import { type UserProfile } from "@/stores/auth";
+import { type UserProfile } from "@/types/api";
 import { createClient } from "@supabase/supabase-js";
 
 export const supabase = createClient(
