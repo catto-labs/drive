@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import path from "node:path";
-import fs from "node:fs";
 
 import solid from "solid-start/vite";
 import vercel from "solid-start-vercel";
