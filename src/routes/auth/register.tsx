@@ -102,7 +102,7 @@ const Page: Component = () => {
 
                   <A
                     href="/auth/login"
-                    class="text-text underline decoration-dotted hover:decoration-solid mx-12 w-full text-center"
+                    class="text-text underline decoration-dotted hover:decoration-solid w-full text-center"
                   >
                     All done? Let's log in!
                   </A>
