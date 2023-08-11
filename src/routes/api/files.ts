@@ -1,6 +1,6 @@
 import { type APIEvent, json } from "solid-start"
 import { supabase, getUserProfile } from "@/supabase/server";
-import { UserProfile } from "@/stores/auth";
+import type { UserProfile } from "@/types/api";
 
 export const GET = async ({ request }: APIEvent): Promise<Response> => {
   let api_token = request.headers.get("authorization");
@@ -53,7 +53,12 @@ export const PUT = async ({ request }: APIEvent): Promise<Response> => {
   const formData = await request.formData();
   const formDataFiles = formData.getAll("files") as File[];
 
-  const workspaceId = formData.get("workspace_id") as string;
+  const workspaceId = formData.get("workspace_id") as string | undefined;
+  if (user_profile && !workspaceId) return json({
+    success: false,
+    message: "Authenticated users should always specify a workspace ID."
+  });
+
   const isPrivate = parseInt((formData.get("private") as string | null) ?? "1");
 
   // TODO: type this shit.
@@ -65,11 +70,11 @@ export const PUT = async ({ request }: APIEvent): Promise<Response> => {
     const { data } = await supabase
       .from("uploads")
       .insert({
-        creator: user_profile?.user_id ?? null,
+        creator: user_profile ? user_profile.user_id : null,
         // Always public for anonymous uploads.
         private: user_profile ? Boolean(isPrivate) : false,
         shared_with: [],
-        workspace_id: workspaceId,
+        workspace_id: user_profile ? workspaceId : null,
         name: file.name
       })
       .select();
