@@ -143,22 +143,6 @@ const Page: Component = () => {
                 My Files
               </h1>
               <div class="flex flex-row gap-x-2 mr-4 items-center">
-                {/*<button
-                  type="button"
-                  title="Upload a file"
-                  onClick={() => createFileUpload(fileUploadHandler)}
-                  class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
-                >
-                  <IconFileUploadOutline class="text-xl" />
-                </button>
-                */}
-                {/* <button
-                type="button"
-                title="Upload a folder"
-                class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
-              >
-                <IconFolderUploadOutline class="text-xl" />
-              </button> */}
                 <button
                   type="button"
                   title="Share the selected items"
