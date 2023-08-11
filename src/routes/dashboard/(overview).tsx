@@ -17,7 +17,7 @@ import IconChevronRight from "~icons/mdi/chevron-right";
 import IconCheck from "~icons/mdi/check";
 import IconFileUploadOutline from "~icons/mdi/file-upload-outline";
 import IconPlus from "~icons/mdi/plus"
-import IconFolderAccountOutine from "~icons/mdi/folder-account-outline"
+import IconFolderAccountOutline from "~icons/mdi/folder-account-outline"
 import IconAccountMultipleOutline from "~icons/mdi/account-multiple-outline"
 import IconTrashCanOutline from "~icons/mdi/trash-can-outline"
 
@@ -27,41 +27,7 @@ import FullscreenLoader from "@/components/FullscreenLoader";
 
 import { DropdownMenu } from "@kobalte/core";
 
-import { createFileImporter, makeFileUpload } from "@/utils/files";
-
-async function downloadFile(url: string, filename: string) {
-  try {
-    // Fetch the file
-    const response = await fetch(url);
-
-    // Check if the request was successful
-    if (response.status !== 200) {
-      throw new Error(
-        `Unable to download file. HTTP status: ${response.status}`
-      );
-    }
-
-    // Get the Blob data
-    const blob = await response.blob();
-
-    // Create a download link
-    const downloadLink = document.createElement("a");
-    downloadLink.href = URL.createObjectURL(blob);
-    downloadLink.download = filename;
-
-    // Trigger the download
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-
-    // Clean up
-    setTimeout(() => {
-      URL.revokeObjectURL(downloadLink.href);
-      document.body.removeChild(downloadLink);
-    }, 100);
-  } catch (error) {
-    console.error("Error downloading the file:", (error as Error).message);
-  }
-}
+import { createFileImporter, downloadUploadedFile, getUploadedFileURL, makeFileUpload } from "@/utils/files";
 
 const Page: Component = () => {
   const [view, setView] = createSignal<string>("name");
@@ -124,7 +90,7 @@ const Page: Component = () => {
             </button>
             <div class="flex flex-col gap-0.5">
               <A href="/dashboard" class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md">
-                <IconFolderAccountOutine class="w-6 h-6" />
+                <IconFolderAccountOutline class="w-6 h-6" />
                 <span>My workspace</span>
               </A>
               <A href="/dashboard/shared" class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md">
@@ -299,19 +265,19 @@ const Page: Component = () => {
                       <p class="text-sm">{file.name}</p>
                       <button
                         type="button"
-                        onClick={async () => {
-                          const response = await fetch("/api/file/" + file.id, {
-                            method: "GET",
-                            headers: { authorization: auth.profile!.api_token }
-                          });
-
-                          const json = await response.json();
-                          const url = json.data.url;
-
-                          downloadFile(url, file.name);
-                        }}
+                        onClick={() => downloadUploadedFile(file)}
                       >
                         Download
+                      </button>
+                      <button
+                        type="button"
+                        class="bg-lavender text-crust px-2 py-1 rounded"
+                        onClick={async () => {
+                          const url = getUploadedFileURL(file);
+                          await navigator.clipboard.writeText(url.href);
+                        }}
+                      >
+                        Copy public URL
                       </button>
                     </div>
                   )}

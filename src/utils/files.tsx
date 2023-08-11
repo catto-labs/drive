@@ -1,4 +1,5 @@
 import { auth } from "@/stores/auth";
+import { UploadedFile } from "@/types/api";
 
 export const createFileImporter = (onFileUploaded: (files: FileList) => unknown) => {
   const input = document.createElement("input");
@@ -72,3 +73,43 @@ export const makeFileUpload = async (files: FileList | Array<File>, options?: {
   // All's good, we send back the new rows in `uploads` table.
   return json.data.uploaded;
 };
+
+export const getUploadedFileURL = (file: UploadedFile) => {
+  const url = new URL("/api/file/" + file.id, window.location.origin);
+  return url;
+}
+
+export const downloadUploadedFile = (file: UploadedFile) => {
+  const xhr = new XMLHttpRequest()
+  xhr.open("GET", "/api/file/" + file.id, true);
+  xhr.setRequestHeader("authorization", auth.profile!.api_token);
+
+  xhr.responseType = "blob";
+
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      const blob = xhr.response;
+      const downloadLink = document.createElement("a");
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = file.name;
+
+      // Trigger the download
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+
+      // Clean up
+      setTimeout(() => {
+        URL.revokeObjectURL(downloadLink.href);
+        document.body.removeChild(downloadLink);
+      }, 100);
+    }
+  };
+
+  xhr.onprogress = (event) => {
+    if (event.lengthComputable) {
+      console.info(file.name, `${event.loaded}/${event.total} (${event.loaded * 100 / event.total}%)`);
+    }
+  }
+
+  xhr.send();
+}
