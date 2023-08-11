@@ -62,7 +62,10 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
       .from("uploads")
       .createSignedUrl(`${file_data.creator ?? "anon"}/${file_data.id}.${file_extension}`, 3600);
   
-    return Response.redirect(data!.signedUrl, 301);
+    const response = Response.redirect(data!.signedUrl, 301);
+    response.headers.set("access-control-allow-origin", "*");
+
+    return response;
   }
   catch (error) {
     console.error(error);
