@@ -16,31 +16,41 @@ import IconShareVariantOutline from "~icons/mdi/share-variant-outline";
 import IconChevronRight from "~icons/mdi/chevron-right";
 import IconCheck from "~icons/mdi/check";
 import IconFileUploadOutline from "~icons/mdi/file-upload-outline";
-import IconPlus from "~icons/mdi/plus"
-import IconFolderAccountOutline from "~icons/mdi/folder-account-outline"
-import IconAccountMultipleOutline from "~icons/mdi/account-multiple-outline"
-import IconTrashCanOutline from "~icons/mdi/trash-can-outline"
+import IconPlus from "~icons/mdi/plus";
+import IconFolderAccountOutline from "~icons/mdi/folder-account-outline";
+import IconAccountMultipleOutline from "~icons/mdi/account-multiple-outline";
+import IconTrashCanOutline from "~icons/mdi/trash-can-outline";
 
-import cattoDriveLogo from "@/assets/icon/logo.png"
+import cattoDriveLogo from "@/assets/icon/logo.png";
 
 import FullscreenLoader from "@/components/FullscreenLoader";
 
 import { DropdownMenu } from "@kobalte/core";
 
-import { createFileImporter, downloadUploadedFile, getUploadedFileURL, makeFileUpload } from "@/utils/files";
+import {
+  createFileImporter,
+  downloadUploadedFile,
+  getUploadedFileURL,
+  makeFileUpload,
+} from "@/utils/files";
 
 const Page: Component = () => {
   const [view, setView] = createSignal<string>("name");
 
-  const [currentWorkspaceId, setCurrentWorkspaceId] = createSignal(auth.profile!.root_workspace_id);
+  const [currentWorkspaceId, setCurrentWorkspaceId] = createSignal(
+    auth.profile!.root_workspace_id
+  );
   const [files, setFiles] = createSignal<any[] | null>(null);
   const navigate = useNavigate();
 
   onMount(async () => {
-    const response = await fetch(`/api/files?workspace_id=${currentWorkspaceId()}`, {
-      method: "GET",
-      headers: { authorization: auth.profile!.api_token }
-    });
+    const response = await fetch(
+      `/api/files?workspace_id=${currentWorkspaceId()}`,
+      {
+        method: "GET",
+        headers: { authorization: auth.profile!.api_token },
+      }
+    );
 
     const json = await response.json();
     setFiles(json.data as any[]);
@@ -50,7 +60,7 @@ const Page: Component = () => {
     try {
       const new_uploads = await makeFileUpload(files, {
         workspace_id: currentWorkspaceId(),
-        private: true
+        private: true,
       });
 
       setFiles((files) => (files ? [...files, ...new_uploads] : new_uploads));
@@ -70,38 +80,50 @@ const Page: Component = () => {
       <Show
         when={files()}
         fallback={
-          <FullscreenLoader
-            message="Please wait, our cats are finding your files !"
-          />
+          <FullscreenLoader message="Please wait, our cats are finding your files !" />
         }
       >
         <div class="backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
-          <div class="text-text bg-surface0 opacity-80 w-1/5 p-4 shrink-0">
+          <div class="text-text bg-surface0 opacity-80 min-w-64 w-1/5 p-4 shrink-0">
             <div class="flex flex-row gap-3 mb-4">
               <img src={cattoDriveLogo} class="w-10 h-10" />
-              <span class="text-lg"><span class="font-bold text-2xl">Drive </span>by catto labs</span>
+              <span class="text-lg">
+                <span class="font-bold text-2xl">Drive </span>by catto labs
+              </span>
             </div>
-            <button 
-              onClick={() => createFileImporter(fileUploadHandler)} 
+            <button
+              onClick={() => createFileImporter(fileUploadHandler)}
               class="mb-4 pl-2 pr-4 py-2 flex flex-row gap-1 text-crust bg-lavender hover:bg-[#5f72d9] transition rounded-md"
             >
               <IconPlus class="h-6 w-6" />
               <span>Upload</span>
             </button>
             <div class="flex flex-col gap-0.5">
-              <A href="/dashboard" class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md">
+              <A
+                href="/dashboard"
+                class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+              >
                 <IconFolderAccountOutline class="w-6 h-6" />
                 <span>My workspace</span>
               </A>
-              <A href="/dashboard/shared" class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md">
+              <A
+                href="/dashboard/shared"
+                class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+              >
                 <IconAccountMultipleOutline class="w-6 h-6" />
                 <span>Shared with me</span>
               </A>
-              <A href="/dashboard/favorites" class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md">
+              <A
+                href="/dashboard/favorites"
+                class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+              >
                 <IconStarOutline class="w-6 h-6" />
                 <span>Favorites</span>
               </A>
-              <A href="/dashboard/trash" class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md">
+              <A
+                href="/dashboard/trash"
+                class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+              >
                 <IconTrashCanOutline class="w-6 h-6" />
                 <span>Recycle bin</span>
               </A>
