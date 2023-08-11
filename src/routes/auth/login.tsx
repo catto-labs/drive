@@ -2,7 +2,7 @@ import { type Component, type JSX, Show } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Title, useNavigate, A } from "solid-start";
 
-import { supabase } from "@/supabase/client";
+import { getProfileWithSession, supabase } from "@/supabase/client";
 import { setAuth } from "@/stores/auth";
 
 import Header from "@/components/landing/Header";
@@ -49,7 +49,9 @@ const Page: Component = () => {
         throw new Error(error.message);
       }
 
-      setAuth("session", data.session);
+      const user_profile = await getProfileWithSession(data.session);
+
+      setAuth({ session: data.session, profile: user_profile });
       navigate("/dashboard");
     } catch (err) {
       const error = err as Error;
