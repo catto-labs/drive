@@ -77,9 +77,9 @@ const Page: Component = () => {
         redirectTo: window.location.origin + "/dashboard",
       },
     });
-  
+
     if (error) alert(error.message);
-  }
+  };
 
   return (
     <Show
@@ -102,7 +102,7 @@ const Page: Component = () => {
 
                   <A
                     href="/auth/login"
-                    class="text-base underline decoration-dotted hover:decoration-solid mx-12"
+                    class="text-text underline decoration-dotted hover:decoration-solid mx-12 w-full text-center"
                   >
                     All done? Let's log in!
                   </A>
@@ -119,9 +119,7 @@ const Page: Component = () => {
         <div class="text-text bg-base border border-surface0 rounded-lg shadow-xl w-96 h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
           <div class="flex gap-x-3 w-full">
             <div class="flex flex-col gap-y-4 w-full">
-              <h1 class="text-xl font-semibold">
-                We're glad to see you.
-              </h1>
+              <h1 class="text-xl font-semibold">We're glad to see you.</h1>
               <form
                 onSubmit={credentialsRegisterHandler}
                 class="flex flex-col gap-y-2"
@@ -206,13 +204,28 @@ const Page: Component = () => {
                 </p>
 
                 <div class="grid grid-cols-3 gap-x-4">
-                  <button onClick={async (e: Event) => await signInWithOAuthProvider(e, 'discord')} class="px-4 py-2 border-2 rounded-lg border-[#5865F2] group hover:bg-[#5865F2] transition flex justify-center">
+                  <button
+                    onClick={async (e: Event) =>
+                      await signInWithOAuthProvider(e, "discord")
+                    }
+                    class="px-4 py-2 border-2 rounded-lg border-[#5865F2] group hover:bg-[#5865F2] transition flex justify-center"
+                  >
                     <IconDiscord class="group-hover:text-base text-lg text-text" />
                   </button>
-                  <button onClick={async (e: Event) => await signInWithOAuthProvider(e, 'google')} class="px-4 py-2 border-2 rounded-lg border-[#4285F4] group hover:bg-[#4285F4] transition flex justify-center">
+                  <button
+                    onClick={async (e: Event) =>
+                      await signInWithOAuthProvider(e, "google")
+                    }
+                    class="px-4 py-2 border-2 rounded-lg border-[#4285F4] group hover:bg-[#4285F4] transition flex justify-center"
+                  >
                     <IconGoogle class="group-hover:text-base text-lg text-text" />
                   </button>
-                  <button onClick={async (e: Event) => await signInWithOAuthProvider(e, 'github')} class="px-4 py-2 border-2 rounded-lg border-[#333] group hover:bg-[#333] transition flex justify-center">
+                  <button
+                    onClick={async (e: Event) =>
+                      await signInWithOAuthProvider(e, "github")
+                    }
+                    class="px-4 py-2 border-2 rounded-lg border-[#333] group hover:bg-[#333] transition flex justify-center"
+                  >
                     <IconGithub class="group-hover:text-base text-lg text-text" />
                   </button>
                 </div>
