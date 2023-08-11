@@ -1,6 +1,6 @@
 import { type APIEvent, json } from "solid-start"
 import { supabase, getUserProfile } from "@/supabase/server";
-import type { UserProfile } from "@/types/api";
+import type { UploadedFile, UserProfile } from "@/types/api";
 
 export const GET = async ({ request }: APIEvent): Promise<Response> => {
   let api_token = request.headers.get("authorization");
@@ -62,7 +62,7 @@ export const PUT = async ({ request }: APIEvent): Promise<Response> => {
   const isPrivate = parseInt((formData.get("private") as string | null) ?? "1");
 
   // TODO: type this shit.
-  const newUploadsInDatabase: any[] = [];
+  const newUploadsInDatabase: UploadedFile[] = [];
   
   for (const file of formDataFiles) {
     const file_extension = file.name.substring(file.name.lastIndexOf(".") + 1);
@@ -79,12 +79,12 @@ export const PUT = async ({ request }: APIEvent): Promise<Response> => {
       })
       .select();
     
-    const upload_id = data![0].id;
-    newUploadsInDatabase.push(data![0]);
+    const upload = (data as [UploadedFile])[0];
+    newUploadsInDatabase.push(upload);
     
     await supabase.storage
       .from('uploads')
-      .upload(`${user_profile?.user_id ?? "anon"}/${upload_id}.${file_extension}`, file, {
+      .upload(`${user_profile?.user_id ?? "anon"}/${upload.id}.${file_extension}`, file, {
         cacheControl: '3600',
         upsert: true
       });
