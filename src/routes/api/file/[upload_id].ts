@@ -67,6 +67,8 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     const headers = new Headers();
     headers.set("access-control-allow-origin", "*");
     headers.set("location", data!.signedUrl);
+    headers.set("Cache-Control", "300");
+    headers.set("Content-Disposition", `attachment; filename="${file_data.name}"`);
     
     if (file_content_type) {
       headers.set("content-type", file_content_type);
