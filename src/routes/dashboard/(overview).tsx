@@ -85,7 +85,7 @@ const Page: Component = () => {
       >
         <div class="backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
           <div class="text-text bg-surface0 opacity-80 min-w-64 w-1/5 shrink-0">
-            <header class="shrink-0 sticky top-0 w-full h-1/12 flex flex-row justify-between ">
+            <header class="shrink-0 sticky top-0 w-full h-14 flex flex-row justify-between ">
               <div class="flex mt-1 flex-row gap-[10px] items-center justify-center w-full">
                 <img src={cattoDriveLogo} class="w-10 h-10 -ml-1" />
                 <span class="text-lg">
@@ -138,7 +138,7 @@ const Page: Component = () => {
           </div>
 
           <div class="flex flex-col h-full bg-surface0 border-l border-surface2 w-4/5 z-20">
-            <header class="shrink-0 sticky top-0 bg-surface1 border-b border-surface2 w-full h-1/12 flex flex-row justify-between shadow-sm">
+            <header class="shrink-0 sticky top-0 bg-surface1 border-b border-surface2 w-full h-14 flex flex-row justify-between shadow-sm">
               <h1 class="border-base font-semibold h-full justify-center flex flex-col ml-4">
                 My Files
               </h1>
