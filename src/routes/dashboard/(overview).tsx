@@ -170,41 +170,41 @@ const Page: Component = () => {
                   </DropdownMenu.Trigger>
                   <DropdownMenu.Portal>
                     <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md w-full flex justify-between">
+                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between">
                         New Folder <span class="text-subtext1">⌘ N</span>
                       </DropdownMenu.Item>
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md">
+                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
                         Open in New Tab
                       </DropdownMenu.Item>
                       <DropdownMenu.Separator class="border border-overlay0 my-1 opacity-50 border-dashed" />
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md w-full flex justify-between">
+                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between">
                         <div class="inline-flex ">
                           Quick Look{" "}
                           <blockquote class="ml-1">My Files</blockquote>
                         </div>{" "}
                         <span class="text-subtext1">Space</span>
                       </DropdownMenu.Item>
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md">
+                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
                         Get Info
                       </DropdownMenu.Item>
                       <DropdownMenu.Separator class="border border-overlay0 my-1 opacity-50 border-dashed" />
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md w-full flex justify-between">
+                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between">
                         Use Groups
                       </DropdownMenu.Item>
                       <DropdownMenu.Sub overlap gutter={4} shift={-8}>
-                        <DropdownMenu.SubTrigger class="px-4 py-1 hover:bg-lavender hover:bg-opacity-50 rounded-md flex justify-between w-full overview-dropdown-submenu">
+                        <DropdownMenu.SubTrigger class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] hover:bg-opacity-50 rounded-md flex justify-between w-full overview-dropdown-submenu">
                           Sort By...
                           <IconChevronRight class="text-subtext1 text-lg my-auto" />
                         </DropdownMenu.SubTrigger>
                         <DropdownMenu.Portal>
-                          <DropdownMenu.SubContent class="overview-dropdown-content bg-surface0 border border-surface2 p-2 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                          <DropdownMenu.SubContent class="overview-dropdown-content bg-surface0 border text-text hover:text-[rgb(46,48,66)] border-surface2 p-2 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
                             <DropdownMenu.RadioGroup
                               value={view()}
                               onChange={setView}
                               class="flex flex-col w-40 text-sm"
                             >
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="name"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -213,7 +213,7 @@ const Page: Component = () => {
                                 <p class="ml-1">Name</p>
                               </DropdownMenu.RadioItem>
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="date-modified"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -222,7 +222,7 @@ const Page: Component = () => {
                                 <p class="ml-1">Date modified</p>
                               </DropdownMenu.RadioItem>
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="kind"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -231,7 +231,7 @@ const Page: Component = () => {
                                 <p class="ml-1">Kind</p>
                               </DropdownMenu.RadioItem>
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="size"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -243,7 +243,7 @@ const Page: Component = () => {
                           </DropdownMenu.SubContent>
                         </DropdownMenu.Portal>
                       </DropdownMenu.Sub>
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender rounded-md">
+                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
                         Show View Options
                       </DropdownMenu.Item>
                     </DropdownMenu.Content>
