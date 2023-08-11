@@ -57,7 +57,6 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     }
   
     const file_extension = file_data.name.substring(file_data.name.lastIndexOf(".") + 1);
-    console.log(file_extension, "POGOGOGOGO");
     const file_content_type = mime_type(file_extension);
 
     // Create a download URL, only available for 15s.
