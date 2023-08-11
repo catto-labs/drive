@@ -85,8 +85,8 @@ const Page: Component = () => {
       >
         <div class="backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
           <div class="text-text bg-surface0 opacity-80 min-w-64 w-1/5 shrink-0">
-            <header class="shrink-0 sticky top-0 w-full h-1/12 flex flex-row justify-between bg-surface1">
-              <div class="flex flex-row gap-[10px] items-center justify-center w-full">
+            <header class="shrink-0 sticky top-0 w-full h-1/12 flex flex-row justify-between ">
+              <div class="flex mt-1 flex-row gap-[10px] items-center justify-center w-full">
                 <img src={cattoDriveLogo} class="w-10 h-10 -ml-1" />
                 <span class="text-lg">
                   <span class="font-bold text-2xl -mt-2">Drive </span>
