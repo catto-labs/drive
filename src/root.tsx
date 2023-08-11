@@ -18,20 +18,14 @@ import {
 } from "solid-start";
 
 import { FullscreenLoaderEntry } from "@/components/FullscreenLoader";
-import { UserProfile, setAuth } from "@/stores/auth";
-import { supabase } from "@/supabase/client";
+import { getProfileWithSession, supabase } from "@/supabase/client";
+import { setAuth } from "@/stores/auth";
 
 export default function Root() {
   onMount(async () => {
     const { data } = await supabase.auth.getSession();
     if (data.session) {
-      const { data: _profile } = await supabase.from("profiles")
-        .select()
-        .eq("user_id", data.session.user.id)
-        .limit(1)
-        .single();
-      
-      let user_profile = _profile as UserProfile;
+      const user_profile = await getProfileWithSession(data.session);
       setAuth({ loading: false, session: data.session, profile: user_profile });
     }
     else {
