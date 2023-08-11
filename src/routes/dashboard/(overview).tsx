@@ -102,34 +102,34 @@ const Page: Component = () => {
                 <IconPlus class="h-6 w-6" />
                 <span>Upload</span>
               </button>
-              <div class="flex flex-col gap-0.5">
+              <div class="flex flex-col gap-0.5 text-text">
                 <A
                   href="/dashboard"
-                  class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 bg-lavender bg-opacity-25 transition rounded-md"
                 >
                   <IconFolderAccountOutline class="w-6 h-6" />
-                  <span>My workspace</span>
+                  <span>My Workspace</span>
                 </A>
                 <A
                   href="/dashboard/shared"
-                  class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
                 >
                   <IconAccountMultipleOutline class="w-6 h-6" />
-                  <span>Shared with me</span>
+                  <span>Shared</span>
                 </A>
                 <A
                   href="/dashboard/favorites"
-                  class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
                 >
                   <IconStarOutline class="w-6 h-6" />
-                  <span>Favorites</span>
+                  <span>Favourites</span>
                 </A>
                 <A
                   href="/dashboard/trash"
-                  class="py-2 pl-0.1 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
+                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-surface1 transition rounded-md"
                 >
                   <IconTrashCanOutline class="w-6 h-6" />
-                  <span>Recycle bin</span>
+                  <span>Recycle Bin</span>
                 </A>
               </div>
             </div>
