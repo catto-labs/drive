@@ -2,15 +2,16 @@ import { type Component, Show, Switch, Match, createSignal, batch, For } from "s
 import { createStore } from "solid-js/store";
 
 import Header from "@/components/landing/Header";
-import { createFileImporter, makeFileUpload } from "@/utils/files";
+import { createFileImporter, getUploadedFileURL, makeFileUpload } from "@/utils/files";
 
 import IconPlus from "~icons/mdi/plus";
 import { auth } from "@/stores/auth";
+import type { UploadedFile } from "@/types/api";
 
 const Page: Component = () => {
   interface MainState { view: "main", dragging: boolean }
   interface UploadingState { view: "uploading", uploads: null, private: boolean, workspace_id: string }
-  interface UploadedState { view: "uploaded", uploads: any[] }
+  interface UploadedState { view: "uploaded", uploads: UploadedFile[] }
   
   const [filesToUpload, setFilesToUpload] = createSignal<FileList | Array<File>>([]);
   const [state, setState] = createStore<(
@@ -162,7 +163,21 @@ const Page: Component = () => {
                 {upload => (
                   <div class="flex flex-col">
                     <p>{upload.name}</p>
+                    <p>Is public? {upload.private ? "No" : "Yes"}</p>
                     <p class="text-sm">{upload.id}</p>
+
+                    <Show when={!upload.private}>
+                      <button
+                        type="button"
+                        class="bg-lavender text-crust px-2 py-1 rounded"
+                        onClick={async () => {
+                          const url = getUploadedFileURL(upload);
+                          await navigator.clipboard.writeText(url.href);
+                        }}
+                      >
+                        Copy public URL
+                      </button>
+                    </Show>
                   </div>
                 )}
               </For>
