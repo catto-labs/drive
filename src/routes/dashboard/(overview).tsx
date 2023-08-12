@@ -25,6 +25,7 @@ import IconFileOutline from "~icons/mdi/file-outline"
 import IconFileImageOutline from "~icons/mdi/file-image-outline"
 import IconFileDownloadOutline from "~icons/mdi/file-download-outline"
 import IconDeleteOutline from "~icons/mdi/delete-outline"
+import IconHomeExportOutline from "~icons/mdi/home-export-outline"
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
@@ -113,7 +114,7 @@ const Page: Component = () => {
                 </span>
               </span>
             </header>
-            <div class="p-4 ">
+            <div class="p-4 h-[85vh]">
               <button
                 onClick={() => createFileImporter(fileUploadHandler)}
                 class="mb-4 pl-2 pr-4 py-2 flex flex-row gap-1 text-crust bg-lavender hover:bg-[#5f72d9] transition rounded-md"
@@ -121,34 +122,43 @@ const Page: Component = () => {
                 <IconPlus class="h-6 w-6" />
                 <span>Upload</span>
               </button>
-              <div class="flex flex-col gap-0.5 text-text">
+              <div class="flex flex-col gap-0.5 justify-between h-full text-text">
+                <div>
+                  <A
+                    href="/dashboard"
+                    class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 bg-gradient-to-r from-lavender/30 to-mauve/20 transition rounded-md"
+                  >
+                    <IconFolderAccountOutline class="w-6 h-6" />
+                    <span>My Workspace</span>
+                  </A>
+                  <A
+                    href="/dashboard/shared"
+                    class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
+                  >
+                    <IconAccountMultipleOutline class="w-6 h-6" />
+                    <span>Shared</span>
+                  </A>
+                  <A
+                    href="/dashboard/favorites"
+                    class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
+                  >
+                    <IconStarOutline class="w-6 h-6" />
+                    <span>Favourites</span>
+                  </A>
+                  <A
+                    href="/dashboard/trash"
+                    class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
+                  >
+                    <IconTrashCanOutline class="w-6 h-6" />
+                    <span>Recycle Bin</span>
+                  </A>
+                </div>
                 <A
-                  href="/dashboard"
-                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 bg-gradient-to-r from-lavender/30 to-mauve/20 transition rounded-md"
-                >
-                  <IconFolderAccountOutline class="w-6 h-6" />
-                  <span>My Workspace</span>
-                </A>
-                <A
-                  href="/dashboard/shared"
+                  href="/"
                   class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
                 >
-                  <IconAccountMultipleOutline class="w-6 h-6" />
-                  <span>Shared</span>
-                </A>
-                <A
-                  href="/dashboard/favorites"
-                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
-                >
-                  <IconStarOutline class="w-6 h-6" />
-                  <span>Favourites</span>
-                </A>
-                <A
-                  href="/dashboard/trash"
-                  class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
-                >
-                  <IconTrashCanOutline class="w-6 h-6" />
-                  <span>Recycle Bin</span>
+                  <IconHomeExportOutline class="w-6 h-6" />
+                  <span>Go to home page</span>
                 </A>
               </div>
             </div>
