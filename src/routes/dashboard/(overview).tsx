@@ -53,7 +53,7 @@ const Page: Component = () => {
 
   createEffect(on(currentWorkspaceId, async (workspaceId: string) => {
     const response = await fetch(
-      `/api/get_files?workspace_id=${currentWorkspaceId()}`,
+      `/api/workspace?workspace_id=${currentWorkspaceId()}`,
       {
         method: "GET",
         headers: { authorization: auth.profile!.api_token },
@@ -87,8 +87,6 @@ const Page: Component = () => {
     else {
       return <IconFileOutline class="text-xl" />
     }
-
-    return "yeeet";
   }
 
   createEffect(() => {

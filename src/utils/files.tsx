@@ -54,7 +54,7 @@ export const makeFileUpload = async (files: FileList | Array<File>, options?: {
     headers.authorization = auth.profile.api_token;
   }
 
-  const response = await fetch("/api/files", {
+  const response = await fetch("/api/workspace/upload", {
     method: "PUT",
     headers,
     body
