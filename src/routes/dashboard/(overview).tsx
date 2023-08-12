@@ -5,6 +5,7 @@ import {
   createEffect,
   Show,
   For,
+  on,
 } from "solid-js";
 import { A, Title, useNavigate } from "solid-start";
 import { auth, logOutUser } from "@/stores/auth";
@@ -22,6 +23,11 @@ import IconAccountMultipleOutline from "~icons/mdi/account-multiple-outline";
 import IconTrashCanOutline from "~icons/mdi/trash-can-outline";
 import IconAccount from "~icons/mdi/account";
 import IconMenuDown from "~icons/mdi/menu-down";
+import IconFileOutline from "~icons/mdi/file-outline"
+import IconFileImageOutline from "~icons/mdi/file-image-outline"
+
+//@ts-ignore
+import { FileIcons } from "file-icons-js"
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
@@ -45,7 +51,7 @@ const Page: Component = () => {
   const [files, setFiles] = createSignal<any[] | null>(null);
   const navigate = useNavigate();
 
-  onMount(async () => {
+  createEffect(on(currentWorkspaceId, async (workspaceId: string) => {
     const response = await fetch(
       `/api/get_files?workspace_id=${currentWorkspaceId()}`,
       {
@@ -56,7 +62,7 @@ const Page: Component = () => {
 
     const json = await response.json();
     setFiles(json.data as any[]);
-  });
+  }));
 
   const fileUploadHandler = async (files: FileList) => {
     try {
@@ -70,6 +76,20 @@ const Page: Component = () => {
       console.error(error);
     }
   };
+
+  const getFileIcon = (file: any) => {
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+    const imageFileExtensions = ["png", "jpg", "jpeg", "gif", "webp"];
+
+    if (imageFileExtensions.indexOf(fileExtension) !== -1) {
+      return <IconFileImageOutline class="text-xl" />
+    }
+    else {
+      return <IconFileOutline class="text-xl" />
+    }
+
+    return "yeeet";
+  }
 
   createEffect(() => {
     window.scrollTo(0, 0);
@@ -281,27 +301,32 @@ const Page: Component = () => {
             </header>
 
             <main class="overflow-auto">
-              <section class="flex flex-wrap gap-4 p-4">
+              <section class="block p-4">
                 <For each={files()!}>
                   {(file) => (
-                    <div class="max-w-60 h-auto rounded-md p-2 flex flex-col gap-1 border border-text hover:bg-subtext0">
-                      <p class="text-sm">{file.name}</p>
-                      <button
-                        type="button"
-                        onClick={() => downloadUploadedFile(file)}
-                      >
-                        Download
-                      </button>
-                      <button
-                        type="button"
-                        class="bg-lavender text-crust px-2 py-1 rounded"
-                        onClick={async () => {
-                          const url = getUploadedFileURL(file);
-                          await navigator.clipboard.writeText(url.href);
-                        }}
-                      >
-                        Copy public URL
-                      </button>
+                    <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-text hover:bg-surface0">
+                      <div class="flex flex-row gap-4">
+                        {getFileIcon(file)}
+                        <p class="text-sm mt-0.5">{file.name}</p>
+                      </div>
+                      <div class="flex flex-row gap-4">
+                        <button
+                          type="button"
+                          onClick={() => downloadUploadedFile(file)}
+                        >
+                          Download
+                        </button>
+                        <button
+                          type="button"
+                          class="bg-lavender text-crust px-2 py-1 rounded"
+                          onClick={async () => {
+                            const url = getUploadedFileURL(file);
+                            await navigator.clipboard.writeText(url.href);
+                          }}
+                        >
+                          Copy public URL
+                        </button>
+                      </div>
                     </div>
                   )}
                 </For>
