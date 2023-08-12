@@ -181,7 +181,15 @@ const Page: Component = () => {
                   <DropdownMenu.Portal>
                     <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
                       <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between"
-                        onSelect={() => createWorkspace(params.workspace_id)}
+                        onSelect={async () => {
+                          const workspace = await createWorkspace(params.workspace_id);
+                          const item: WorkspaceContent = {
+                            type: "workspace",
+                            data: workspace
+                          };
+
+                          setWorkspaceContent(prev => prev ? [...prev, item] : [item]);
+                        }}
                       >
                         New Folder <span class="text-subtext1">⌘ N</span>
                       </DropdownMenu.Item>
