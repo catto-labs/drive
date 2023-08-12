@@ -1,6 +1,6 @@
-import { type APIEvent, json } from "solid-start"
+import { type APIEvent, json, redirect } from "solid-start"
 import { supabase, getUserProfile } from "@/supabase/server";
-import type { UploadedFile, UserProfile } from "@/types/api";
+import type { UserProfile } from "@/types/api";
 
 export const GET = async ({ request }: APIEvent): Promise<Response> => {
   let api_token = request.headers.get("authorization");
@@ -36,3 +36,8 @@ export const GET = async ({ request }: APIEvent): Promise<Response> => {
     data
   });
 }
+
+export const PUT = () => {
+  const url = new URL(`/functions/v1/upload-file`, import.meta.env.VITE_SUPABASE_PROJECT_URL as string)
+  return redirect(url.href, 308);
+};

@@ -1,17 +1,13 @@
 import { type APIEvent, json } from "solid-start";
-// import { contentType as mime_type } from "mime-types";
  
+import type { UploadedFile, UserProfile } from "@/types/api";
 import { supabase, getUserProfile } from "@/supabase/server";
-import { UploadedFile, UserProfile } from "@/types/api";
 
 export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
   try {
     let { upload_id } = params;
     let token = request.headers.get("authorization");
     
-    // if (upload_id.includes(".")) {
-    //   upload_id = upload_id.substring(0, upload_id.indexOf("."));
-    // }
     const { data: file_data } = await supabase
       .from("uploads")
       .select()
@@ -60,7 +56,6 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     }
   
     const file_extension = file_data.name.substring(file_data.name.lastIndexOf(".") + 1);
-    // const file_content_type = mime_type(file_extension);
 
     // Create a download URL, only available for 15s.
     const { data } = await supabase.storage
@@ -70,14 +65,9 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     const headers = new Headers();
     headers.set("access-control-allow-origin", "*");
     headers.set("location", data!.signedUrl);
-    // headers.set("Cache-Control", "300");
-    
-    // if (file_content_type) {
-    //   headers.set("content-type", file_content_type);
-    // }
 
     const response = new Response(null, {
-      status: 301,
+      status: 307,
       headers
     });
 
