@@ -310,19 +310,19 @@ const Page: Component = () => {
                             <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-surface0/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
                             <DropdownMenu.Item
                                 onClick={() => downloadUploadedFile(file)}
-                                class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                class="flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
                               >
                                 <IconFileDownloadOutline class="text-lg" />
                                 Download
                               </DropdownMenu.Item>
                               <DropdownMenu.Item
-                                class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                class="flex flex-row items-center gap-6 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
                               >
                                 <IconStarOutline class="text-lg" />
                                 Favourite
                               </DropdownMenu.Item>
                               <DropdownMenu.Item
-                                class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                class="flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
                               >
                                 <IconTrashCanOutline class="text-lg" />
                                 Delete
