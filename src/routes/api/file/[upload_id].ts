@@ -1,14 +1,17 @@
 import { type APIEvent, json } from "solid-start";
-import { contentType as mime_type } from "mime-types";
+// import { contentType as mime_type } from "mime-types";
  
 import { supabase, getUserProfile } from "@/supabase/server";
 import { UploadedFile, UserProfile } from "@/types/api";
 
 export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
   try {
-    const { upload_id } = params;
+    let { upload_id } = params;
     let token = request.headers.get("authorization");
     
+    // if (upload_id.includes(".")) {
+    //   upload_id = upload_id.substring(0, upload_id.indexOf("."));
+    // }
     const { data: file_data } = await supabase
       .from("uploads")
       .select()
@@ -57,7 +60,7 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     }
   
     const file_extension = file_data.name.substring(file_data.name.lastIndexOf(".") + 1);
-    const file_content_type = mime_type(file_extension);
+    // const file_content_type = mime_type(file_extension);
 
     // Create a download URL, only available for 15s.
     const { data } = await supabase.storage
@@ -67,13 +70,11 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     const headers = new Headers();
     headers.set("access-control-allow-origin", "*");
     headers.set("location", data!.signedUrl);
-    headers.set("Cache-Control", "300");
-    headers.set("Content-Disposition", `attachment; filename="${file_data.name}"`);
-    headers.set("Link", `<https://drive.cattolabs.com/api/file/${file_data.id}>; rel="canonical"`)
+    // headers.set("Cache-Control", "300");
     
-    if (file_content_type) {
-      headers.set("content-type", file_content_type);
-    }
+    // if (file_content_type) {
+    //   headers.set("content-type", file_content_type);
+    // }
 
     const response = new Response(null, {
       status: 301,
