@@ -113,4 +113,13 @@ export const downloadUploadedFile = (file: UploadedFile) => {
   }
 
   xhr.send();
-}
+};
+
+export const removePermanentlyFile = async (upload_id: string) => {
+  await fetch("/api/file/" + upload_id, {
+    method: "DELETE",
+    headers: {
+      authorization: auth.profile!.api_token
+    }
+  });
+};

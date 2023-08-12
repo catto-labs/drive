@@ -44,6 +44,7 @@ import {
   downloadUploadedFile,
   getUploadedFileURL,
   makeFileUpload,
+  removePermanentlyFile,
 } from "@/utils/files";
 
 import {
@@ -289,30 +290,6 @@ const Page: Component = () => {
                     <Switch>
                       <Match when={content.type === "file" && content.data}>
                         {file => (
-                          // <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-text hover:bg-surface0">
-                          //   <div class="flex flex-row gap-2">
-                          //     {getFileIcon(file())}
-                          //     <p class="text-sm mt-0.5">{file().name}</p>
-                          //   </div>
-                          //   <div class="flex flex-row gap-4">
-                          //     <button
-                          //       type="button"
-                          //       onClick={() => downloadUploadedFile(file())}
-                          //     >
-                          //       Download
-                          //     </button>
-                          //     <button
-                          //       type="button"
-                          //       class="bg-lavender text-crust px-2 py-1 rounded"
-                          //       onClick={async () => {
-                          //         const url = getUploadedFileURL(file());
-                          //         await navigator.clipboard.writeText(url.href);
-                          //       }}
-                          //     >
-                          //       Copy public URL
-                          //     </button>
-                          //   </div>
-                          // </div>
                           <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0">
                             <div class="flex flex-row gap-2">
                               {getFileIcon(file())}
@@ -334,7 +311,7 @@ const Page: Component = () => {
                                 <DropdownMenu.Trigger>
                                 <button
                                   type="button"
-                                  title="Delete file"
+                                  title="Actions"
                                   class="p-1 hover:bg-surface1 rounded-md"
                                 >
                                   <IconDotsHorizontal class="text-lg text-text" />
@@ -353,13 +330,19 @@ const Page: Component = () => {
                                       class="flex flex-row items-center gap-6 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                     >
                                       <IconStarOutline class="text-lg" />
-                                      Favourite
+                                      Favorite
                                     </DropdownMenu.Item>
                                     <DropdownMenu.Item
-                                      class="flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                      class="cursor-pointer flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                      onSelect={async () => {
+                                        await removePermanentlyFile(file().id)
+                                        setWorkspaceContent(prev => prev ?
+                                          prev.filter(item => item.type === "workspace" || (item.type === "file" && item.data.id !== file().id))
+                                        : [])
+                                      }}
                                     >
                                       <IconDeleteOutline class="text-lg" />
-                                      Delete
+                                      Delete permanently
                                     </DropdownMenu.Item>
                                   </DropdownMenu.Content>
                                 </DropdownMenu.Portal>
