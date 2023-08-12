@@ -1,7 +1,7 @@
 {
   "redirects": [
     {
-      "source": "/api/file",
+      "source": "/api/files",
       "destination": "https://kcpxeoxkmblpivpgwdsm.supabase.co/functions/v1/upload-file",
       "permanent": true
     }
