@@ -47,19 +47,43 @@ const response = await fetch("https://drive.cattolabs.com/api/...", {
 
 To use [drive.cattolabs.com](https://drive.cattolabs.com) with ShareX, you have to setup a custom uploader.
 
-1. Head over to "Destinations" > "Custom uploader settings" ;
-1. Click on "New" to create a new uploader. Name it as you want, we'll go with `drive.cattolabs.com` here ;
-1. Set the "Destination type" to `Image uploader` and `File uploader`, we currently don't support `Text uploader` ;
-1. Set the "Method" to `PUT` ;
-1. Set the "Request URL" to `https://drive.cattolabs.com/api/files` ;
-1. Keep "URL parameters" empty ;
-1. For "Headers", leave empty if you want to upload as anonymous, else add `Authorization` and as value, [your API key](#using-the-api) ;
-1. Keep "Body" as `Form data (multipart/form-data)`, below you're able to add form data parameters
-  - `private` as name and `0` as value to make all your uploaded files public.
-  - If you're authenticated, uploaded files will be at the root of your drive by default, you can override that behavior by adding `workspace_id` as name and [any workspace ID](#get-a-workspace-id) as value to make all uploads go there.
-8. Set the "File form name" to `files` ;
-1. Set the "URL" to `https://drive.cattolabs.com/api/file/{json:data.uploaded[0].id}`
-1. Set the "Error message" to `{json:message}`
+Head over to "Destinations" > "Custom uploader settings" ;
+
+### Manual
+
+- Click on "New" to create a new uploader. Name it as you want, we'll go with `drive.cattolabs.com` here ;
+- Set the "Destination type" to `Image uploader` and `File uploader`, we currently don't support `Text uploader` ;
+- Set the "Method" to `PUT` ;
+- Set the "Request URL" to `https://kcpxeoxkmblpivpgwdsm.supabase.co/functions/v1/upload-file`, (for some reason, ShareX throws on redirections so `https://drive.cattolabs.com/api/files` doesn't work) ;
+- Keep "URL parameters" empty ;
+- For "Headers", leave empty if you want to upload as anonymous, else add `Authorization` and as value, [your API key](#using-the-api) ;
+- Keep "Body" as `Form data (multipart/form-data)`, below you're able to add form data parameters
+
+> `private` as name and `0` as value to make all your uploaded files public.
+> If you're authenticated, uploaded files will be at the root of your drive by default, you can override that behavior by adding `workspace_id` as name and [any workspace ID](#get-a-workspace-id) as value to make all uploads go there.
+
+- Set the "File form name" to `files` ;
+- Set the "URL" to `https://drive.cattolabs.com/api/file/{json:data.uploaded[0].id}`
+- Set the "Error message" to `{json:message}`
+
+### Pre-made: Anonymously upload public files
+
+```json
+{
+  "Version": "15.0.0",
+  "Name": "drive.cattolabs.com",
+  "DestinationType": "ImageUploader, FileUploader",
+  "RequestMethod": "PUT",
+  "RequestURL": "https://kcpxeoxkmblpivpgwdsm.supabase.co/functions/v1/upload-file",
+  "Body": "MultipartFormData",
+  "Arguments": {
+    "private": "0"
+  },
+  "FileFormName": "files",
+  "URL": "https://drive.cattolabs.com/api/file/{json:data.uploaded[0].id}",
+  "ErrorMessage": "{json:message}"
+}
+```
 
 ## Developing
 
@@ -69,4 +93,3 @@ pnpm dev
 # or start the server and open the app in a new browser tab
 pnpm dev --open
 ```
-
