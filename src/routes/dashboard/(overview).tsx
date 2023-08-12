@@ -23,6 +23,8 @@ import IconAccount from "~icons/mdi/account";
 import IconMenuDown from "~icons/mdi/menu-down";
 import IconFileOutline from "~icons/mdi/file-outline"
 import IconFileImageOutline from "~icons/mdi/file-image-outline"
+import IconFileDownloadOutline from "~icons/mdi/file-download-outline"
+import IconDeleteOutline from "~icons/mdi/delete-outline"
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
@@ -73,6 +75,8 @@ const Page: Component = () => {
   };
 
   const getFileIcon = (file: any) => {
+    console.log(file);
+
     const fileExtension = file.name.split(".").pop().toLowerCase();
     const imageFileExtensions = ["png", "jpg", "jpeg", "gif", "webp"];
 
@@ -297,7 +301,7 @@ const Page: Component = () => {
               <section class="block p-4">
                 <For each={files()!}>
                   {(file) => (
-                    <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-text hover:bg-surface0">
+                    <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0">
                       <div class="flex flex-row gap-2">
                         {getFileIcon(file)}
                         <p class="text-sm mt-0.5">{file.name}</p>
@@ -305,19 +309,29 @@ const Page: Component = () => {
                       <div class="flex flex-row gap-4">
                         <button
                           type="button"
-                          onClick={() => downloadUploadedFile(file)}
-                        >
-                          Download
-                        </button>
-                        <button
-                          type="button"
-                          class="bg-lavender text-crust px-2 py-1 rounded"
+                          title="Share"
+                          class="p-1 hover:bg-surface1 rounded-md"
                           onClick={async () => {
                             const url = getUploadedFileURL(file);
                             await navigator.clipboard.writeText(url.href);
                           }}
                         >
-                          Copy public URL
+                          <IconShareVariantOutline class="text-lg text-text" />
+                        </button>
+                        <button
+                          type="button"
+                          title="Download file"
+                          onClick={() => downloadUploadedFile(file)}
+                          class="p-1 hover:bg-surface1 rounded-md"
+                        >
+                          <IconFileDownloadOutline class="text-lg text-text" />
+                        </button>
+                        <button
+                          type="button"
+                          title="Delete file"
+                          class="p-1 hover:bg-surface1 rounded-md"
+                        >
+                          <IconDeleteOutline class="text-lg text-text" />
                         </button>
                       </div>
                     </div>
