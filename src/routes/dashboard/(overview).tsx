@@ -324,7 +324,7 @@ const Page: Component = () => {
                               <DropdownMenu.Item
                                 class="flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
                               >
-                                <IconTrashCanOutline class="text-lg" />
+                                <IconDeleteOutline class="text-lg" />
                                 Delete
                               </DropdownMenu.Item>
                             </DropdownMenu.Content>
