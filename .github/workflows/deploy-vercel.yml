@@ -1,4 +1,4 @@
-name: Deploy
+name: Vercel
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to Vercel
+    name: Deploy to Production
     runs-on: ubuntu-latest
 
     steps:

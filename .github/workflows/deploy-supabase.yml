@@ -1,4 +1,4 @@
-name: Deploy
+name: Supabase
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to Supabase
+    name: Deploy functions
     runs-on: ubuntu-latest
 
     env:

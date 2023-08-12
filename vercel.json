@@ -1,7 +1,12 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
       "source": "/api/files",
+      // We have to hardcode the URL here for Vercel.
+      // In development, we get redirected by the API route.
+      // This is only for production build where request body is limited
+      // to approx. 5MB and doesn't allow more, even with the API route redirect.
       "destination": "https://kcpxeoxkmblpivpgwdsm.supabase.co/functions/v1/upload-file",
       "permanent": true
     }
