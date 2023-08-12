@@ -17,3 +17,17 @@ export interface UploadedFile {
   name: string;
   workspace_id: string | null;
 }
+
+export interface Workspace {
+  id: string;
+  created_at: string;
+  parent_workspace_id: string | null;
+  shared_with: Array<string>;
+  name: string;
+  creator: string;
+}
+
+export type WorkspaceContent = (
+  | { type: "file", data: UploadedFile }
+  | { type: "workspace", data: Workspace }
+);

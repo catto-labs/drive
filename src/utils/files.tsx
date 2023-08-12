@@ -1,6 +1,5 @@
 import { auth } from "@/stores/auth";
-import { getFunctionUrl, supabase } from "@/supabase/client";
-import { UploadedFile } from "@/types/api";
+import type { UploadedFile } from "@/types/api";
 
 export const createFileImporter = (onFileUploaded: (files: FileList) => unknown) => {
   const input = document.createElement("input");

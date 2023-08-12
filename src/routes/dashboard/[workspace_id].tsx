@@ -6,6 +6,7 @@ import {
   Show,
   For,
   on,
+  Match,
 } from "solid-js";
 import { A, Title, useNavigate } from "solid-start";
 import { auth, logOutUser } from "@/stores/auth";
@@ -35,6 +36,8 @@ import FullscreenLoader from "@/components/FullscreenLoader";
 
 import { DropdownMenu } from "@kobalte/core";
 
+import { useParams } from "solid-start";
+
 import {
   createFileImporter,
   downloadUploadedFile,
@@ -42,36 +45,39 @@ import {
   makeFileUpload,
 } from "@/utils/files";
 
+import {
+  getContentOfWorkspace,
+  createWorkspace
+} from "@/utils/workspaces";
+
+import type { WorkspaceContent } from "@/types/api";
+import { Switch } from "solid-js";
+
 const Page: Component = () => {
   const [view, setView] = createSignal<string>("name");
+  const params = useParams();
 
-  const [currentWorkspaceId, setCurrentWorkspaceId] = createSignal(
-    auth.profile!.root_workspace_id
-  );
-  const [files, setFiles] = createSignal<any[] | null>(null);
+  const [workspaceContent, setWorkspaceContent] = createSignal<WorkspaceContent[] | null>(null);
   const navigate = useNavigate();
 
-  createEffect(on(currentWorkspaceId, async (workspaceId: string) => {
-    const response = await fetch(
-      `/api/workspace?workspace_id=${currentWorkspaceId()}`,
-      {
-        method: "GET",
-        headers: { authorization: auth.profile!.api_token },
-      }
-    );
-
-    const json = await response.json();
-    setFiles(json.data as any[]);
+  createEffect(on(() => params.workspace_id, async (workspaceId: string) => {
+    const workspace_content = await getContentOfWorkspace(workspaceId);
+    setWorkspaceContent(workspace_content);
   }));
 
   const fileUploadHandler = async (files: FileList) => {
     try {
-      const new_uploads = await makeFileUpload(files, {
-        workspace_id: currentWorkspaceId(),
-        private: true,
+      const uploaded = await makeFileUpload(files, {
+        workspace_id: params.workspace_id,
+        private: true
       });
 
-      setFiles((files) => (files ? [...files, ...new_uploads] : new_uploads));
+      const new_content: WorkspaceContent[] = uploaded.map(file => ({
+        type: "file",
+        data: file
+      }))
+
+      setWorkspaceContent((files) => (files ? [...files, ...new_content] : new_content));
     } catch (error) {
       console.error(error);
     }
@@ -91,14 +97,14 @@ const Page: Component = () => {
 
   createEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  });
 
   return (
     <>
       <Title>Dashboard - Drive</Title>
 
       <Show
-        when={files()}
+        when={workspaceContent()}
         fallback={
           <FullscreenLoader message="Please wait, our cats are finding your files!" />
         }
@@ -142,7 +148,7 @@ const Page: Component = () => {
                   class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
                 >
                   <IconStarOutline class="w-6 h-6" />
-                  <span>Favourites</span>
+                  <span>Favorites</span>
                 </A>
                 <A
                   href="/dashboard/trash"
@@ -188,7 +194,9 @@ const Page: Component = () => {
                   </DropdownMenu.Trigger>
                   <DropdownMenu.Portal>
                     <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between">
+                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between"
+                        onSelect={() => createWorkspace(params.workspace_id)}
+                      >
                         New Folder <span class="text-subtext1">⌘ N</span>
                       </DropdownMenu.Item>
                       <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
@@ -196,7 +204,7 @@ const Page: Component = () => {
                       </DropdownMenu.Item>
                       <DropdownMenu.Separator class="border border-overlay0 my-1 opacity-50 border-dashed" />
                       <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between">
-                        <div class="inline-flex ">
+                        <div class="inline-flex">
                           Quick Look{" "}
                           <blockquote class="ml-1">My Files</blockquote>
                         </div>{" "}
@@ -300,32 +308,49 @@ const Page: Component = () => {
 
             <main class="overflow-auto">
               <section class="block p-4">
-                <For each={files()!}>
-                  {(file) => (
-                    <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-text hover:bg-surface0">
-                      <div class="flex flex-row gap-2">
-                        {getFileIcon(file)}
-                        <p class="text-sm mt-0.5">{file.name}</p>
-                      </div>
-                      <div class="flex flex-row gap-4">
-                        <button
-                          type="button"
-                          onClick={() => downloadUploadedFile(file)}
-                        >
-                          Download
-                        </button>
-                        <button
-                          type="button"
-                          class="bg-lavender text-crust px-2 py-1 rounded"
-                          onClick={async () => {
-                            const url = getUploadedFileURL(file);
-                            await navigator.clipboard.writeText(url.href);
-                          }}
-                        >
-                          Copy public URL
-                        </button>
-                      </div>
-                    </div>
+                <For each={workspaceContent()!}>
+                  {(content) => (
+                    <Switch>
+                      <Match when={content.type === "file" && content.data}>
+                        {file => (
+                          <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-text hover:bg-surface0">
+                            <div class="flex flex-row gap-2">
+                              {getFileIcon(file())}
+                              <p class="text-sm mt-0.5">{file().name}</p>
+                            </div>
+                            <div class="flex flex-row gap-4">
+                              <button
+                                type="button"
+                                onClick={() => downloadUploadedFile(file())}
+                              >
+                                Download
+                              </button>
+                              <button
+                                type="button"
+                                class="bg-lavender text-crust px-2 py-1 rounded"
+                                onClick={async () => {
+                                  const url = getUploadedFileURL(file());
+                                  await navigator.clipboard.writeText(url.href);
+                                }}
+                              >
+                                Copy public URL
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </Match>
+                      <Match when={content.type === "workspace" && content.data}>
+                        {workspace => (
+                          <A class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-text hover:bg-surface0"
+                            href={`/dashboard/${workspace().id}`}
+                          >
+                            <div class="flex flex-row gap-2">
+                              <p class="text-sm mt-0.5">{workspace().name}</p>
+                            </div>
+                          </A>
+                        )}
+                      </Match>
+                    </Switch>
                   )}
                 </For>
               </section>
