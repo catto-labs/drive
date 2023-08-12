@@ -26,6 +26,7 @@ import IconFileImageOutline from "~icons/mdi/file-image-outline"
 import IconFileDownloadOutline from "~icons/mdi/file-download-outline"
 import IconDeleteOutline from "~icons/mdi/delete-outline"
 import IconHomeExportOutline from "~icons/mdi/home-export-outline"
+import IconDotsHorizontal from "~icons/mdi/dots-horizontal"
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
@@ -170,27 +171,12 @@ const Page: Component = () => {
                 My Workspace
               </h1>
               <div class="flex flex-row gap-x-2 mr-4 items-center">
-                <button
-                  type="button"
-                  title="Share the selected items"
-                  class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit ml-4 rounded-lg"
-                >
-                  <IconShareVariantOutline class="text-xl" />
-                </button>
-                <button
-                  type="button"
-                  title="Toggle favorite"
-                  class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
-                >
-                  <IconStarOutline class="text-xl" />
-                  {/* this should change to a filled star when a file is starred */}
-                </button>
                 <DropdownMenu.Root>
                   <DropdownMenu.Trigger>
                     <button
                       type="button"
                       title="Perform tasks with the selected items"
-                      class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
+                      class="mr-2 hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
                     >
                       <IconDotsHorizontalCircleOutline class="text-xl" />
                     </button>
@@ -199,24 +185,6 @@ const Page: Component = () => {
                     <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
                       <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between">
                         New Folder <span class="text-subtext1">⌘ N</span>
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
-                        Open in New Tab
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Separator class="border border-overlay0 my-1 opacity-50 border-dashed" />
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between">
-                        <div class="inline-flex ">
-                          Quick Look{" "}
-                          <blockquote class="ml-1">My Files</blockquote>
-                        </div>{" "}
-                        <span class="text-subtext1">Space</span>
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
-                        Get Info
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Separator class="border border-overlay0 my-1 opacity-50 border-dashed" />
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between">
-                        Use Groups
                       </DropdownMenu.Item>
                       <DropdownMenu.Sub overlap gutter={4} shift={-8}>
                         <DropdownMenu.SubTrigger class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] hover:bg-opacity-50 rounded-md flex justify-between w-full overview-dropdown-submenu">
@@ -271,7 +239,7 @@ const Page: Component = () => {
                         </DropdownMenu.Portal>
                       </DropdownMenu.Sub>
                       <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
-                        Show View Options
+                        Workspace properties
                       </DropdownMenu.Item>
                     </DropdownMenu.Content>
                   </DropdownMenu.Portal>
@@ -281,7 +249,7 @@ const Page: Component = () => {
                   placeholder="Search..."
                   name="search"
                   autofocus
-                  class="py-1 px-4 rounded-xl w-84 mx-4 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
+                  class="py-1 px-4 rounded-xl w-84 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
                 />
                 <DropdownMenu.Root>
                   <DropdownMenu.Trigger>
@@ -291,7 +259,7 @@ const Page: Component = () => {
                     </button>
                   </DropdownMenu.Trigger>
                   <DropdownMenu.Portal>
-                    <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                    <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
                       <DropdownMenu.Item
                         onClick={async () => {
                           await logOutUser();
@@ -316,7 +284,7 @@ const Page: Component = () => {
                         {getFileIcon(file)}
                         <p class="text-sm mt-0.5">{file.name}</p>
                       </div>
-                      <div class="flex flex-row gap-4">
+                      <div class="flex flex-row gap-1">
                         <button
                           type="button"
                           title="Share"
@@ -328,21 +296,40 @@ const Page: Component = () => {
                         >
                           <IconShareVariantOutline class="text-lg text-text" />
                         </button>
-                        <button
-                          type="button"
-                          title="Download file"
-                          onClick={() => downloadUploadedFile(file)}
-                          class="p-1 hover:bg-surface1 rounded-md"
-                        >
-                          <IconFileDownloadOutline class="text-lg text-text" />
-                        </button>
-                        <button
-                          type="button"
-                          title="Delete file"
-                          class="p-1 hover:bg-surface1 rounded-md"
-                        >
-                          <IconDeleteOutline class="text-lg text-text" />
-                        </button>
+                        <DropdownMenu.Root>
+                          <DropdownMenu.Trigger>
+                          <button
+                            type="button"
+                            title="Delete file"
+                            class="p-1 hover:bg-surface1 rounded-md"
+                          >
+                            <IconDotsHorizontal class="text-lg text-text" />
+                          </button>
+                          </DropdownMenu.Trigger>
+                          <DropdownMenu.Portal>
+                            <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-surface0/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                            <DropdownMenu.Item
+                                onClick={() => downloadUploadedFile(file)}
+                                class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                              >
+                                <IconFileDownloadOutline class="text-lg" />
+                                Download
+                              </DropdownMenu.Item>
+                              <DropdownMenu.Item
+                                class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                              >
+                                <IconStarOutline class="text-lg" />
+                                Favourite
+                              </DropdownMenu.Item>
+                              <DropdownMenu.Item
+                                class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                              >
+                                <IconTrashCanOutline class="text-lg" />
+                                Delete
+                              </DropdownMenu.Item>
+                            </DropdownMenu.Content>
+                          </DropdownMenu.Portal>
+                        </DropdownMenu.Root>
                       </div>
                     </div>
                   )}
