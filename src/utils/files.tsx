@@ -1,5 +1,5 @@
 import { auth } from "@/stores/auth";
-import { supabase } from "@/supabase/client";
+import { getFunctionUrl, supabase } from "@/supabase/client";
 import { UploadedFile } from "@/types/api";
 
 export const createFileImporter = (onFileUploaded: (files: FileList) => unknown) => {
@@ -54,30 +54,26 @@ export const makeFileUpload = async (files: FileList | Array<File>, options?: {
     headers.authorization = auth.profile.api_token;
   }
 
-  for (const file of files) {
-    await supabase.storage
-      .from("test-up")
-      .upload(`${auth.session?.user.id ?? "anon"}/${file.name}`, file);
-  }
+  const response = await fetch(getFunctionUrl("upload-file"), {
+    method: "PUT",
+    headers,
+    body
+  });
 
-  const { data: response } = await supabase.functions.invoke<(
+  const json = await response.json() as (
     | { success: false, message: string }
     | { success: true, data: {
       uploaded: UploadedFile[]
     }}
-  )>("upload-file", {
-    method: "PUT",
-    headers,
-    body,
-  });
+  );
 
   // Aww... something went wrong :'(
-  if (!response || !response.success) {
-    throw new Error(response ? response.message : "Failed to request.");
+  if (!json.success) {
+    throw new Error(json.message);
   }
 
   // // All's good, we send back the new rows in `uploads` table.
-  return response.data.uploaded;
+  return json.data.uploaded;
 };
 
 export const getUploadedFileURL = (file: UploadedFile) => {
