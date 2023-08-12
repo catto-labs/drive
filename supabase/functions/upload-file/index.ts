@@ -6,7 +6,8 @@ import { supabase, getUserProfile } from "../_shared/supabase.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey',
+  'Access-Control-Allow-Methods': 'PUT',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info',
 }
 
 const json = <T>(data: T, options?: { status: number }) => new Response(
