@@ -2,6 +2,7 @@ import { type APIEvent, json } from "solid-start";
  
 import type { UploadedFile, UserProfile } from "@/types/api";
 import { supabase, getUserProfile } from "@/supabase/server";
+import { file_extension } from "@/utils/files";
 
 export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
   try {
@@ -80,4 +81,49 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
       message: "An error server-side happened."
     }, { status: 500 });
   }
-}
+};
+
+export const DELETE = async ({ request, params }: APIEvent): Promise<Response> => {
+  let { upload_id } = params;
+  
+  let token = request.headers.get("authorization");
+  if (!token) return json({
+    success: false,
+    message: "You need to provide an API token."
+  }, { status: 401 });
+
+  const { data: file_data } = await supabase
+    .from("uploads")
+    .select()
+    .eq("id", upload_id)
+    .limit(1)
+    .single<UploadedFile>();
+  
+  // Respond only a 404.
+  if (!file_data) return json({
+    success: false,
+    message: "Couldn't find any upload with the given ID."
+  }, { status: 404 });
+
+  const user_profile = await getUserProfile(token)
+  let isCreatorOfFile = file_data.creator === user_profile.user_id;
+
+  // Check if we're the owner of the file.
+  if (!isCreatorOfFile) return json({
+    success: false,
+    message: "You're not allowed to delete this file."
+  }, { status: 403 });
+
+  const extension = file_extension(file_data.name);
+
+  await supabase
+    .from("uploads")
+    .delete()
+    .eq("id", upload_id);
+  
+  await supabase.storage
+    .from("uploads")
+    .remove([`${file_data.creator}/${file_data.id}.${extension}`]);
+
+  return json({ success: true, data: null });
+};
