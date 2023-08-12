@@ -47,7 +47,7 @@ const Page: Component = () => {
 
   onMount(async () => {
     const response = await fetch(
-      `/api/files?workspace_id=${currentWorkspaceId()}`,
+      `/api/get_files?workspace_id=${currentWorkspaceId()}`,
       {
         method: "GET",
         headers: { authorization: auth.profile!.api_token },
