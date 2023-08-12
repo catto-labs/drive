@@ -10,13 +10,11 @@ import {
 import { A, Title, useNavigate } from "solid-start";
 import { auth, logOutUser } from "@/stores/auth";
 
-import IconPower from "~icons/mdi/power";
 import IconDotsHorizontalCircleOutline from "~icons/mdi/dots-horizontal-circle-outline";
 import IconStarOutline from "~icons/mdi/star-outline";
 import IconShareVariantOutline from "~icons/mdi/share-variant-outline";
 import IconChevronRight from "~icons/mdi/chevron-right";
 import IconCheck from "~icons/mdi/check";
-import IconFileUploadOutline from "~icons/mdi/file-upload-outline";
 import IconPlus from "~icons/mdi/plus";
 import IconFolderAccountOutline from "~icons/mdi/folder-account-outline";
 import IconAccountMultipleOutline from "~icons/mdi/account-multiple-outline";
@@ -25,9 +23,6 @@ import IconAccount from "~icons/mdi/account";
 import IconMenuDown from "~icons/mdi/menu-down";
 import IconFileOutline from "~icons/mdi/file-outline"
 import IconFileImageOutline from "~icons/mdi/file-image-outline"
-
-//@ts-ignore
-import { FileIcons } from "file-icons-js"
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
