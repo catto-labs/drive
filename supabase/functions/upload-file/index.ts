@@ -4,9 +4,14 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import type { UploadedFile, UserProfile } from "../../../src/types/api.ts";
 import { supabase, getUserProfile } from "../_shared/supabase.ts";
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey',
+}
+
 const json = <T>(data: T, options?: { status: number }) => new Response(
   JSON.stringify(data),
-  { headers: { "Content-Type": "application/json" }, status: options?.status ?? 200 }
+  { headers: { "Content-Type": "application/json", ...corsHeaders }, status: options?.status ?? 200 }
 );
 
 /**
