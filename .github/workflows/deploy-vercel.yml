@@ -25,4 +25,3 @@ jobs:
           vercel-args: "--prod"
           github-comment: false
   
-      - run: supabase functions deploy --project-ref $PROJECT_ID
