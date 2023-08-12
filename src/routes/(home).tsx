@@ -8,6 +8,7 @@ import {
   For,
 } from "solid-js";
 import { createStore } from "solid-js/store";
+import { A, useNavigate } from "solid-start";
 
 import Header from "@/components/landing/Header";
 import {
@@ -35,6 +36,8 @@ const Page: Component = () => {
     view: "uploaded";
     uploads: UploadedFile[];
   }
+
+  const navigate = useNavigate();
 
   const [filesToUpload, setFilesToUpload] = createSignal<
     FileList | Array<File>
@@ -103,7 +106,7 @@ const Page: Component = () => {
       >
         <Switch>
           <Match when={state.view === "main"}>
-            <section class="flex gap-x-3 py-16 pl-8 justify-start transition-all">
+            <section class="flex gap-x-3 py-16 pl-6 justify-start transition-all">
               <div class="flex flex-row gap-x-6">
                 <button
                   type="button"
@@ -127,24 +130,17 @@ const Page: Component = () => {
                       </p>
                     }
                   >
-                    <span class="text-subtext0">Or if you prefer...</span>
+                    <span class="text-subtext0">Upload files by dragging them here</span>
                     <span class="text-subtext1">
-                      select some{" "}
+                      or select some{" "}
                       <button
                         type="button"
                         class="underline-dotted underline hover:underline-solid hover:underline-lavender hover:text-lavender"
                         onClick={() => createFileImporter(handleUploadedFiles)}
                       >
                         files
-                      </button>{" "}
-                      or a{" "}
-                      <button
-                        type="button"
-                        class="underline-dotted underline hover:underline-solid hover:underline-lavender hover:text-lavender"
-                      >
-                        folder
                       </button>
-                      .
+                      {" "}yourself.
                     </span>
                   </Show>
                 </div>
@@ -153,7 +149,7 @@ const Page: Component = () => {
           </Match>
           <Match when={state.view === "uploading"}>
             <form
-              class="flex flex-col gap-4"
+              class="flex flex-col gap-2"
               onSubmit={async (event) => {
                 event.preventDefault();
                 const uploads = await makeFileUpload(filesToUpload(), {
@@ -163,25 +159,25 @@ const Page: Component = () => {
                 setState({ view: "uploaded", uploads });
               }}
             >
-              <h2 class="text-xl font-semibold text-text">
+              <h2 class="text-xl font-semibold text-text text-ellipsis overflow-hidden">
                 Do you want to upload{" "}
                 {filesToUpload().length === 1
-                  ? "this file"
-                  : `those ${filesToUpload().length} files`}{" "}
+                  ? `the file "${filesToUpload()[0].name}"`
+                  : `the ${filesToUpload().length} selected files`}
                 ?
               </h2>
 
               <Show
                 when={auth.session && auth.profile}
                 fallback={
-                  <p>
-                    Since you're not logged in, the uploads will be always
-                    public.
+                  <p class="text-subtext0">
+                    Since you're not logged in, the uploads will be
+                    public. We recommend you to <A href="/auth/login" class="underline underline-dotted">log in</A> to have full control over your uploads.
                   </p>
                 }
               >
-                <label class="flex gap-2">
-                  Should be private ?
+                <label class="flex items-center gap-2 my-2">
+                  Set private?
                   <input
                     type="checkbox"
                     checked={(state as UploadingState).private}
@@ -192,13 +188,13 @@ const Page: Component = () => {
                 </label>
               </Show>
 
-              <button type="submit" class="px-2 py-1 rounded bg-text text-base">
-                Send to the catto!
+              <button type="submit" class="px-3 py-1.5 rounded bg-lavender hover:bg-[#5f72d9] text-base">
+                Send to the catto! (Upload)
               </button>
 
               <button
                 type="button"
-                class="px-2 py-1 rounded border border-base text-base"
+                class="px-2 py-1 rounded border border-surface2 text-subtext1 hover:bg-surface2"
                 onClick={() =>
                   batch(() => {
                     setState({ view: "main", dragging: false });
@@ -206,37 +202,49 @@ const Page: Component = () => {
                   })
                 }
               >
-                Finally, no
+                Oh no, please go back {" "}  𖦹´ ᯅ `𖦹
               </button>
             </form>
           </Match>
           <Match when={state.view === "uploaded"}>
             <section>
-              <h2>Your files are ready!</h2>
-              <p>Our cats uploaded those files just for you!</p>
+              <h2 class="text-2xl font-semibold text-text">We did it! ⋆ ˚｡⋆୨୧˚</h2>
+              <p class="text-subtext0 mb-1">Our cats uploaded those files just for you! ପ(๑•ᴗ•๑)ଓ They are now ready to be accessed by you or other users.</p>
 
-              <For each={(state as UploadedState).uploads}>
-                {(upload) => (
-                  <div class="flex flex-col">
-                    <p>{upload.name}</p>
-                    <p>Is public? {upload.private ? "No" : "Yes"}</p>
-                    <p class="text-sm">{upload.id}</p>
+              <p class="font-medium text-lg text-text">Here's an overview of all uploaded files:</p>
+              <div class="flex flex-col gap-2">
+                <For each={(state as UploadedState).uploads}>
+                  {(upload) => (
+                    <div class="flex flex-col w-full">
+                      <div class="flex flex-row items-baseline w-full justify-between">
+                        <p class="text-[15px] text-[#0e0e0e]">{upload.name}</p>
+                        <p class="text-sm ml-1 px-4 py-1 rounded-xl bg-sapphire text-crust">{upload.private ? "Private" : "Public"}</p>
+                      </div>
 
-                    <Show when={!upload.private}>
-                      <button
-                        type="button"
-                        class="bg-lavender text-crust px-2 py-1 rounded"
-                        onClick={async () => {
-                          const url = getUploadedFileURL(upload);
-                          await navigator.clipboard.writeText(url.href);
-                        }}
-                      >
-                        Copy public URL
-                      </button>
-                    </Show>
-                  </div>
-                )}
-              </For>
+                      <Show when={!upload.private}>
+                        <button
+                          type="button"
+                          class="mt-1 bg-lavender text-crust px-2 py-1 rounded"
+                          onClick={async () => {
+                            const url = getUploadedFileURL(upload);
+                            await navigator.clipboard.writeText(url.href);
+                          }}
+                        >
+                          Copy public sharing link
+                        </button>
+                      </Show>
+                    </div>
+                  )}
+                </For>
+              </div>
+              <button onClick={() => batch(() => {
+                  setState({ view: "main", dragging: false });
+                  setFilesToUpload([]);
+                })} 
+                class="w-full mt-4 px-4 py-2 rounded border border-lavender text-text hover:bg-lavender hover:text-crust"
+              >
+                Go back & upload more files (*ᴗ͈ˬᴗ͈)ꕤ*.ﾟ
+              </button>
             </section>
           </Match>
         </Switch>
