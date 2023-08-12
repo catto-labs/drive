@@ -1,44 +1,33 @@
 name: Deploy
+
 on:
+  workflow_dispatch:
   push:
-    branches: main
-  pull_request:
-    branches: main
+    branches:
+      - main
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy to Vercel & Supabase
     runs-on: ubuntu-latest
 
-    permissions:
-      id-token: write # Needed for auth with Deno Deploy
-      contents: read # Needed to clone the repository
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID }}
+
 
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v3
-
-      - uses: pnpm/action-setup@v2
+      - uses: actions/checkout@v3
+      - uses: amondnet/vercel-action@v25
         with:
-          version: 8
-
-      - name: Install Deno
-        uses: denoland/setup-deno@v1
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} 
+          vercel-args: "--prod"
+          github-comment: false
+      - uses: supabase/setup-cli@v1
         with:
-          deno-version: v1.x
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: lts/*
-          cache: 'pnpm'
-
-      - name: Build step
-        run: "pnpm install && pnpm build"
-
-      - name: Upload to Deno Deploy
-        uses: denoland/deployctl@v1
-        with:
-          project: "drive-cattolabs"
-          entrypoint: "server.js"
-          root: "dist"
+          version: latest
+  
+      - run: supabase functions deploy --project-ref $PROJECT_ID

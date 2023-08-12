@@ -1,4 +1,5 @@
 import { auth } from "@/stores/auth";
+import { supabase } from "@/supabase/client";
 import { UploadedFile } from "@/types/api";
 
 export const createFileImporter = (onFileUploaded: (files: FileList) => unknown) => {
@@ -19,6 +20,8 @@ export const createFileImporter = (onFileUploaded: (files: FileList) => unknown)
   document.body.appendChild(input);
   input.click();
 };
+
+export const file_extension = (str: string) => str.substring(str.lastIndexOf(".") + 1);
 
 /**
  * Upload `files` to the API.
@@ -46,32 +49,35 @@ export const makeFileUpload = async (files: FileList | Array<File>, options?: {
   }
 
   // Only add headers for authenticated users.
-  const headers = new Headers();
+  const headers: Record<string, string> = {};
   if (auth.profile) {
-    headers.set("authorization", auth.profile.api_token);
+    headers.authorization = auth.profile.api_token;
   }
 
-  // Let's upload!
-  const response = await fetch("/api/files", {
-    method: "PUT",
-    headers,
-    body
-  });
+  for (const file of files) {
+    await supabase.storage
+      .from("test-up")
+      .upload(`${auth.session?.user.id ?? "anon"}/${file.name}`, file);
+  }
 
-  const json = await response.json() as (
+  const { data: response } = await supabase.functions.invoke<(
     | { success: false, message: string }
     | { success: true, data: {
-      uploaded: any[]
+      uploaded: UploadedFile[]
     }}
-  )
+  )>("upload-file", {
+    method: "PUT",
+    headers,
+    body,
+  });
 
   // Aww... something went wrong :'(
-  if (!json.success) {
-    throw new Error(json.message);
+  if (!response || !response.success) {
+    throw new Error(response ? response.message : "Failed to request.");
   }
 
-  // All's good, we send back the new rows in `uploads` table.
-  return json.data.uploaded;
+  // // All's good, we send back the new rows in `uploads` table.
+  return response.data.uploaded;
 };
 
 export const getUploadedFileURL = (file: UploadedFile) => {

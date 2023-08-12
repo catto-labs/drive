@@ -23,6 +23,7 @@ import { setAuth } from "@/stores/auth";
 
 export default function Root() {
   onMount(async () => {
+    window.sb = supabase;
     const { data } = await supabase.auth.getSession();
     if (data.session) {
       const user_profile = await getProfileWithSession(data.session);

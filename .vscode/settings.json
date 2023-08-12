@@ -3,6 +3,9 @@
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
 
+  "deno.enablePaths": ["./supabase/functions"],
+  "deno.importMap": "./supabase/functions/import_map.json",
+
   "cSpell.language": "en",
   "cSpell.words": [
     "catto",
