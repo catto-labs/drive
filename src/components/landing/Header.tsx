@@ -13,10 +13,10 @@ export default function Header() {
       <nav class="h-64 flex justify-end">
         <div class="flex gap-x-4 h-fit">
           <A
-            href="https://github.com/catto-labs/drive"
+            href="https://github.com/catto-labs/drive#integration-with-sharex"
             class="text-text inline-flex gap-x-1 bg-surface0 hover:bg-surface1 border border-surface1 px-4 py-2 rounded-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
           >
-            Command-line Client
+            ShareX integration
           </A>
           <Show
             when={isAuthenticated()}

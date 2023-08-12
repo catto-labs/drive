@@ -26,9 +26,10 @@ import IconAccount from "~icons/mdi/account";
 import IconMenuDown from "~icons/mdi/menu-down";
 import IconFileOutline from "~icons/mdi/file-outline"
 import IconFileImageOutline from "~icons/mdi/file-image-outline"
-
-//@ts-ignore
-import { FileIcons } from "file-icons-js"
+import IconFileDownloadOutline from "~icons/mdi/file-download-outline"
+import IconDeleteOutline from "~icons/mdi/delete-outline"
+import IconHomeExportOutline from "~icons/mdi/home-export-outline"
+import IconDotsHorizontal from "~icons/mdi/dots-horizontal"
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
@@ -167,27 +168,12 @@ const Page: Component = () => {
                 My Workspace
               </h1>
               <div class="flex flex-row gap-x-2 mr-4 items-center">
-                <button
-                  type="button"
-                  title="Share the selected items"
-                  class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit ml-4 rounded-lg"
-                >
-                  <IconShareVariantOutline class="text-xl" />
-                </button>
-                <button
-                  type="button"
-                  title="Toggle favorite"
-                  class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
-                >
-                  <IconStarOutline class="text-xl" />
-                  {/* this should change to a filled star when a file is starred */}
-                </button>
                 <DropdownMenu.Root>
                   <DropdownMenu.Trigger>
                     <button
                       type="button"
                       title="Perform tasks with the selected items"
-                      class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
+                      class="mr-2 hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
                     >
                       <IconDotsHorizontalCircleOutline class="text-xl" />
                     </button>
@@ -198,24 +184,6 @@ const Page: Component = () => {
                         onSelect={() => createWorkspace(params.workspace_id)}
                       >
                         New Folder <span class="text-subtext1">⌘ N</span>
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
-                        Open in New Tab
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Separator class="border border-overlay0 my-1 opacity-50 border-dashed" />
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between">
-                        <div class="inline-flex">
-                          Quick Look{" "}
-                          <blockquote class="ml-1">My Files</blockquote>
-                        </div>{" "}
-                        <span class="text-subtext1">Space</span>
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
-                        Get Info
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Separator class="border border-overlay0 my-1 opacity-50 border-dashed" />
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between">
-                        Use Groups
                       </DropdownMenu.Item>
                       <DropdownMenu.Sub overlap gutter={4} shift={-8}>
                         <DropdownMenu.SubTrigger class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] hover:bg-opacity-50 rounded-md flex justify-between w-full overview-dropdown-submenu">
@@ -270,7 +238,7 @@ const Page: Component = () => {
                         </DropdownMenu.Portal>
                       </DropdownMenu.Sub>
                       <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
-                        Show View Options
+                        Workspace properties
                       </DropdownMenu.Item>
                     </DropdownMenu.Content>
                   </DropdownMenu.Portal>
@@ -280,7 +248,7 @@ const Page: Component = () => {
                   placeholder="Search..."
                   name="search"
                   autofocus
-                  class="py-1 px-4 rounded-xl w-84 mx-4 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
+                  class="py-1 px-4 rounded-xl w-84 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
                 />
                 <DropdownMenu.Root>
                   <DropdownMenu.Trigger>
@@ -290,7 +258,7 @@ const Page: Component = () => {
                     </button>
                   </DropdownMenu.Trigger>
                   <DropdownMenu.Portal>
-                    <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                    <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
                       <DropdownMenu.Item
                         onClick={async () => {
                           await logOutUser();
@@ -313,28 +281,81 @@ const Page: Component = () => {
                     <Switch>
                       <Match when={content.type === "file" && content.data}>
                         {file => (
-                          <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-text hover:bg-surface0">
+                          // <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-text hover:bg-surface0">
+                          //   <div class="flex flex-row gap-2">
+                          //     {getFileIcon(file())}
+                          //     <p class="text-sm mt-0.5">{file().name}</p>
+                          //   </div>
+                          //   <div class="flex flex-row gap-4">
+                          //     <button
+                          //       type="button"
+                          //       onClick={() => downloadUploadedFile(file())}
+                          //     >
+                          //       Download
+                          //     </button>
+                          //     <button
+                          //       type="button"
+                          //       class="bg-lavender text-crust px-2 py-1 rounded"
+                          //       onClick={async () => {
+                          //         const url = getUploadedFileURL(file());
+                          //         await navigator.clipboard.writeText(url.href);
+                          //       }}
+                          //     >
+                          //       Copy public URL
+                          //     </button>
+                          //   </div>
+                          // </div>
+                          <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0">
                             <div class="flex flex-row gap-2">
                               {getFileIcon(file())}
                               <p class="text-sm mt-0.5">{file().name}</p>
                             </div>
-                            <div class="flex flex-row gap-4">
+                            <div class="flex flex-row gap-1">
                               <button
                                 type="button"
-                                onClick={() => downloadUploadedFile(file())}
-                              >
-                                Download
-                              </button>
-                              <button
-                                type="button"
-                                class="bg-lavender text-crust px-2 py-1 rounded"
+                                title="Share"
+                                class="p-1 hover:bg-surface1 rounded-md"
                                 onClick={async () => {
                                   const url = getUploadedFileURL(file());
                                   await navigator.clipboard.writeText(url.href);
                                 }}
                               >
-                                Copy public URL
+                                <IconShareVariantOutline class="text-lg text-text" />
                               </button>
+                              <DropdownMenu.Root>
+                                <DropdownMenu.Trigger>
+                                <button
+                                  type="button"
+                                  title="Delete file"
+                                  class="p-1 hover:bg-surface1 rounded-md"
+                                >
+                                  <IconDotsHorizontal class="text-lg text-text" />
+                                </button>
+                                </DropdownMenu.Trigger>
+                                <DropdownMenu.Portal>
+                                  <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-surface0/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                                  <DropdownMenu.Item
+                                      onClick={() => downloadUploadedFile(file())}
+                                      class="flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                    >
+                                      <IconFileDownloadOutline class="text-lg" />
+                                      Download
+                                    </DropdownMenu.Item>
+                                    <DropdownMenu.Item
+                                      class="flex flex-row items-center gap-6 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                    >
+                                      <IconStarOutline class="text-lg" />
+                                      Favourite
+                                    </DropdownMenu.Item>
+                                    <DropdownMenu.Item
+                                      class="flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                    >
+                                      <IconDeleteOutline class="text-lg" />
+                                      Delete
+                                    </DropdownMenu.Item>
+                                  </DropdownMenu.Content>
+                                </DropdownMenu.Portal>
+                              </DropdownMenu.Root>
                             </div>
                           </div>
                         )}
