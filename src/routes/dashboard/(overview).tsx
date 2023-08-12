@@ -20,8 +20,8 @@ import IconPlus from "~icons/mdi/plus";
 import IconFolderAccountOutline from "~icons/mdi/folder-account-outline";
 import IconAccountMultipleOutline from "~icons/mdi/account-multiple-outline";
 import IconTrashCanOutline from "~icons/mdi/trash-can-outline";
-import IconAccount from "~icons/mdi/account"
-import IconMenuDown from "~icons/mdi/menu-down"
+import IconAccount from "~icons/mdi/account";
+import IconMenuDown from "~icons/mdi/menu-down";
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
@@ -256,17 +256,6 @@ const Page: Component = () => {
                   autofocus
                   class="py-1 px-4 rounded-xl w-84 mx-4 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
                 />
-                {/*<button
-                  type="button"
-                  onClick={async () => {
-                    await logOutUser();
-                    navigate("/");
-                  }}
-                  title="Logs you out of catto drive"
-                  class="hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
-                >
-                  <IconPower class="text-xl" />
-                </button>*/}
                 <DropdownMenu.Root>
                   <DropdownMenu.Trigger>
                     <button class="flex flex-row hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg">
@@ -275,15 +264,14 @@ const Page: Component = () => {
                     </button>
                   </DropdownMenu.Trigger>
                   <DropdownMenu.Portal>
-                    <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm"> 
-                      <DropdownMenu.Item 
-                          onClick={async () => {
-                              await logOutUser(); 
-                              navigate("/");
-                            }
-                          } 
-                          class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
-                        >
+                    <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                      <DropdownMenu.Item
+                        onClick={async () => {
+                          await logOutUser();
+                          navigate("/");
+                        }}
+                        class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                      >
                         Sign out
                       </DropdownMenu.Item>
                     </DropdownMenu.Content>
