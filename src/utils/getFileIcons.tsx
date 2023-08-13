@@ -402,47 +402,47 @@ export const getFileIcon = (file: any) => {
     case fileCog.indexOf(fileExtension) !== -1:
       return <IconFileCogOutline class="text-xl text-subtext0" />;
     case fileDelimited.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#40a02b]" />;
+      return <IconFileDelimitedOutline class="text-xl text-[#40a02b]" />;
     case fileDocument.indexOf(fileExtension) !== -1:
       return <IconFileDocumentOutline class="text-xl text-sapphire" />;
     case fileDownload.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#1e66f5]" />;
+      return <IconFileDownloadOutline class="text-xl text-[#1e66f5]" />;
     case fileExcel.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#40a02b]" />;
+      return <IconFileExcelBox class="text-xl text-[#40a02b]" />;
     case fileImage.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#179299]" />;
+      return <IconFileImageOutline class="text-xl text-[#179299]" />;
     case fileKey.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#df8e1d]" />;
+      return <IconFileKeyOutline class="text-xl text-[#df8e1d]" />;
     case fileLink.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#04a5e5]" />;
+      return <IconFileLinkOutline class="text-xl text-[#04a5e5]" />;
     case fileLock.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#df8e1d]" />;
+      return <IconFileLockOutline class="text-xl text-[#df8e1d]" />;
     case fileMarker.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#d20f39]" />;
+      return <IconFileMarkerOutline class="text-xl text-[#d20f39]" />;
     case fileMusic.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-maroon" />;
+      return <IconFileMusicOutline class="text-xl text-maroon" />;
     case filePdf.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#d20f39]" />;
+      return <IconFilePdfBox class="text-xl text-[#d20f39]" />;
     case filePowerpoint.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#d20f39]" />;
+      return <IconFilePowerpointOutline class="text-xl text-[#d20f39]" />;
     case filePresentation.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-peach" />;
+      return <IconFilePresentationBox class="text-xl text-peach" />;
     case fileTable.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#40a02b]" />;
+      return <IconFileTableBox class="text-xl text-[#40a02b]" />;
     case fileVideo.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-mauve" />;
+      return <IconFileVideoOutline class="text-xl text-mauve" />;
     case fileWord.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#1e66f5]" />;
+      return <IconFileWordBox class="text-xl text-[#1e66f5]" />;
     case formatFont.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#d20f39]" />;
+      return <IconFormatFont class="text-xl text-[#d20f39]" />;
     case gamepad.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#40a02b]" />;
+      return <IconGamepad class="text-xl text-[#40a02b]" />;
     case printer3d.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-sapphire" />;
+      return <IconPrinter3d class="text-xl text-sapphire" />;
     case squareRoot.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#179299]" />;
+      return <IconSquareRootBox class="text-xl text-[#179299]" />;
     case zip.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-[#40a02b]" />;
+      return <IconZipBoxOutline class="text-xl text-[#40a02b]" />;
     default:
       return <IconFileOutline class="text-xl text-subtext0" />;
   }
