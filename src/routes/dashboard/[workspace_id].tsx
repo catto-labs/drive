@@ -340,7 +340,7 @@ const Page: Component = () => {
                                       Favorite
                                     </DropdownMenu.Item>
                                     <DropdownMenu.Item
-                                      class="cursor-pointer flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                      class="cursor-pointer flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
                                       onSelect={async () => {
                                         await removePermanentlyFile(file().id);
                                         setWorkspaceContent((prev) =>
