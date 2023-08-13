@@ -333,12 +333,12 @@ const Page: Component = () => {
                                       onClick={() =>
                                         downloadUploadedFile(file())
                                       }
-                                      class="flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                      class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                     >
                                       <IconFileDownloadOutline class="text-lg" />
                                       Download
                                     </DropdownMenu.Item>
-                                    <DropdownMenu.Item class="flex flex-row items-center gap-6 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md">
+                                    <DropdownMenu.Item class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md">
                                       <IconStarOutline class="text-lg" />
                                       Favorite
                                     </DropdownMenu.Item>
@@ -346,7 +346,7 @@ const Page: Component = () => {
                                       open={openDeletion()}
                                       onOpenChange={setOpenDeletion}
                                     >
-                                      <Dialog.Trigger class="flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md">
+                                      <Dialog.Trigger class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md">
                                         <IconDeleteOutline class="text-lg" />
                                         Delete permanently
                                       </Dialog.Trigger>
