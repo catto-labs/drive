@@ -24,7 +24,7 @@ import IconAccount from "~icons/mdi/account";
 import IconMenuDown from "~icons/mdi/menu-down";
 import IconFileOutline from "~icons/mdi/file-outline";
 import IconFileImageOutline from "~icons/mdi/file-image-outline";
-import IconFileDownloadOutline from "~icons/mdi/file-download-outline";
+import IconDownload from "~icons/mdi/download";
 import IconDeleteOutline from "~icons/mdi/delete-outline";
 import IconDotsHorizontal from "~icons/mdi/dots-horizontal";
 import IconClose from "~icons/mdi/close";
@@ -335,7 +335,7 @@ const Page: Component = () => {
                                       }
                                       class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                     >
-                                      <IconFileDownloadOutline class="text-lg" />
+                                      <IconDownload class="text-lg" />
                                       Download
                                     </DropdownMenu.Item>
                                     <DropdownMenu.Item class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md">
