@@ -69,7 +69,7 @@ const Page: Component = () => {
         redirectTo: window.location.origin + "/dashboard",
       },
     });
-  
+
     if (error) alert(error.message);
   }
 
@@ -96,7 +96,7 @@ const Page: Component = () => {
                   placeholder="What's your e-mail?"
                   name="email"
                   autofocus
-                  class="py-2 px-4 rounded-xl w-full bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
+                  class="py-2 px-4 rounded-xl w-full bg-surface0 border border-surface1 focus-border-surface2 outline-none text-text placeholder-text-subtext1"
                 />
 
                 <input
@@ -108,7 +108,7 @@ const Page: Component = () => {
                   }
                   placeholder="What about your password?"
                   name="password"
-                  class="py-2 px-4 rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
+                  class="py-2 px-4 rounded-xl bg-surface0 border border-surface1 outline-none focus-border-surface2 text-text placeholder-text-subtext1"
                 />
 
                 <Show when={state.error}>

@@ -1,31 +1,37 @@
+import {
+  type Component,
+} from "solid-js";
 import { A } from "solid-start";
 
-export default function NotFound() {
+import Header from "@/components/landing/Header";
+
+const Page: Component = () => {
+
   return (
-    <main class="text-center mx-auto text-gray-700 p-4">
-      <h1 class="max-6-xs text-6xl text-sky-700 font-thin uppercase my-16">
-        Not Found
-      </h1>
-      <p class="mt-8">
-        Visit{" "}
-        <a
-          href="https://solidjs.com"
-          target="_blank"
-          class="text-sky-600 hover:underline"
-        >
-          solidjs.com
-        </a>{" "}
-        to learn how to build Solid apps.
-      </p>
-      <p class="my-4">
-        <A href="/" class="text-sky-600 hover:underline">
-          Home
-        </A>
-        {" - "}
-        <A href="/about" class="text-sky-600 hover:underline">
-          About Page
-        </A>
-      </p>
-    </main>
+    <div
+      class="h-screen w-screen relative text-sm"
+    >
+      <Header />
+      <main
+        class="border-2 border-surface0 bg-base/80 rounded-lg shadow-xl w-96 h-fit p-4 m-auto transition-all absolute left-0 right-0 top-0 bottom-0 backdrop-blur-lg"
+      >
+        <div class="flex flex-col gap-1">
+          <h1 class="text-xl font-semibold text-[#0f0f0f]">
+            Error 404: Where are you going?
+          </h1>
+          <span class="text-text">I can't find the page you're looking for!</span>
+          <span class="text-text">Why don't we go back home instead, shall we?</span>
+
+          <A
+            href="/"
+            class=" underline decoration-dotted hover:decoration-solid text-lavender mt-4 w-full text-center"
+          >
+            Navigate back to home
+          </A>
+        </div>
+      </main>
+    </div>
   );
-}
+};
+
+export default Page;

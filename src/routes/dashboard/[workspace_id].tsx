@@ -140,7 +140,7 @@ const Page: Component = () => {
       >
         <button
           type="submit"
-          class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
+          class="py-2 px-4 border-surface1 bg-flamingo/80 hover:bg-flamingo border transition-all hover:border-lavender my-auto rounded-lg"
         >
           Yes
         </button>
@@ -283,19 +283,19 @@ const Page: Component = () => {
       <div class="md:backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
         <div class="text-text bg-surface0/80 min-w-64 w-1/5 shrink-0 md:block hidden">
           <header class="px-4 pt-6 pb-2 shrink-0 sticky top-0 w-full h-14 flex flex-row flex flex-row gap-[10px] items-center w-full">
-          
-          <div class="relative w-10 h-10">
-            <img src={cattoDriveBox} class="absolute inset-0 -bottom-4 mx-auto my-auto z-10" />
 
-            <img
-              src={cattoDriveCatto}
-              class="absolute transition-all transition-duration-500"
-              classList={{
-                "-mt-2.5": workspaces[params.workspace_id] !== undefined, // Loaded.
-                "-mt-0": !workspaces[params.workspace_id] // Loading.
-              }}
-            />
-          </div>
+            <div class="relative w-10 h-10">
+              <img src={cattoDriveBox} class="absolute inset-0 -bottom-4 mx-auto my-auto z-10" />
+
+              <img
+                src={cattoDriveCatto}
+                class="absolute transition-all transition-duration-500"
+                classList={{
+                  "-mt-2.5": workspaces[params.workspace_id] !== undefined, // Loaded.
+                  "-mt-0": !workspaces[params.workspace_id] // Loading.
+                }}
+              />
+            </div>
             <span class="text-lg">
               <span class="font-bold text-2xl">Drive </span>
               <span class="mr-[10px] font-light text-[15px]">
@@ -323,21 +323,21 @@ const Page: Component = () => {
               </A>
               <A
                 href="/dashboard/shared"
-                class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
+                class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition-all rounded-md"
               >
                 <IconAccountMultipleOutline class="w-6 h-6" />
                 <span>Shared</span>
               </A>
               <A
                 href="/dashboard/favorites"
-                class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
+                class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition-all rounded-md"
               >
                 <IconStarOutline class="w-6 h-6" />
                 <span>Favorites</span>
               </A>
               <A
                 href="/dashboard/trash"
-                class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition rounded-md"
+                class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition-all rounded-md"
               >
                 <IconTrashCanOutline class="w-6 h-6" />
                 <span>Recycle Bin</span>
@@ -449,7 +449,7 @@ const Page: Component = () => {
                 placeholder="Search..."
                 name="search"
                 autofocus
-                class="py-1 px-4 rounded-xl w-full md:w-84 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
+                class="py-1 px-4 outline-none rounded-xl w-full md:w-84 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
               />
               <DropdownMenu.Root>
                 <DropdownMenu.Trigger>
@@ -464,7 +464,7 @@ const Page: Component = () => {
                       onClick={async () => {
                         navigate("/account");
                       }}
-                      class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                      class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender transition text-text hover:text-[rgb(46,48,66)] rounded-md"
                     >
                       <IconAccount class="text-lg" />
                       My Account
@@ -474,7 +474,7 @@ const Page: Component = () => {
                         await logOutUser();
                         navigate("/");
                       }}
-                      class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                      class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender transition  text-text hover:text-[rgb(46,48,66)] rounded-md"
                     >
                       <IconLogout class="text-lg" />
                       Sign out
@@ -493,7 +493,7 @@ const Page: Component = () => {
             >
               <IconPlus class="text-2xl" />
             </button>
-            
+
             <Presence exitBeforeEnter>
               <Show when={workspaces[params.workspace_id]}
                 fallback={
@@ -502,25 +502,25 @@ const Page: Component = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.1 }}
                   >
-                      <img src={cattoDriveBox} class="absolute mx-auto my-auto w-48 z-10" />
+                    <img src={cattoDriveBox} class="absolute mx-auto my-auto w-48 z-10" />
 
-                      <img
-                        src={cattoDriveCatto}
-                        class="absolute mx-auto my-auto w-41 -mt-48 transition-all transition-duration-500"
-                      />
+                    <img
+                      src={cattoDriveCatto}
+                      class="absolute mx-auto my-auto w-41 -mt-48 transition-all transition-duration-500"
+                    />
 
-                      <div class="mt-56 text-center">
-                        <div class="inline-flex gap-x-2 mt-1">
-                          <SpinnerRingResize class="my-auto text-text" />
+                    <div class="mt-56 text-center">
+                      <div class="inline-flex gap-x-2 mt-1">
+                        <SpinnerRingResize class="my-auto text-text" />
 
-                          <h1 class="text-lg font-semibold my-auto text-text">
-                            Loading...
-                          </h1>
-                        </div>
-                        <p class="text-subtext0">
-                          Our cats are gathering the files for this workspace!
-                        </p>
+                        <h1 class="text-lg font-semibold my-auto text-text">
+                          Loading...
+                        </h1>
                       </div>
+                      <p class="text-subtext0">
+                        Our cats are gathering the files for this workspace!
+                      </p>
+                    </div>
                   </Motion.section>
                 }
               >
@@ -538,7 +538,7 @@ const Page: Component = () => {
                         <Switch>
                           <Match when={content.type === "file" && content}>
                             {(file) => (
-                              <div class="w-full h-auto p-2 px-4 md:px-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
+                              <div class="w-full h-auto p-2 px-4 md:px-2 transition flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
                                 <div class="flex flex-row gap-x-2 truncate text-ellipsis">
                                   <div class="my-auto">
                                     {getFileIcon(file().data)}
