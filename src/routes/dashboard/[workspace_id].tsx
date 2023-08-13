@@ -9,7 +9,7 @@ import {
   Match,
 } from "solid-js";
 import { A, Title, useNavigate } from "solid-start";
-import { logOutUser } from "@/stores/auth";
+import { auth, logOutUser } from "@/stores/auth";
 
 import IconDotsHorizontalCircleOutline from "~icons/mdi/dots-horizontal-circle-outline";
 import IconStarOutline from "~icons/mdi/star-outline";
@@ -127,7 +127,7 @@ const Page: Component = () => {
               </button>
               <div class="flex flex-col gap-0.5 text-text">
                 <A
-                  href="/dashboard"
+                  href={`/dashboard/${auth.profile!.root_workspace_id}`}
                   class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 bg-gradient-to-r from-lavender/30 to-mauve/20 transition rounded-md"
                 >
                   <IconFolderAccountOutline class="w-6 h-6" />
