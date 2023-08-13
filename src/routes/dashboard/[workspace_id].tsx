@@ -163,16 +163,7 @@ const Page: Component = () => {
   return (
     <>
       <Title>Dashboard - Drive</Title>
-
-      {/* <Show
-        when={workspaces[params.workspace_id]}
-        fallback={
-          <FullscreenLoader message="Please wait, our cats are finding your files!" />
-        }
-      > */}
       <div class="md:backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
-        
-
         <div class="text-text bg-surface0/80 min-w-64 w-1/5 shrink-0 md:block hidden">
           <header class="px-4 pt-6 pb-2 shrink-0 sticky top-0 w-full h-14 flex flex-row flex flex-row gap-[10px] items-center w-full">
             <img src={cattoDriveLogo} class="w-10 h-10 -ml-1 mt-1" />
@@ -368,21 +359,11 @@ const Page: Component = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.1 }}
                   >
-                    {/* <Motion.div
-                      class="z-50 bg-surface0 fixed inset-0 flex items-center justify-center"
-                      initial={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ delay: 0.6, duration: 0.5 }}
-                    > */}
                       <img src={cattoDriveBox} class="absolute mx-auto my-auto w-48 z-10" />
 
                       <img
                         src={cattoDriveCatto}
                         class="absolute mx-auto my-auto w-41 -mt-48 transition-all transition-duration-500"
-                        // classList={{
-                        //   "-mt-48": loaderData().finished,
-                        //   "-mt-10": !loaderData().finished,
-                        // }}
                       />
 
                       <div class="mt-56 text-center">
@@ -397,7 +378,6 @@ const Page: Component = () => {
                           Our cats are gathering the files for this workspace!
                         </p>
                       </div>
-                    {/* </Motion.div> */}
                   </Motion.section>
                 }
               >
@@ -552,7 +532,6 @@ const Page: Component = () => {
           </footer>
         </div>
       </div>
-      {/* </Show> */}
     </>
   );
 };
