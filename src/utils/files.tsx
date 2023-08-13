@@ -48,14 +48,12 @@ export const makeFileUpload = async (files: FileList | Array<File>, options?: {
   }
 
   // Only add headers for authenticated users.
-  const headers: Record<string, string> = {};
   if (auth.profile) {
-    headers.authorization = auth.profile.api_token;
+    body.set("api_token", auth.profile.api_token);
   }
 
   const response = await fetch("/api/workspace/upload", {
     method: "PUT",
-    headers,
     body
   });
 
