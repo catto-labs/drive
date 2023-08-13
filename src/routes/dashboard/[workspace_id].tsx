@@ -328,7 +328,7 @@ const Page: Component = () => {
                                   </button>
                                 </DropdownMenu.Trigger>
                                 <DropdownMenu.Portal>
-                                  <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-surface0/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                                  <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-base/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
                                     <DropdownMenu.Item
                                       onClick={() =>
                                         downloadUploadedFile(file())
