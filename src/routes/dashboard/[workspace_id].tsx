@@ -26,7 +26,7 @@ import IconDownload from "~icons/mdi/download";
 import IconDeleteOutline from "~icons/mdi/delete-outline";
 import IconDotsHorizontal from "~icons/mdi/dots-horizontal";
 import IconClose from "~icons/mdi/close";
-import IconFolder from "~icons/mdi/folder";
+import IconFolderOutline from "~icons/mdi/folder-outline";
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
@@ -410,11 +410,11 @@ const Page: Component = () => {
                       >
                         {(workspace) => (
                           <A
-                            class="w-full h-auto p-3 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0"
+                            class="w-full h-auto py-3 px-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0"
                             href={`/dashboard/${workspace().id}`}
                           >
                             <div class="flex flex-row gap-2 pl-0.5">
-                              <IconFolder class="text-lg" />
+                              <IconFolderOutline class="text-lg" />
                               <p class="text-sm mt-0.5">{workspace().name}</p>
                             </div>
                           </A>
