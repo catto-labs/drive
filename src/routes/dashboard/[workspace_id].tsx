@@ -465,6 +465,38 @@ const Page: Component = () => {
               </section>
             </main>
           </div>
+
+          <footer class="fixed z-20 bottom-0 shrink-0 bg-surface0/30 backdrop-blur-md border-t border-surface1 w-full h-16 flex flex-row justify-between px-4
+           shadow-sm">
+            <A
+              href={`/dashboard/${auth.profile!.root_workspace_id}`}
+              class="py-2 flex flex-col items-center px-2 gap-1 transition rounded-md"
+            >
+              <IconFolderAccountOutline class="w-13 h-7 bg-gradient-to-r rounded-full from-lavender/30 to-mauve/20 " />
+              <span class="text-[0.8rem]">My Workspace</span>
+            </A>
+            <A
+              href="/dashboard/shared"
+              class="py-2 flex flex-col items-center px-2 gap-1 transition rounded-md"
+            >
+              <IconFolderAccountOutline class="w-13 h-7 " />
+              <span class="text-[0.8rem]">Shared</span>
+            </A>
+            <A
+              href="/dashboard/favorites"
+              class="py-2 flex flex-col items-center px-2 gap-1 transition rounded-md"
+            >
+              <IconStarOutline class="w-6 h-6" />
+              <span class="text-[0.8rem]">Favorites</span>
+            </A>
+            <A
+              href="/dashboard/trash"
+              class="py-2 flex flex-col items-center px-2 gap-1 transition rounded-md"
+            >
+              <IconTrashCanOutline class="w-6 h-6" />
+              <span class="text-[0.8rem]">Recycle Bin</span>
+            </A>
+          </footer>
         </div>
       </Show>
     </>
