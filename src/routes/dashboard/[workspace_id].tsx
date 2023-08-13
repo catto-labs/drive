@@ -27,6 +27,7 @@ import IconDeleteOutline from "~icons/mdi/delete-outline";
 import IconDotsHorizontal from "~icons/mdi/dots-horizontal";
 import IconClose from "~icons/mdi/close";
 import IconFolderOutline from "~icons/mdi/folder-outline";
+import IconArrowULeftTop from "~icons/mdi/arrow-u-left-top"
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
@@ -90,6 +91,18 @@ const Page: Component = () => {
       console.error(error);
     }
   };
+
+  const getWorkspaceName = (name: string) => {
+    if (name === "../") {
+      return "Go back to parent folder";
+    }
+  
+    if (name.startsWith("./")) {
+      return name.substring(2);
+    }
+  
+    return name;
+  }
 
   createEffect(() => {
     window.scrollTo(0, 0);
@@ -300,7 +313,7 @@ const Page: Component = () => {
                         {(file) => (
                           <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0/50">
                             <div class="flex flex-row">
-                              <div class="flex flex-row gap-2 text-text w-150">
+                              <div class="flex flex-row gap-2 text-[#0f0f0f] w-150">
                                 {getFileIcon(file())}
                                 <p class="text-sm mt-0.5">{file().name}</p>
                               </div>
@@ -424,9 +437,13 @@ const Page: Component = () => {
                             class="w-full h-auto py-3 px-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0"
                             href={`/dashboard/${workspace().id}`}
                           >
-                            <div class="flex flex-row gap-2 pl-0.5">
-                              <IconFolderOutline class="text-lg" />
-                              <p class="text-sm mt-0.5">{workspace().name}</p>
+                            <div class="flex flex-row gap-2 pl-0.5 text-[#0f0f0f]">
+                              <Show when={workspace().name === "../"} fallback={
+                                <IconFolderOutline class="text-lg" />
+                              }>
+                                <IconArrowULeftTop class="text-lg" />
+                              </Show>
+                              <p class="text-sm mt-0.5">{getWorkspaceName(workspace().name)}</p>
                             </div>
                           </A>
                         )}
