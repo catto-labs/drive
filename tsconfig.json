@@ -1,17 +1,31 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
+    "noErrorTruncation": true,
+    
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "jsxImportSource": "solid-js",
+    
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    
     "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    
     "strict": true,
-    "types": ["solid-start/env", "unplugin-icons/types/solid"],
-    "baseUrl": "./",
+    "noEmit": true,
+    
+    "baseUrl": "src",
     "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
+      "@/*": ["./*"]
+    },
+
+    "types": [
+      "solid-start/env",
+      "unplugin-icons/types/solid"
+    ],
+  },
+
+  "include": ["src", ".eslintrc.cjs", "vite.config.ts", "uno.config.ts"],
+  "exclude": ["node_modules/**", "dist/**", ".solid/**"]
 }

@@ -1,12 +1,12 @@
 
-import { type APIEvent, json } from "solid-start"
-import { supabase, getUserProfile } from "@/supabase/server"
+import { type APIEvent, json } from "solid-start";
+import { supabase, getUserProfile } from "@/supabase/server";
 
 export const PATCH = async ({ request, params }: APIEvent) => {
   try {
-    let { content_id } = params;
+    const { content_id } = params;
   
-    let api_token = request.headers.get("authorization");
+    const api_token = request.headers.get("authorization");
     if (!api_token) return json({
       success: false,
       message: "You need to provide an API token."
@@ -31,7 +31,7 @@ export const PATCH = async ({ request, params }: APIEvent) => {
       .limit(1)
       .single();
   
-    let isCreatorOfContent = content_data.creator === user_profile.user_id;
+    const isCreatorOfContent = content_data.creator === user_profile.user_id;
   
     // Check if we're the owner of the file.
     if (!isCreatorOfContent) return json({
@@ -39,7 +39,7 @@ export const PATCH = async ({ request, params }: APIEvent) => {
       message: "You're not allowed to access this file."
     }, { status: 403 });
   
-    let new_content_data: Record<string, unknown> = {
+    const new_content_data: Record<string, unknown> = {
       shared_with: body.shared_uids
     };
   
@@ -51,7 +51,7 @@ export const PATCH = async ({ request, params }: APIEvent) => {
       .from(body.type === "workspace" ? "workspaces" : "uploads")
       .update(new_content_data)
       .eq("id", content_id)
-      .select()
+      .select();
   
     return json({
       success: true,
@@ -59,6 +59,6 @@ export const PATCH = async ({ request, params }: APIEvent) => {
     });
   }
   catch (error) {
-    console.error(error)
+    console.error(error);
   }
 };

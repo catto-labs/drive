@@ -6,8 +6,8 @@ import { file_extension } from "@/utils/files";
 
 export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
   try {
-    let { upload_id } = params;
-    let token = request.headers.get("authorization");
+    const { upload_id } = params;
+    const token = request.headers.get("authorization");
     
     const { data: file_data } = await supabase
       .from("uploads")
@@ -46,8 +46,8 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
         .limit(1)
         .single();
 
-      let isCreatorOfFile = file_data.creator === user_profile.user_id;
-      let isCreatorOfWorkspace = workspace_data.creator === user_profile.user_id;
+      const isCreatorOfFile = file_data.creator === user_profile.user_id;
+      const isCreatorOfWorkspace = workspace_data.creator === user_profile.user_id;
 
       // Check if we're the owner of the file.
       if (!isCreatorOfFile && !isCreatorOfWorkspace) return json({
@@ -84,9 +84,9 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
 };
 
 export const DELETE = async ({ request, params }: APIEvent): Promise<Response> => {
-  let { upload_id } = params;
+  const { upload_id } = params;
   
-  let token = request.headers.get("authorization");
+  const token = request.headers.get("authorization");
   if (!token) return json({
     success: false,
     message: "You need to provide an API token."
@@ -105,8 +105,8 @@ export const DELETE = async ({ request, params }: APIEvent): Promise<Response> =
     message: "Couldn't find any upload with the given ID."
   }, { status: 404 });
 
-  const user_profile = await getUserProfile(token)
-  let isCreatorOfFile = file_data.creator === user_profile.user_id;
+  const user_profile = await getUserProfile(token);
+  const isCreatorOfFile = file_data.creator === user_profile.user_id;
 
   // Check if we're the owner of the file.
   if (!isCreatorOfFile) return json({

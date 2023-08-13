@@ -55,7 +55,7 @@ const Page: Component = () => {
 
   return (
     <div
-      class="h-screen w-screen relative text-sm"
+      class="relative h-screen w-screen text-sm"
       onDrop={(event) => {
         event.preventDefault();
         if (!event.dataTransfer) return;
@@ -94,7 +94,7 @@ const Page: Component = () => {
     >
       <Header />
       <main
-        class=" border-2  rounded-lg shadow-xl w-96 h-fit p-4 m-auto transition-all absolute left-0 right-0 top-0 bottom-0 backdrop-blur-lg"
+        class="absolute bottom-0 left-0 right-0 top-0 m-auto h-fit w-96 border-2 rounded-lg p-4 shadow-xl backdrop-blur-lg transition-all"
         classList={{
           "border-surface0 bg-base/80": !(
             state.view === "main" && state.dragging
@@ -104,11 +104,11 @@ const Page: Component = () => {
       >
         <Switch>
           <Match when={state.view === "main"}>
-            <section class="flex gap-x-3 py-16 pl-6 justify-start transition-all">
+            <section class="flex justify-start gap-x-3 py-16 pl-6 transition-all">
               <div class="flex flex-row gap-x-6">
                 <button
                   type="button"
-                  class="rounded-full p-2 aspect-square m-auto bg-lavender cursor-pointer hover:bg-[#5f72d9] transition-colors duration-200"
+                  class="m-auto aspect-square cursor-pointer rounded-full bg-lavender p-2 transition-colors duration-200 hover:bg-[#5f72d9]"
                   onClick={() => createFileImporter(handleUploadedFiles)}
                 >
                   <IconPlus class="text-4xl text-mantle" />
@@ -133,7 +133,7 @@ const Page: Component = () => {
                       or 
                       <button
                         type="button"
-                        class="underline-dotted underline hover:underline-solid hover:underline-lavender hover:text-lavender"
+                        class="underline underline-dotted hover:text-lavender hover:underline-lavender hover:underline-solid"
                         onClick={() => createFileImporter(handleUploadedFiles)}
                       >
                         select some files yourself.
@@ -156,7 +156,7 @@ const Page: Component = () => {
                 setState({ view: "uploaded", uploads });
               }}
             >
-              <h2 class="text-xl font-semibold text-text text-ellipsis overflow-hidden">
+              <h2 class="overflow-hidden text-ellipsis text-xl font-semibold text-text">
                 Do you want to upload{" "}
                 {filesToUpload().length === 1
                   ? `the file "${filesToUpload()[0].name}"`
@@ -173,7 +173,7 @@ const Page: Component = () => {
                   </p>
                 }
               >
-                <label class="flex items-center gap-2 my-2">
+                <label class="my-2 flex items-center gap-2">
                   Set private?
                   <input
                     type="checkbox"
@@ -185,13 +185,13 @@ const Page: Component = () => {
                 </label>
               </Show>
 
-              <button type="submit" class="px-3 py-1.5 rounded bg-lavender hover:bg-[#5f72d9] text-base">
+              <button type="submit" class="rounded bg-lavender px-3 py-1.5 text-base hover:bg-[#5f72d9]">
                 Send to the catto! (Upload)
               </button>
 
               <button
                 type="button"
-                class="px-2 py-1 rounded border border-surface2 text-subtext1 hover:bg-surface2"
+                class="border border-surface2 rounded px-2 py-1 text-subtext1 hover:bg-surface2"
                 onClick={() =>
                   batch(() => {
                     setState({ view: "main", dragging: false });
@@ -206,22 +206,22 @@ const Page: Component = () => {
           <Match when={state.view === "uploaded"}>
             <section>
               <h2 class="text-2xl font-semibold text-text">We did it! ⋆ ˚｡⋆୨୧˚</h2>
-              <p class="text-subtext0 mb-1">Our cats uploaded those files just for you! ପ(๑•ᴗ•๑)ଓ They are now ready to be accessed by you or other users.</p>
+              <p class="mb-1 text-subtext0">Our cats uploaded those files just for you! ପ(๑•ᴗ•๑)ଓ They are now ready to be accessed by you or other users.</p>
 
-              <p class="font-medium text-lg text-text">Here's an overview of all uploaded files:</p>
+              <p class="text-lg font-medium text-text">Here's an overview of all uploaded files:</p>
               <div class="flex flex-col gap-2">
                 <For each={(state as UploadedState).uploads}>
                   {(upload) => (
-                    <div class="flex flex-col w-full">
-                      <div class="flex flex-row items-baseline w-full justify-between">
+                    <div class="w-full flex flex-col">
+                      <div class="w-full flex flex-row items-baseline justify-between">
                         <p class="text-[15px] text-[#0e0e0e]">{upload.name}</p>
-                        <p class="text-sm ml-1 px-4 py-1 rounded-xl bg-sapphire text-crust">{upload.private ? "Private" : "Public"}</p>
+                        <p class="ml-1 rounded-xl bg-sapphire px-4 py-1 text-sm text-crust">{upload.private ? "Private" : "Public"}</p>
                       </div>
 
                       <Show when={!upload.private}>
                         <button
                           type="button"
-                          class="mt-1 bg-lavender text-crust px-2 py-1 rounded"
+                          class="mt-1 rounded bg-lavender px-2 py-1 text-crust"
                           onClick={async () => {
                             const url = getUploadedFileURL(upload);
                             await navigator.clipboard.writeText(url.href);
@@ -238,7 +238,7 @@ const Page: Component = () => {
                 setState({ view: "main", dragging: false });
                 setFilesToUpload([]);
               })}
-                class="w-full mt-4 px-4 py-2 rounded border border-lavender text-text hover:bg-lavender hover:text-crust"
+              class="mt-4 w-full border border-lavender rounded px-4 py-2 text-text hover:bg-lavender hover:text-crust"
               >
                 Go back & upload more files (*ᴗ͈ˬᴗ͈)ꕤ*.ﾟ
               </button>

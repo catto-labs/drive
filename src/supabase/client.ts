@@ -14,11 +14,11 @@ export const getProfileWithSession = async (session: Session) => {
     .limit(1)
     .single();
       
-  let user_profile = _profile as UserProfile;
+  const user_profile = _profile as UserProfile;
   return user_profile;
-}
+};
 
 export const getFunctionUrl = (function_name: string) => {
-  const url = new URL(`/functions/v1/${function_name}`, import.meta.env.VITE_SUPABASE_PROJECT_URL as string)
+  const url = new URL(`/functions/v1/${function_name}`, import.meta.env.VITE_SUPABASE_PROJECT_URL as string);
   return url.href;
 };

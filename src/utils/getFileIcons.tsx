@@ -29,6 +29,7 @@ import IconPrinter3d from "~icons/mdi/printer-3d";
 import IconSquareRootBox from "~icons/mdi/square-root-box";
 import IconZipBoxOutline from "~icons/mdi/zip-box-outline";
 import type { UploadedFile } from "@/types/api";
+import { Match, Switch } from "solid-js";
 
 export const getFileIcon = (file: UploadedFile) => {
   const fileExtension = file.name.split(".").pop()!.toLowerCase();
@@ -385,66 +386,97 @@ export const getFileIcon = (file: UploadedFile) => {
     "xip",
   ];
 
-  switch (true) {
-    case application.indexOf(fileExtension) !== -1:
-      return <IconApplication class="text-xl" text-peach />;
-    case database.indexOf(fileExtension) !== -1:
-      return <IconDatabase class="text-xl text-maroon" />;
-    case disc.indexOf(fileExtension) !== -1:
-      return <IconDisc class="text-xl text-subtext0" />;
-    case fileCabinet.indexOf(fileExtension) !== -1:
-      return <IconFileCabinet class="text-xl text-mauve" />;
-    case fileCad.indexOf(fileExtension) !== -1:
-      return <IconFileCadBox class="text-xl text-maroon" />;
-    case fileCertificate.indexOf(fileExtension) !== -1:
-      return <IconFileCertificate class="text-xl text-[#df8e1d]" />;
-    case fileCode.indexOf(fileExtension) !== -1:
-      return <IconFileCodeOutline class="text-xl text-peach" />;
-    case fileCog.indexOf(fileExtension) !== -1:
-      return <IconFileCogOutline class="text-xl text-subtext0" />;
-    case fileDelimited.indexOf(fileExtension) !== -1:
-      return <IconFileDelimitedOutline class="text-xl text-[#40a02b]" />;
-    case fileDocument.indexOf(fileExtension) !== -1:
-      return <IconFileDocumentOutline class="text-xl text-sapphire" />;
-    case fileDownload.indexOf(fileExtension) !== -1:
-      return <IconFileDownloadOutline class="text-xl text-[#1e66f5]" />;
-    case fileExcel.indexOf(fileExtension) !== -1:
-      return <IconFileExcelBox class="text-xl text-[#40a02b]" />;
-    case fileImage.indexOf(fileExtension) !== -1:
-      return <IconFileImageOutline class="text-xl text-[#179299]" />;
-    case fileKey.indexOf(fileExtension) !== -1:
-      return <IconFileKeyOutline class="text-xl text-[#df8e1d]" />;
-    case fileLink.indexOf(fileExtension) !== -1:
-      return <IconFileLinkOutline class="text-xl text-[#04a5e5]" />;
-    case fileLock.indexOf(fileExtension) !== -1:
-      return <IconFileLockOutline class="text-xl text-[#df8e1d]" />;
-    case fileMarker.indexOf(fileExtension) !== -1:
-      return <IconFileMarkerOutline class="text-xl text-[#d20f39]" />;
-    case fileMusic.indexOf(fileExtension) !== -1:
-      return <IconFileMusicOutline class="text-xl text-maroon" />;
-    case filePdf.indexOf(fileExtension) !== -1:
-      return <IconFilePdfBox class="text-xl text-[#d20f39]" />;
-    case filePowerpoint.indexOf(fileExtension) !== -1:
-      return <IconFilePowerpointOutline class="text-xl text-[#d20f39]" />;
-    case filePresentation.indexOf(fileExtension) !== -1:
-      return <IconFilePresentationBox class="text-xl text-peach" />;
-    case fileTable.indexOf(fileExtension) !== -1:
-      return <IconFileTableBox class="text-xl text-[#40a02b]" />;
-    case fileVideo.indexOf(fileExtension) !== -1:
-      return <IconFileVideoOutline class="text-xl text-mauve" />;
-    case fileWord.indexOf(fileExtension) !== -1:
-      return <IconFileWordBox class="text-xl text-[#1e66f5]" />;
-    case formatFont.indexOf(fileExtension) !== -1:
-      return <IconFormatFont class="text-xl text-[#d20f39]" />;
-    case gamepad.indexOf(fileExtension) !== -1:
-      return <IconGamepad class="text-xl text-[#40a02b]" />;
-    case printer3d.indexOf(fileExtension) !== -1:
-      return <IconPrinter3d class="text-xl text-sapphire" />;
-    case squareRoot.indexOf(fileExtension) !== -1:
-      return <IconSquareRootBox class="text-xl text-[#179299]" />;
-    case zip.indexOf(fileExtension) !== -1:
-      return <IconZipBoxOutline class="text-xl text-[#40a02b]" />;
-    default:
-      return <IconFileOutline class="text-xl text-subtext0" />;
-  }
+  return (
+    <Switch fallback={
+      <IconFileOutline class="text-xl text-subtext0" />
+    }>
+      <Match when={application.indexOf(fileExtension) !== -1}>
+        <IconApplication class="text-xl" text-peach />
+      </Match>
+      <Match when={database.indexOf(fileExtension) !== -1}>
+        <IconDatabase class="text-xl text-maroon" />
+      </Match>
+      <Match when={disc.indexOf(fileExtension) !== -1}>
+        <IconDisc class="text-xl text-subtext0" />
+      </Match>
+      <Match when={fileCabinet.indexOf(fileExtension) !== -1}>
+        <IconFileCabinet class="text-xl text-mauve" />
+      </Match>
+      <Match when={fileCad.indexOf(fileExtension) !== -1}>
+        <IconFileCadBox class="text-xl text-maroon" />
+      </Match>
+      <Match when={fileCertificate.indexOf(fileExtension) !== -1}>
+        <IconFileCertificate class="text-xl text-[#df8e1d]" />
+      </Match>
+      <Match when={fileCode.indexOf(fileExtension) !== -1}>
+        <IconFileCodeOutline class="text-xl text-peach" />
+      </Match>
+      <Match when={fileCog.indexOf(fileExtension) !== -1}>
+        <IconFileCogOutline class="text-xl text-subtext0" />
+      </Match>
+      <Match when={fileDelimited.indexOf(fileExtension) !== -1}>
+        <IconFileDelimitedOutline class="text-xl text-[#40a02b]" />
+      </Match>
+      <Match when={fileDocument.indexOf(fileExtension) !== -1}>
+        <IconFileDocumentOutline class="text-xl text-sapphire" />
+      </Match>
+      <Match when={fileDownload.indexOf(fileExtension) !== -1}>
+        <IconFileDownloadOutline class="text-xl text-[#1e66f5]" />
+      </Match>
+      <Match when={fileExcel.indexOf(fileExtension) !== -1}>
+        <IconFileExcelBox class="text-xl text-[#40a02b]" />
+      </Match>
+      <Match when={fileImage.indexOf(fileExtension) !== -1}>
+        <IconFileImageOutline class="text-xl text-[#179299]" />
+      </Match>
+      <Match when={fileKey.indexOf(fileExtension) !== -1}>
+        <IconFileKeyOutline class="text-xl text-[#df8e1d]" />
+      </Match>
+      <Match when={fileLink.indexOf(fileExtension) !== -1}>
+        <IconFileLinkOutline class="text-xl text-[#04a5e5]" />
+      </Match>
+      <Match when={fileLock.indexOf(fileExtension) !== -1}>
+        <IconFileLockOutline class="text-xl text-[#df8e1d]" />
+      </Match>
+      <Match when={fileMarker.indexOf(fileExtension) !== -1}>
+        <IconFileMarkerOutline class="text-xl text-[#d20f39]" />
+      </Match>
+      <Match when={fileMusic.indexOf(fileExtension) !== -1}>
+        <IconFileMusicOutline class="text-xl text-maroon" />
+      </Match>
+      <Match when={filePdf.indexOf(fileExtension) !== -1}>
+        <IconFilePdfBox class="text-xl text-[#d20f39]" />
+      </Match>
+      <Match when={filePowerpoint.indexOf(fileExtension) !== -1}>
+        <IconFilePowerpointOutline class="text-xl text-[#d20f39]" />
+      </Match>
+      <Match when={filePresentation.indexOf(fileExtension) !== -1}>
+        <IconFilePresentationBox class="text-xl text-peach" />
+      </Match>
+      <Match when={fileTable.indexOf(fileExtension) !== -1}>
+        <IconFileTableBox class="text-xl text-[#40a02b]" />
+      </Match>
+      <Match when={fileVideo.indexOf(fileExtension) !== -1}>
+        <IconFileVideoOutline class="text-xl text-mauve" />
+      </Match>
+      <Match when={fileWord.indexOf(fileExtension) !== -1}>
+        <IconFileWordBox class="text-xl text-[#1e66f5]" />
+      </Match>
+      <Match when={formatFont.indexOf(fileExtension) !== -1}>
+        <IconFormatFont class="text-xl text-[#d20f39]" />
+      </Match>
+      <Match when={gamepad.indexOf(fileExtension) !== -1}>
+        <IconGamepad class="text-xl text-[#40a02b]" />
+      </Match>
+      <Match when={printer3d.indexOf(fileExtension) !== -1}>
+        <IconPrinter3d class="text-xl text-sapphire" />
+      </Match>
+      <Match when={squareRoot.indexOf(fileExtension) !== -1}>
+        <IconSquareRootBox class="text-xl text-[#179299]" />
+      </Match>
+      <Match when={zip.indexOf(fileExtension) !== -1}>
+        <IconZipBoxOutline class="text-xl text-[#40a02b]" />
+      </Match>
+    </Switch>
+  );
 };

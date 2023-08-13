@@ -9,11 +9,11 @@ const Page: Component = () => {
 
   return (
     <div
-      class="h-screen w-screen relative text-sm"
+      class="relative h-screen w-screen text-sm"
     >
       <Header />
       <main
-        class="border-2 border-surface0 bg-base/80 rounded-lg shadow-xl w-96 h-fit p-4 m-auto transition-all absolute left-0 right-0 top-0 bottom-0 backdrop-blur-lg"
+        class="absolute bottom-0 left-0 right-0 top-0 m-auto h-fit w-96 border-2 border-surface0 rounded-lg bg-base/80 p-4 shadow-xl backdrop-blur-lg transition-all"
       >
         <div class="flex flex-col gap-1">
           <h1 class="text-xl font-semibold text-[#0f0f0f]">
@@ -24,7 +24,7 @@ const Page: Component = () => {
 
           <A
             href="/"
-            class=" underline decoration-dotted hover:decoration-solid text-lavender mt-4 w-full text-center"
+            class="mt-4 w-full text-center text-lavender underline decoration-dotted hover:decoration-solid"
           >
             Navigate back to home
           </A>

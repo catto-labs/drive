@@ -54,7 +54,7 @@ export default function Root() {
         <Meta name="msapplication-TileColor" content="#7287fd" />
         <Meta name="theme-color" content="#ffffff" />
       </Head>
-      <Body class="font-sans min-h-screen h-full bg-[url(https://source.unsplash.com/collection/175083)] bg-no-repeat bg-cover bg-center bg-crust">
+      <Body class="h-full min-h-screen bg-crust bg-[url(https://source.unsplash.com/collection/175083)] bg-cover bg-center bg-no-repeat font-sans">
         <FullscreenLoaderEntry />
 
         <Suspense fallback={

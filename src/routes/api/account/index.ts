@@ -2,7 +2,7 @@ import { APIEvent, json } from "solid-start";
 import { getUserProfile, supabase } from "@/supabase/server";
 
 export const POST = async ({ request }: APIEvent) => {
-  let api_token = request.headers.get("authorization");
+  const api_token = request.headers.get("authorization");
   if (!api_token) return json({
     success: false,
     message: "You need to provide an API token."
@@ -21,13 +21,13 @@ export const POST = async ({ request }: APIEvent) => {
   };
 
   const { data: updated_user } = await supabase
-    .from('profiles')
+    .from("profiles")
     .update(body)
     .eq("id", user_profile.user_id)
-    .select()
+    .select();
 
   return {
     success: true,
     data: updated_user
-  }
-}
+  };
+};

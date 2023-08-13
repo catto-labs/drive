@@ -1,6 +1,6 @@
 
-import { type APIEvent, json } from "solid-start"
-import { supabase, getUserProfile } from "@/supabase/server"
+import { type APIEvent, json } from "solid-start";
+import { supabase, getUserProfile } from "@/supabase/server";
 import type { WorkspaceMeta } from "@/types/api";
 
 /**
@@ -8,7 +8,7 @@ import type { WorkspaceMeta } from "@/types/api";
  * Needs `authorization` header.
  */
 export const POST = async ({ request }: APIEvent) => {
-  let api_token = request.headers.get("authorization");
+  const api_token = request.headers.get("authorization");
   if (!api_token) return json({
     success: false,
     message: "You need to provide an API token."
@@ -36,7 +36,7 @@ export const POST = async ({ request }: APIEvent) => {
     .limit(1)
     .single();
 
-  let isCreatorOfWorkspace = workspace_data.creator === user_profile.user_id;
+  const isCreatorOfWorkspace = workspace_data.creator === user_profile.user_id;
 
   // Check if we're the owner of the file.
   if (!isCreatorOfWorkspace) return json({
@@ -51,7 +51,7 @@ export const POST = async ({ request }: APIEvent) => {
       parent_workspace_id,
       creator: user_profile.user_id
     }])
-    .select()
+    .select();
 
   return json({
     success: true,

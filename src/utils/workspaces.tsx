@@ -3,10 +3,9 @@ import type { Workspace, WorkspaceMeta } from "@/types/api";
 
 export const getWorkspace = async (workspace_id: string): Promise<Workspace> => {
   const response = await fetch(`/api/workspace?workspace_id=${workspace_id}`, {
-      method: "GET",
-      headers: { authorization: auth.profile!.api_token }
-    }
-  );
+    method: "GET",
+    headers: { authorization: auth.profile!.api_token }
+  });
 
   const workspace = await response.json() as { data: Workspace };
 
@@ -14,9 +13,11 @@ export const getWorkspace = async (workspace_id: string): Promise<Workspace> => 
   const sortedWorkspaceContents = workspace.data.content.sort((a, b) => {
     if (a.type === "workspace" && b.type !== "workspace") {
       return -1;
-    } else if (a.type !== "workspace" && b.type === "workspace") {
+    }
+    else if (a.type !== "workspace" && b.type === "workspace") {
       return 1;
-    } else {
+    }
+    else {
       return 0;
     }
   });

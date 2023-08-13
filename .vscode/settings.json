@@ -3,17 +3,79 @@
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
 
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+
+  "unocss.root": ".",
+
+  "emmet.includeLanguages": {
+    "typescriptreact": "html"
+  },
+
   "deno.enablePaths": ["./supabase/functions"],
   "deno.importMap": "./supabase/functions/import_map.json",
 
   "cSpell.language": "en",
   "cSpell.words": [
+    "aimppl",
+    "applescript",
+    "autofocus",
+    "cals",
     "catto",
     "cattolabs",
-    "Supabase"
-  ],
-
-  "files.associations": {
-    "vercel.json": "jsonc"
-  }
+    "cattos",
+    "crdownload",
+    "dtshd",
+    "dtsma",
+    "dxml",
+    "dylib",
+    "ecab",
+    "epub",
+    "exif",
+    "flac",
+    "geotiff",
+    "gnumeric",
+    "harwell",
+    "icns",
+    "iconify",
+    "innerhtml",
+    "kdbx",
+    "kdenlive",
+    "kode",
+    "lemonapp",
+    "lzma",
+    "mcaddon",
+    "mcfunction",
+    "mcmeta",
+    "mcpack",
+    "mctemplate",
+    "mcworld",
+    "mhtml",
+    "mscx",
+    "mscz",
+    "nsigne",
+    "nvram",
+    "odoc",
+    "pdax",
+    "prproj",
+    "qcow",
+    "rbxl",
+    "rbxm",
+    "rbxmx",
+    "simcity",
+    "Supabase",
+    "topojson",
+    "TSES",
+    "unplugin",
+    "vhdx",
+    "vsqx",
+    "wbfs",
+    "webloc",
+    "webm",
+    "webp",
+    "xlsb"
+  ]
 }

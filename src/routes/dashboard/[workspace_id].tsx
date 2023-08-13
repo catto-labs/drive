@@ -16,12 +16,10 @@ import { Motion, Presence } from "@motionone/solid";
 
 import { autofocus } from "@solid-primitives/autofocus";
 // prevents from being tree-shaken by TS
-autofocus
+autofocus;
 
 import IconStarOutline from "~icons/mdi/star-outline";
 import IconShareVariantOutline from "~icons/mdi/share-variant-outline";
-import IconChevronRight from "~icons/mdi/chevron-right";
-import IconCheck from "~icons/mdi/check";
 import IconPlus from "~icons/mdi/plus";
 import IconFolderAccountOutline from "~icons/mdi/folder-account-outline";
 import IconAccountPlusOutline from "~icons/mdi/account-plus-outline";
@@ -36,8 +34,8 @@ import IconContentCopy from "~icons/mdi/content-copy";
 import IconClose from "~icons/mdi/close";
 import IconFolderOutline from "~icons/mdi/folder-outline";
 import IconArrowULeftTop from "~icons/mdi/arrow-u-left-top";
-import IconLogout from "~icons/mdi/logout"
-import IconFolderPlusOutline from "~icons/mdi/folder-plus-outline"
+import IconLogout from "~icons/mdi/logout";
+import IconFolderPlusOutline from "~icons/mdi/folder-plus-outline";
 import cattoDriveBox from "@/assets/icon/box.png";
 import cattoDriveCatto from "@/assets/icon/catto.png";
 import SpinnerRingResize from "~icons/svg-spinners/ring-resize";
@@ -90,7 +88,8 @@ const Page: Component = () => {
       setWorkspaces(params.workspace_id, "content", (files) =>
         files ? [...files, ...new_content] : new_content
       );
-    } catch (error) {
+    }
+    catch (error) {
       console.error(error);
     }
   };
@@ -107,18 +106,18 @@ const Page: Component = () => {
     return name;
   };
 
-  const [openNewFolderModal] = createModal(({ CloseButton, close }) => (
+  const [openNewFolderModal] = createModal((Modal) => (
     <>
-      <div class="text-text flex justify-between">
-        <h1 class="text-xl font-semibold my-auto">
+      <div class="flex justify-between text-text">
+        <h1 class="my-auto text-xl font-semibold">
           Create a new folder
         </h1>
-        <CloseButton class="p-2 hover:bg-maroon/20 my-auto rounded-lg">
+        <Modal.CloseButton class="my-auto rounded-lg p-2 hover:bg-maroon/20">
           <IconClose class="text-lg" />
-        </CloseButton>
+        </Modal.CloseButton>
       </div>
       <form
-        class="flex flex-col w-full justify-end gap-x-4 mt-2"
+        class="mt-2 w-full flex flex-col justify-end gap-x-4"
         onSubmit={async (event) => {
           event.preventDefault();
           
@@ -136,56 +135,56 @@ const Page: Component = () => {
           );
 
           setNewFolderName("");
-          close();
+          Modal.close();
         }}
       >
-        <input use:autofocus autofocus placeholder="Enter a name for your folder..." value={newFolderName()} onInput={event => setNewFolderName(event.target.value)} class="px-1 py-2 rounded-md text-text mb-2" />
-        <div class="flex flex-row gap-2 items-center justify-end">
+        <input use:autofocus autofocus placeholder="Enter a name for your folder..." value={newFolderName()} onInput={event => setNewFolderName(event.target.value)} class="mb-2 rounded-md px-1 py-2 text-text" />
+        <div class="flex flex-row items-center justify-end gap-2">
           <button
             type="submit"
-            class="py-2 px-4 border-surface1 bg-lavender/80 hover:bg-lavender border transition-all hover:border-lavender my-auto rounded-lg"
+            class="my-auto border border-surface1 rounded-lg bg-lavender/80 px-4 py-2 transition-all hover:border-lavender hover:bg-lavender"
           >
             Create folder
           </button>
-          <CloseButton
+          <Modal.CloseButton
             type="button"
-            class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
+            class="my-auto border border-surface1 rounded-lg bg-base/50 px-4 py-2 transition-all hover:border-lavender hover:bg-base"
           >
             Cancel
-          </CloseButton>
+          </Modal.CloseButton>
         </div>
       </form>
     </>
   ));
 
-  const [openDeleteModal] = createModal<UploadedFile>(({ Description, CloseButton, data: file, close }) => (
+  const [openDeleteModal] = createModal<UploadedFile>((Modal) => (
     <>
-      <div class="text-text flex justify-between">
-        <h1 class="text-xl font-semibold my-auto">
+      <div class="flex justify-between text-text">
+        <h1 class="my-auto text-xl font-semibold">
           Delete file
         </h1>
-        <CloseButton class="p-2 hover:bg-maroon/20 my-auto rounded-lg">
+        <Modal.CloseButton class="my-auto rounded-lg p-2 hover:bg-maroon/20">
           <IconClose class="text-lg" />
-        </CloseButton>
+        </Modal.CloseButton>
       </div>
-      <Description class="text-subtext0">
+      <Modal.Description class="text-subtext0">
         Are you sure you want to
         permanently delete this file? You
         won't be able to restore this from
         the trash bin later on.
-      </Description>
+      </Modal.Description>
       <form
-        class="flex w-full justify-end gap-x-4 mt-2"
+        class="mt-2 w-full flex justify-end gap-x-4"
         onSubmit={async (event) => {
           event.preventDefault();
-          await removePermanentlyFile(file!.id);
+          await removePermanentlyFile(Modal.data.id);
 
           setWorkspaces(params.workspace_id, "content", (prev) =>
             prev
               ? prev.filter(
                 (item) =>
                   item.type === "workspace" ||
-                  (item.type === "file" && item.data.id !== file!.id)
+                  (item.type === "file" && item.data.id !== Modal.data.id)
               )
               : []
           );
@@ -195,64 +194,66 @@ const Page: Component = () => {
       >
         <button
           type="submit"
-          class="py-2 px-4 border-surface1 bg-flamingo/80 hover:bg-flamingo border transition-all hover:border-lavender my-auto rounded-lg"
+          class="my-auto border border-surface1 rounded-lg bg-flamingo/80 px-4 py-2 transition-all hover:border-lavender hover:bg-flamingo"
         >
           Yes
         </button>
-        <CloseButton
+        <Modal.CloseButton
           type="button"
-          class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
+          class="my-auto border border-surface1 rounded-lg bg-base/50 px-4 py-2 transition-all hover:border-lavender hover:bg-base"
         >
           No
-        </CloseButton>
+        </Modal.CloseButton>
       </form>
     </>
   ));
 
-  const [openSharingModal] = createModal<WorkspaceContent>(({ data: content, close }) => {
+  const [openSharingModal] = createModal<WorkspaceContent>(Modal => {
     // We only check for files, since workspaces are always private.
     // The only way to share workspaces is sharing the access to someone.
-    const [isPublic, setIsPublic] = createSignal(content.type === "file" ? !content.data.private : false);
-    const [uidShared, setUidShared] = createSignal(content.data.shared_with);
+    // eslint-disable-next-line solid/reactivity
+    const [isPublic, setIsPublic] = createSignal(Modal.data.type === "file" ? !Modal.data.data.private : false);
+    // eslint-disable-next-line solid/reactivity
+    const [uidShared, setUidShared] = createSignal(Modal.data.data.shared_with);
     const [uidToAdd, setUidToAdd] = createSignal("");
 
     return (
       <div class="flex flex-col gap-4">
-        <h1 class="text-2xl font-semibold text-center">
+        <h1 class="text-center text-2xl font-semibold">
           Sharing
         </h1>
-        <div class="flex gap-2 items-center justify-center px-3 py-1 bg-crust rounded-lg w-fit mx-auto mb-2">
-          {content.type === "file" ? getFileIcon(content.data) : <IconFolderOutline />}
+        <div class="mx-auto mb-2 w-fit flex items-center justify-center gap-2 rounded-lg bg-crust px-3 py-1">
+          {Modal.data.type === "file" ? getFileIcon(Modal.data.data) : <IconFolderOutline />}
           <p class="text-text">
-            {content.data.name || content.data.id}
+            {Modal.data.data.name || Modal.data.data.id}
           </p>
         </div>
 
-        <Show when={content.type === "file"}>
+        <Show when={Modal.data.type === "file"}>
           <KSwitch.Root
-            class="inline-flex items-center cursor-pointer mx-auto"
+            class="mx-auto inline-flex cursor-pointer items-center"
             checked={isPublic()}
             onChange={setIsPublic}
           >
             <KSwitch.Input />
-            <KSwitch.Control class="inline-flex items-center h-[24px] w-[44px] border border-text rounded-xl py-0 px-.5 bg-text ui-checked:(bg-lavender border-lavender) transition">
-              <KSwitch.Thumb class="h-[20px] w-[20px] rounded-2.5 bg-base ui-checked:translate-x-[calc(100%-1px)] transition" />
+            <KSwitch.Control class="h-[24px] w-[44px] inline-flex items-center border border-text rounded-xl bg-text px-.5 py-0 transition ui-checked:(border-lavender bg-lavender)">
+              <KSwitch.Thumb class="h-[20px] w-[20px] rounded-2.5 bg-base transition ui-checked:translate-x-[calc(100%-1px)]" />
             </KSwitch.Control>
             <KSwitch.Label
-              class="ml-2 text-text text-lg select-none font-medium"
+              class="ml-2 select-none text-lg font-medium text-text"
             >
               Public to <strong class="font-semibold">everyone who has the link</strong>
             </KSwitch.Label>
           </KSwitch.Root>
         </Show>
 
-        <Show when={content.type === "workspace" || (content.type === "file" && !isPublic())}>
+        <Show when={Modal.data.type === "workspace" || (Modal.data.type === "file" && !isPublic())}>
           <div class="flex flex-col">
-            <p class="text-text select-none">Give access to this {content.type} to some users</p>
-            <p class="text-text text-sm font-medium">Note that those users will <strong class="font-semibold">have full access to the {content.type}</strong>, but won't be able to delete it.</p>
+            <p class="select-none text-text">Give access to this {Modal.data.type} to some users</p>
+            <p class="text-sm font-medium text-text">Note that those users will <strong class="font-semibold">have full access to the {Modal.data.type}</strong>, but won't be able to delete it.</p>
           
             <form
-              class="flex w-full mt-2"
+              class="mt-2 w-full flex"
               onSubmit={async (event) => {
                 event.preventDefault();
                 const user_data = await getUserFrom(uidToAdd());
@@ -276,17 +277,17 @@ const Page: Component = () => {
               }}
             >
               <input
-                class="w-full rounded-l bg-base outline-none px-3 py-2"
+                class="w-full rounded-l bg-base px-3 py-2 outline-none"
                 type="text"
                 placeholder="Enter email or user ID"
                 value={uidToAdd()}
                 onInput={(event) => setUidToAdd(event.currentTarget.value)}
               />
               <button
-                class="rounded-r bg-base shrink-0 outline-none px-2 py-2"
+                class="shrink-0 rounded-r bg-base px-2 py-2 outline-none"
                 type="submit"
               >
-                <div class="p-1.5 bg-lavender rounded">
+                <div class="rounded bg-lavender p-1.5">
                   <IconAccountPlusOutline class="text-base" />
                 </div>
               </button>
@@ -294,7 +295,7 @@ const Page: Component = () => {
 
             <For each={uidShared()}>
               {uid => (
-                <div class="flex items-center gap-2 text-text ml-2 mt-2">
+                <div class="ml-2 mt-2 flex items-center gap-2 text-text">
                   <IconAccount/> 
                   <p class="font-medium">
                     {uid}
@@ -305,22 +306,22 @@ const Page: Component = () => {
           </div>
         </Show>
 
-        <div class="flex flex-col gap-2 text-center mt-4">
+        <div class="mt-4 flex flex-col gap-2 text-center">
           <button type="button"
-            class="bg-lavender bg-opacity-90 hover:bg-opacity-100 text-base px-2 py-2 rounded-lg transition"
+            class="rounded-lg bg-lavender bg-opacity-90 px-2 py-2 text-base transition hover:bg-opacity-100"
             onClick={async () => {
-              const new_data = await saveUploadSharingPreferences(content.type, content.data.id, isPublic(), uidShared())
+              const new_data = await saveUploadSharingPreferences(Modal.data.type, Modal.data.data.id, isPublic(), uidShared());
               if (!new_data) return;
 
-              setWorkspaces(params.workspace_id, "content", item => item.data.id === content.data.id, "data", new_data);
+              setWorkspaces(params.workspace_id, "content", item => item.data.id === Modal.data.data.id, "data", new_data);
               
-              close();
+              Modal.close();
             }}
           >
             Save
           </button>
           <button type="button"
-            class="text-text px-2 py-1 hover:bg-text/10 transition rounded-lg"
+            class="rounded-lg px-2 py-1 text-text transition hover:bg-text/10"
             onClick={close}
           >
             Forget about it
@@ -328,19 +329,19 @@ const Page: Component = () => {
         </div>
 
       </div>
-    )
-  })
+    );
+  });
 
   return (
     <>
       <Title>Dashboard - Drive</Title>
 
-      <div class="md:backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
-        <div class="text-text bg-surface0/80 min-w-64 w-1/5 shrink-0 md:block hidden">
-          <header class="px-4 pt-6 pb-2 shrink-0 sticky top-0 w-full h-14 flex flex-row flex flex-row gap-[10px] items-center w-full">
+      <div class="relative h-screen w-screen flex overflow-hidden md:backdrop-blur-xl">
+        <div class="hidden min-w-64 w-1/5 shrink-0 bg-surface0/80 text-text md:block">
+          <header class="sticky top-0 h-14 w-full w-full flex flex shrink-0 flex-row flex-row items-center gap-[10px] px-4 pb-2 pt-6">
 
-            <div class="relative w-10 h-10">
-              <img src={cattoDriveBox} class="absolute inset-0 -bottom-4 mx-auto my-auto z-10" />
+            <div class="relative h-10 w-10">
+              <img src={cattoDriveBox} class="absolute inset-0 z-10 mx-auto my-auto -bottom-4" />
 
               <img
                 src={cattoDriveCatto}
@@ -352,8 +353,8 @@ const Page: Component = () => {
               />
             </div>
             <span class="text-lg">
-              <span class="font-bold text-2xl">Drive </span>
-              <span class="mr-[10px] font-light text-[15px]">
+              <span class="text-2xl font-bold">Drive </span>
+              <span class="mr-[10px] text-[15px] font-light">
                 by catto labs
               </span>
             </span>
@@ -363,7 +364,7 @@ const Page: Component = () => {
             <button type="button"
               disabled={!auth.profile}
               onClick={() => createFileImporter(fileUploadHandler)}
-              class="mb-4 pl-2 pr-4 py-2 flex flex-row gap-1 text-crust bg-lavender hover:bg-[#5f72d9] transition rounded-md"
+              class="mb-4 flex flex-row gap-1 rounded-md bg-lavender py-2 pl-2 pr-4 text-crust transition hover:bg-[#5f72d9]"
             >
               <IconPlus class="h-6 w-6" />
               Upload
@@ -371,32 +372,32 @@ const Page: Component = () => {
             <div class="flex flex-col gap-0.5 text-text">
               <A
                 href={`/dashboard/${auth.profile!.root_workspace_id}`}
-                class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 bg-gradient-to-r from-lavender/30 to-mauve/20 transition rounded-md"
+                class="flex flex-row items-center gap-2 rounded-md from-lavender/30 to-mauve/20 bg-gradient-to-r py-2 pl-2 pr-4 transition"
               >
-                <IconFolderAccountOutline class="w-6 h-6" />
+                <IconFolderAccountOutline class="h-6 w-6" />
                 <span>My Workspace</span>
               </A>
               <A
                 href="/dashboard/trash"
-                class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition-all rounded-md"
+                class="flex flex-row items-center gap-2 rounded-md from-lavender/30 py-2 pl-2 pr-4 transition-all hover:bg-gradient-to-r"
               >
-                <IconTrashCanOutline class="w-6 h-6" />
+                <IconTrashCanOutline class="h-6 w-6" />
                 <span>Recycle Bin</span>
               </A>
             </div>
           </nav>
         </div>
 
-        <div class="flex flex-col h-full bg-base border-l border-surface2 w-full md:w-4/5 z-20">
-          <header class="sticky z-20 top-0 bg-surface0/30 border-b border-surface1 w-full h-16 md:pl-0 pl-2 flex flex-row justify-between shadow-sm">
-            <h1 class="md:flex hidden border-base font-semibold h-full justify-center flex-col ml-4 text-text">
+        <div class="z-20 h-full w-full flex flex-col border-l border-surface2 bg-base md:w-4/5">
+          <header class="sticky top-0 z-20 h-16 w-full flex flex-row justify-between border-b border-surface1 bg-surface0/30 pl-2 shadow-sm md:pl-0">
+            <h1 class="ml-4 hidden h-full flex-col justify-center border-base font-semibold text-text md:flex">
               {params.workspace_id === auth.profile!.root_workspace_id ? "My workspace" : (
                 workspaces[params.workspace_id]
                   ? (workspaces[params.workspace_id].meta.name || workspaces[params.workspace_id].meta.id)
                   : "Loading..."
               )}
             </h1>
-            <div class="flex flex-row gap-x-2 mr-4 w-full md:w-fit items-center">
+            <div class="mr-4 w-full flex flex-row items-center gap-x-2 md:w-fit">
               {/*<DropdownMenu.Root>
                 <DropdownMenu.Trigger>
                   <button
@@ -489,7 +490,7 @@ const Page: Component = () => {
                 type="button"
                 title="New folder"
                 onClick={() => openNewFolderModal(setNewFolderName(""))}
-                class="mr-2 md:block hidden hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
+                class="mr-2 hidden h-fit rounded-lg p-1.5 text-subtext1 transition md:block hover:bg-surface2 hover:text-text"
               >
                 <IconFolderPlusOutline class="text-xl text-text" />
               </button>
@@ -498,22 +499,22 @@ const Page: Component = () => {
                 placeholder="Search..."
                 name="search"
                 autofocus
-                class="py-1 px-4 outline-none rounded-xl w-full md:w-84 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
+                class="w-full border-2 border-overlay0 rounded-xl bg-surface1 px-4 py-1 text-text outline-none transition md:w-84 hover:bg-overlay0 placeholder-text-subtext1"
               />
               <DropdownMenu.Root>
                 <DropdownMenu.Trigger>
-                  <button class="flex flex-row hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg">
+                  <button class="h-fit flex flex-row rounded-lg p-1.5 text-subtext1 transition hover:bg-surface2 hover:text-text">
                     <IconMenuDown class="text-xl" />
                     <IconAccount class="text-xl" />
                   </button>
                 </DropdownMenu.Trigger>
                 <DropdownMenu.Portal>
-                  <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                  <DropdownMenu.Content class="overview-dropdown-content flex flex-col gap-y-1 border border-surface2 rounded-lg bg-surface0 bg-opacity-50 p-2 text-sm backdrop-blur-md">
                     <DropdownMenu.Item
                       onClick={async () => {
                         navigate("/account");
                       }}
-                      class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender transition text-text hover:text-[rgb(46,48,66)] rounded-md"
+                      class="flex flex-row gap-4 rounded-md px-4 py-1 text-text transition hover:bg-lavender hover:text-[rgb(46,48,66)]"
                     >
                       <IconAccount class="text-lg" />
                       My Account
@@ -523,7 +524,7 @@ const Page: Component = () => {
                         await logOutUser();
                         navigate("/");
                       }}
-                      class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender transition  text-text hover:text-[rgb(46,48,66)] rounded-md"
+                      class="flex flex-row gap-4 rounded-md px-4 py-1 text-text transition hover:bg-lavender hover:text-[rgb(46,48,66)]"
                     >
                       <IconLogout class="text-lg" />
                       Sign out
@@ -534,11 +535,11 @@ const Page: Component = () => {
             </div>
           </header>
 
-          <main class="relative overflow-hidden h-full">
+          <main class="relative h-full overflow-hidden">
             <button type="button"
               disabled={!auth.profile}
               onClick={() => createFileImporter(fileUploadHandler)}
-              class="absolute z-30 bottom-4 right-4 p-2 rounded-full flex md:hidden flex-row gap-1 text-crust bg-lavender hover:bg-[#5f72d9] transition"
+              class="absolute bottom-4 right-4 z-30 flex flex-row gap-1 rounded-full bg-lavender p-2 text-crust transition md:hidden hover:bg-[#5f72d9]"
             >
               <IconPlus class="text-2xl" />
             </button>
@@ -546,23 +547,23 @@ const Page: Component = () => {
             <Presence exitBeforeEnter>
               <Show when={workspaces[params.workspace_id]}
                 fallback={
-                  <Motion.section class="h-full flex flex-col items-center justify-center absolute inset-0 z-20 bg-base"
+                  <Motion.section class="absolute inset-0 z-20 h-full flex flex-col items-center justify-center bg-base"
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.1 }}
                   >
-                    <img src={cattoDriveBox} class="absolute mx-auto my-auto w-48 z-10" />
+                    <img src={cattoDriveBox} class="absolute z-10 mx-auto my-auto w-48" />
 
                     <img
                       src={cattoDriveCatto}
-                      class="absolute mx-auto my-auto w-41 -mt-48 transition-all transition-duration-500"
+                      class="absolute mx-auto my-auto w-41 transition-all transition-duration-500 -mt-48"
                     />
 
                     <div class="mt-56 text-center">
-                      <div class="inline-flex gap-x-2 mt-1">
+                      <div class="mt-1 inline-flex gap-x-2">
                         <SpinnerRingResize class="my-auto text-text" />
 
-                        <h1 class="text-lg font-semibold my-auto text-text">
+                        <h1 class="my-auto text-lg font-semibold text-text">
                           Loading...
                         </h1>
                       </div>
@@ -573,10 +574,10 @@ const Page: Component = () => {
                   </Motion.section>
                 }
               >
-                <section class="block md:p-4 py-3 overflow-y-auto h-full">
-                  <div class="w-full h-auto pl-10 pb-1 px-2 md:flex hidden flex-row justify-between items-center gap-1 text-sm text-subtext0">
+                <section class="block h-full overflow-y-auto py-3 md:p-4">
+                  <div class="hidden h-auto w-full flex-row items-center justify-between gap-1 px-2 pb-1 pl-10 text-sm text-subtext0 md:flex">
                     <div class="flex flex-row">
-                      <span class="lg:w-142 w-100">Name</span>
+                      <span class="w-100 lg:w-142">Name</span>
                       <span>Date added</span>
                     </div>
                     <span>Actions</span>
@@ -587,14 +588,14 @@ const Page: Component = () => {
                         <Switch>
                           <Match when={content.type === "file" && content}>
                             {(file) => (
-                              <div class="w-full h-auto p-2 px-4 md:px-2 transition flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
+                              <div class="h-auto w-full flex flex-row items-center justify-between gap-1 border-surface2 p-2 px-4 transition md:border-b hover:bg-surface0/50 md:px-2">
                                 <div class="flex flex-row gap-x-2 truncate text-ellipsis">
                                   <div class="my-auto">
                                     {getFileIcon(file().data)}
                                   </div>
-                                  <div class="flex flex-col md:flex-row truncate pr-4">
+                                  <div class="flex flex-col truncate pr-4 md:flex-row">
                                     <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-142 md:w-100">
-                                      <p class="flex gap-2 items-center text-sm mt-0.5 lg:w-122 md:w-80 truncate text-ellipsis">
+                                      <p class="mt-0.5 flex items-center gap-2 truncate text-ellipsis text-sm lg:w-122 md:w-80">
                                         {file().data.name}
                                         <Show when={!file().data.private}>
                                           <IconAccountMultipleOutline class="text-text" />
@@ -604,23 +605,23 @@ const Page: Component = () => {
 
                                     </div>
                                     <div class="flex-row gap-2 text-text">
-                                      <p class="text-sm mt-0.5">
+                                      <p class="mt-0.5 text-sm">
                                         {relativeTime(file().data.created_at)}
                                       </p>
                                     </div>
                                   </div>
                                 </div>
 
-                                <div class="flex flex-row gap-1 w-16">
+                                <div class="w-16 flex flex-row gap-1">
                                   <button
                                     type="button"
                                     title="Share"
-                                    class="p-1 hover:bg-surface1 rounded-md"
+                                    class="rounded-md p-1 hover:bg-surface1"
                                     onClick={(event) => {
                                       event.stopPropagation();
                                       event.preventDefault();
 
-                                      openSharingModal(file())
+                                      openSharingModal(file());
                                     }}
                                   >
                                     <IconShareVariantOutline class="text-lg text-text" />
@@ -630,27 +631,27 @@ const Page: Component = () => {
                                       <button
                                         type="button"
                                         title="Actions"
-                                        class="p-1 hover:bg-surface1 ui-expanded:bg-surface1 rounded-md"
+                                        class="rounded-md p-1 hover:bg-surface1 ui-expanded:bg-surface1"
                                       >
                                         <IconDotsHorizontal class="text-lg text-text" />
                                       </button>
                                     </DropdownMenu.Trigger>
                                     <DropdownMenu.Portal>
-                                      <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-base/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                                      <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] flex flex-col gap-y-1 border border-surface2 rounded-lg bg-base/50 p-2 text-sm backdrop-blur-md">
                                         <DropdownMenu.Item
                                           onClick={() => downloadUploadedFile(file().data)}
-                                          class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                          class="flex flex-row items-center gap-2 rounded-md py-1 pl-2 pr-4 text-text hover:bg-lavender/30 hover:text-[rgb(46,48,66)]"
                                         >
                                           <IconDownload class="text-lg" />
                                           Download
                                         </DropdownMenu.Item>
-                                        <DropdownMenu.Item class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md">
+                                        <DropdownMenu.Item class="flex flex-row items-center gap-2 rounded-md px-4 py-1 pl-2 pr-4 text-text hover:bg-lavender/30 hover:text-[rgb(46,48,66)]">
                                           <IconStarOutline class="text-lg" />
                                           Favorite
                                         </DropdownMenu.Item>
                                         <Show when={!file().data.private}>
                                           <DropdownMenu.Item
-                                            class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                            class="flex flex-row items-center gap-2 rounded-md px-4 py-1 pl-2 pr-4 text-text hover:bg-lavender/30 hover:text-[rgb(46,48,66)]"
                                             onSelect={async () => {
                                               const url = getUploadedFileURL(file().data);
                                               await navigator.clipboard.writeText(url.href);
@@ -661,7 +662,7 @@ const Page: Component = () => {
                                           </DropdownMenu.Item>
                                         </Show>
                                         <DropdownMenu.Item
-                                          class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
+                                          class="flex flex-row items-center gap-2 rounded-md py-1 pl-2 pr-4 text-maroon hover:bg-maroon/20"
                                           onSelect={() => openDeleteModal(file().data)}
                                         >
                                           <IconDeleteOutline class="text-lg" />
@@ -678,31 +679,31 @@ const Page: Component = () => {
                             when={content.type === "workspace" && content}
                           >
                             {(workspace) => (
-                              <A href={`/dashboard/${workspace().data.id}`} class="w-full h-auto p-2 px-4 md:px-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
+                              <A href={`/dashboard/${workspace().data.id}`} class="h-auto w-full flex flex-row items-center justify-between gap-1 border-surface2 p-2 px-4 md:border-b hover:bg-surface0/50 md:px-2">
                                 <div class="flex flex-row gap-x-2 truncate text-ellipsis">
                                   <Show
                                     when={workspace().data.name === "../"}
                                     fallback={
-                                      <IconFolderOutline class="text-lg min-w-6" />
+                                      <IconFolderOutline class="min-w-6 text-lg" />
                                     }
                                   >
-                                    <IconArrowULeftTop class="text-lg mb-0.5 min-w-6" />
+                                    <IconArrowULeftTop class="mb-0.5 min-w-6 text-lg" />
                                   </Show>
-                                  <p class="text-sm mt-0.5 lg:w-122 md:w-80 truncate text-ellipsis text-[#0f0f0f]">
+                                  <p class="mt-0.5 truncate text-ellipsis text-sm text-[#0f0f0f] lg:w-122 md:w-80">
                                     {getWorkspaceName(workspace().data.name)}
                                   </p>
                                 </div>
 
-                                <div class="flex flex-row gap-1 w-16">
+                                <div class="w-16 flex flex-row gap-1">
                                   <button
                                     type="button"
                                     title="Share"
-                                    class="p-1 hover:bg-surface1 rounded-md"
+                                    class="rounded-md p-1 hover:bg-surface1"
                                     onClick={(event) => {
                                       event.stopPropagation();
                                       event.preventDefault();
 
-                                      openSharingModal(workspace())
+                                      openSharingModal(workspace());
                                     }}
                                   >
                                     <IconShareVariantOutline class="text-lg text-text" />
@@ -712,26 +713,26 @@ const Page: Component = () => {
                                       <button
                                         type="button"
                                         title="Actions"
-                                        class="p-1 hover:bg-surface1 ui-expanded:bg-surface1 transition-colors rounded-md"
+                                        class="rounded-md p-1 transition-colors hover:bg-surface1 ui-expanded:bg-surface1"
                                       >
                                         <IconDotsHorizontal class="text-lg text-text" />
                                       </button>
                                     </DropdownMenu.Trigger>
                                     <DropdownMenu.Portal>
-                                      <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-base/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
-                                        <DropdownMenu.Item class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md">
+                                      <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] flex flex-col gap-y-1 border border-surface2 rounded-lg bg-base/50 p-2 text-sm backdrop-blur-md">
+                                        <DropdownMenu.Item class="flex flex-row items-center gap-2 rounded-md px-4 py-1 pl-2 pr-4 text-text hover:bg-lavender/30 hover:text-[rgb(46,48,66)]">
                                           <IconStarOutline class="text-lg" />
                                           Favorite
                                         </DropdownMenu.Item>
                                         <DropdownMenu.Item
-                                          class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                          class="flex flex-row items-center gap-2 rounded-md px-4 py-1 pl-2 pr-4 text-text hover:bg-lavender/30 hover:text-[rgb(46,48,66)]"
                                           onSelect={() => navigator.clipboard.writeText(workspace().data.id)}
                                         >
                                           <IconContentCopy class="text-lg" />
                                           Copy workspace ID
                                         </DropdownMenu.Item>
                                         <DropdownMenu.Item
-                                          class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
+                                          class="flex flex-row items-center gap-2 rounded-md py-1 pl-2 pr-4 text-maroon hover:bg-maroon/20"
                                         >
                                           <IconDeleteOutline class="text-lg" />
                                           Delete permanently
@@ -752,33 +753,33 @@ const Page: Component = () => {
             </Presence>
           </main>
 
-          <footer class="shrink-0 bg-surface0/30 border-t border-surface1 w-full h-16 flex md:hidden flex-row justify-between px-4 shadow-sm">
+          <footer class="h-16 w-full flex shrink-0 flex-row justify-between border-t border-surface1 bg-surface0/30 px-4 shadow-sm md:hidden">
             <A
               href={`/dashboard/${auth.profile!.root_workspace_id}`}
-              class="py-2 flex flex-col items-center px-2 gap-1 transition rounded-md"
+              class="flex flex-col items-center gap-1 rounded-md px-2 py-2 transition"
             >
-              <IconFolderAccountOutline class="w-13 h-7 bg-gradient-to-r rounded-full from-lavender/30 to-mauve/20 " />
+              <IconFolderAccountOutline class="h-7 w-13 rounded-full from-lavender/30 to-mauve/20 bg-gradient-to-r" />
               <span class="text-[0.8rem]">My Workspace</span>
             </A>
             <A
               href="/dashboard/shared"
-              class="py-2 flex flex-col items-center px-2 gap-1 transition rounded-md"
+              class="flex flex-col items-center gap-1 rounded-md px-2 py-2 transition"
             >
-              <IconFolderAccountOutline class="w-13 h-7 " />
+              <IconFolderAccountOutline class="h-7 w-13" />
               <span class="text-[0.8rem]">Shared</span>
             </A>
             <A
               href="/dashboard/favorites"
-              class="py-2 flex flex-col items-center px-2 gap-1 transition rounded-md"
+              class="flex flex-col items-center gap-1 rounded-md px-2 py-2 transition"
             >
-              <IconStarOutline class="w-6 h-6" />
+              <IconStarOutline class="h-6 w-6" />
               <span class="text-[0.8rem]">Favorites</span>
             </A>
             <A
               href="/dashboard/trash"
-              class="py-2 flex flex-col items-center px-2 gap-1 transition rounded-md"
+              class="flex flex-col items-center gap-1 rounded-md px-2 py-2 transition"
             >
-              <IconTrashCanOutline class="w-6 h-6" />
+              <IconTrashCanOutline class="h-6 w-6" />
               <span class="text-[0.8rem]">Recycle Bin</span>
             </A>
           </footer>

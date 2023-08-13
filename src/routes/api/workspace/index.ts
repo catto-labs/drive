@@ -1,9 +1,9 @@
-import { type APIEvent, json } from "solid-start"
+import { type APIEvent, json } from "solid-start";
 import { supabase, getUserProfile } from "@/supabase/server";
 import type { UploadedFile, UserProfile, WorkspaceMeta, WorkspaceContent } from "@/types/api";
 
 export const GET = async ({ request }: APIEvent): Promise<Response> => {
-  let api_token = request.headers.get("authorization");
+  const api_token = request.headers.get("authorization");
 
   let user_profile: UserProfile | undefined;
   if (api_token) (user_profile = await getUserProfile(api_token));
@@ -68,7 +68,7 @@ export const GET = async ({ request }: APIEvent): Promise<Response> => {
         ...parent_workspace_data!,
         name: "../"
       }
-    })
+    });
   }
 
   return json({
@@ -78,4 +78,4 @@ export const GET = async ({ request }: APIEvent): Promise<Response> => {
       content
     }
   });
-}
+};

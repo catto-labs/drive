@@ -46,7 +46,7 @@ const Page: Component = () => {
         throw new Error("passwords not matching.");
       }
 
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: state.email,
         password: state.password,
 
@@ -61,10 +61,12 @@ const Page: Component = () => {
       }
 
       setState("check_email", true);
-    } catch (err) {
+    }
+    catch (err) {
       const error = err as Error;
       setState("error", error.message);
-    } finally {
+    }
+    finally {
       setState("loading", false);
     }
   };
@@ -87,11 +89,11 @@ const Page: Component = () => {
       fallback={
         <>
           <Title>Check your email - Register - Drive</Title>
-          <main class="h-screen w-screen relative text-sm">
+          <main class="relative h-screen w-screen text-sm">
             <Header />
-            <div class="text-text bg-base border border-subtext0 rounded-lg shadow-xl w-96 h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
-              <div class="flex gap-x-3 w-full">
-                <div class="flex flex-col gap-y-4 w-full">
+            <div class="absolute bottom-0 left-0 right-0 top-0 m-auto h-fit w-96 border border-subtext0 rounded-lg bg-base p-4 text-text shadow-xl">
+              <div class="w-full flex gap-x-3">
+                <div class="w-full flex flex-col gap-y-4">
                   <h1 class="text-xl font-semibold">
                     Please verify your account.
                   </h1>
@@ -102,7 +104,7 @@ const Page: Component = () => {
 
                   <A
                     href="/auth/login"
-                    class="text-text underline decoration-dotted hover:decoration-solid w-full text-center"
+                    class="w-full text-center text-text underline decoration-dotted hover:decoration-solid"
                   >
                     All done? Let's log in!
                   </A>
@@ -114,11 +116,11 @@ const Page: Component = () => {
       }
     >
       <Title>Register - Drive</Title>
-      <main class="h-screen w-screen relative text-sm">
+      <main class="relative h-screen w-screen text-sm">
         <Header />
-        <div class="text-text bg-base border border-surface0 rounded-lg shadow-xl w-96 h-fit p-4 m-auto absolute left-0 right-0 top-0 bottom-0">
-          <div class="flex gap-x-3 w-full">
-            <div class="flex flex-col gap-y-4 w-full">
+        <div class="absolute bottom-0 left-0 right-0 top-0 m-auto h-fit w-96 border border-surface0 rounded-lg bg-base p-4 text-text shadow-xl">
+          <div class="w-full flex gap-x-3">
+            <div class="w-full flex flex-col gap-y-4">
               <h1 class="text-xl font-semibold">We're glad to see you.</h1>
               <form
                 onSubmit={credentialsRegisterHandler}
@@ -134,7 +136,7 @@ const Page: Component = () => {
                   placeholder="What's your e-mail?"
                   name="email"
                   autofocus
-                  class="py-2 px-4 outline-none rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
+                  class="border border-surface1 rounded-xl bg-surface0 px-4 py-2 text-text outline-none focus-border-surface2 placeholder-text-subtext1"
                 />
 
                 <input
@@ -146,7 +148,7 @@ const Page: Component = () => {
                   }
                   placeholder="What about your password?"
                   name="password"
-                  class="py-2 px-4 outline-none rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
+                  class="border border-surface1 rounded-xl bg-surface0 px-4 py-2 text-text outline-none focus-border-surface2 placeholder-text-subtext1"
                 />
 
                 <input
@@ -158,12 +160,12 @@ const Page: Component = () => {
                   }
                   placeholder="Confirm your password again."
                   name="confirm_password"
-                  class="py-2 px-4 outline-none rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
+                  class="border border-surface1 rounded-xl bg-surface0 px-4 py-2 text-text outline-none focus-border-surface2 placeholder-text-subtext1"
                 />
 
                 <Show when={state.error}>
                   <div class="inline-flex gap-x-2">
-                    <div class="bg-maroon h-fit rounded-full w-fit my-auto">
+                    <div class="my-auto h-fit w-fit rounded-full bg-maroon">
                       <IconExclamation class="text-mantle" />
                     </div>
                     {state.error === "Signup requires a valid password" ? (
@@ -180,14 +182,14 @@ const Page: Component = () => {
                   </div>
                 </Show>
 
-                <div class="rounded-xl bg-lavender hover:bg-[#596dde] duration-150 transform text-base placeholder-text-overlay0">
+                <div class="transform rounded-xl bg-lavender text-base duration-150 hover:bg-[#596dde] placeholder-text-overlay0">
                   <button
                     type="submit"
                     disabled={state.loading}
-                    class="px-4 h-9 text-center w-full"
+                    class="h-9 w-full px-4 text-center"
                   >
                     {state.loading ? (
-                      <div class="inline-flex gap-x-2 mt-1">
+                      <div class="mt-1 inline-flex gap-x-2">
                         <SpinnerRingResize class="my-auto" />
                         <p class="my-auto">Loading...</p>
                       </div>
@@ -197,7 +199,7 @@ const Page: Component = () => {
                   </button>
                 </div>
 
-                <div class="border border-surface1 mt-4 mb-3"></div>
+                <div class="mb-3 mt-4 border border-surface1" />
 
                 <p class="text-center text-subtext0">
                   Alternatively, you can register with...
@@ -208,25 +210,25 @@ const Page: Component = () => {
                     onClick={async (e: Event) =>
                       await signInWithOAuthProvider(e, "discord")
                     }
-                    class="px-4 py-2 border-2 rounded-lg border-[#5865F2] group hover:bg-[#5865F2] transition flex justify-center"
+                    class="group flex justify-center border-2 border-[#5865F2] rounded-lg px-4 py-2 transition hover:bg-[#5865F2]"
                   >
-                    <IconDiscord class="group-hover:text-base text-lg text-text" />
+                    <IconDiscord class="text-lg text-text group-hover:text-base" />
                   </button>
                   <button
                     onClick={async (e: Event) =>
                       await signInWithOAuthProvider(e, "google")
                     }
-                    class="px-4 py-2 border-2 rounded-lg border-[#4285F4] group hover:bg-[#4285F4] transition flex justify-center"
+                    class="group flex justify-center border-2 border-[#4285F4] rounded-lg px-4 py-2 transition hover:bg-[#4285F4]"
                   >
-                    <IconGoogle class="group-hover:text-base text-lg text-text" />
+                    <IconGoogle class="text-lg text-text group-hover:text-base" />
                   </button>
                   <button
                     onClick={async (e: Event) =>
                       await signInWithOAuthProvider(e, "github")
                     }
-                    class="px-4 py-2 border-2 rounded-lg border-[#333] group hover:bg-[#333] transition flex justify-center"
+                    class="group flex justify-center border-2 border-[#333] rounded-lg px-4 py-2 transition hover:bg-[#333]"
                   >
-                    <IconGithub class="group-hover:text-base text-lg text-text" />
+                    <IconGithub class="text-lg text-text group-hover:text-base" />
                   </button>
                 </div>
               </form>

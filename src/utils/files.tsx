@@ -76,10 +76,10 @@ export const makeFileUpload = async (files: FileList | Array<File>, options?: {
 export const getUploadedFileURL = (file: UploadedFile) => {
   const url = new URL("/api/file/" + file.id, window.location.origin);
   return url;
-}
+};
 
 export const downloadUploadedFile = (file: UploadedFile) => {
-  const xhr = new XMLHttpRequest()
+  const xhr = new XMLHttpRequest();
   xhr.open("GET", "/api/file/" + file.id, true);
   xhr.setRequestHeader("authorization", auth.profile!.api_token);
 
@@ -108,7 +108,7 @@ export const downloadUploadedFile = (file: UploadedFile) => {
     if (event.lengthComputable) {
       console.info(file.name, `${event.loaded}/${event.total} (${event.loaded * 100 / event.total}%)`);
     }
-  }
+  };
 
   xhr.send();
 };

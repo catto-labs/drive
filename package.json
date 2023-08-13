@@ -8,16 +8,23 @@
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.54",
     "@types/mime-types": "^2.1.1",
+    "@types/node": "^20.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "@typescript-eslint/parser": "^6.3.0",
+    "@typescript-eslint/utils": "^6.3.0",
+    "@unocss/eslint-config": "^0.55.0",
     "@unocss/preset-rem-to-px": "^0.54.2",
     "@unocss/transformer-variant-group": "^0.54.2",
-    "solid-start-vercel": "^0.2.30",
+    "eslint": "^8.47.0",
+    "eslint-plugin-solid": "^0.12.1",
+    "solid-start-vercel": "^0.3.2",
     "supabase": "^1.83.7",
     "typescript": "^4.9.4",
     "unocss": "^0.54.2",
     "unocss-catppuccin": "^0.2.0",
     "unocss-preset-primitives": "0.0.1-beta.10",
     "unplugin-icons": "^0.16.5",
-    "vite": "^4.4.6"
+    "vite": "^4.4.9"
   },
   "dependencies": {
     "@fontsource/quicksand": "^5.0.8",
@@ -26,12 +33,12 @@
     "@kobalte/core": "^0.9.8",
     "@motionone/solid": "^10.16.2",
     "@solid-primitives/autofocus": "^0.0.108",
-    "@solidjs/meta": "^0.28.2",
-    "@solidjs/router": "^0.8.2",
+    "@solidjs/meta": "^0.28.6",
+    "@solidjs/router": "^0.8.3",
     "@supabase/supabase-js": "^2.32.0",
     "@unocss/reset": "^0.54.2",
-    "solid-js": "^1.7.8",
-    "solid-start": "^0.2.30"
+    "solid-js": "^1.7.11",
+    "solid-start": "^0.3.2"
   },
   "engines": {
     "node": ">=16"

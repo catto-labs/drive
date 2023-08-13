@@ -15,10 +15,10 @@ export default function Account() {
   onMount(async () => {
     const email = (await supabase.auth.getUser()).data.user?.email;
     setUserEmail(email || "");
-  })
+  });
 
   createEffect(on([username, firstname, lastname], async () => {
-    const response = await fetch(`/api/account`, {
+    const response = await fetch("/api/account", {
       method: "POST",
       body: JSON.stringify({
         username: username(),
@@ -31,26 +31,26 @@ export default function Account() {
       }
     });
   
-    const json = await response.json()
-    setAuth("profile", json.data)
+    const json = await response.json();
+    setAuth("profile", json.data);
   }));
 
   return (
     <div
-      class="h-screen w-screen relative text-sm">
+      class="relative h-screen w-screen text-sm">
       <Header />
       <main
-        class=" border-2 rounded-lg shadow-xl lg:mx-64 md:mx-32 border-surface0 bg-base/80 h-fit p-4 m-auto transition-all absolute left-0 right-0 top-16 bottom-0 backdrop-blur-lg"
+        class="absolute bottom-0 left-0 right-0 top-16 m-auto h-fit border-2 border-surface0 rounded-lg bg-base/80 p-4 shadow-xl backdrop-blur-lg transition-all lg:mx-64 md:mx-32"
       >
-        <h1 class="text-2xl font-semibold text-[#0f0f0f] mb-1">My Account <span class="text-lavender ml-2 text-sm">ᓚᘏᗢ</span></h1>
+        <h1 class="mb-1 text-2xl font-semibold text-[#0f0f0f]">My Account <span class="ml-2 text-sm text-lavender">ᓚᘏᗢ</span></h1>
         <p class="text-text">
           Let our cats know who you are by updating your account information! &nbsp; ฅ^•ﻌ•^ฅ
         </p>
-        <div class="flex flex-col gap-y-2 mt-8">
-          <h2 class="text-xl font-semibold text-[#0f0f0f] mb-2">Profile</h2>
+        <div class="mt-8 flex flex-col gap-y-2">
+          <h2 class="mb-2 text-xl font-semibold text-[#0f0f0f]">Profile</h2>
           <div class="grid grid-cols-2 gap-x-2">
-            <div class="flex flex-col gap-y-1 bg-base p-3 rounded-lg border-surface0 border hover:border-lavender transition">
-              <p class="text-subtext1 font-light text-xs">
+            <div class="flex flex-col gap-y-1 border border-surface0 rounded-lg bg-base p-3 transition hover:border-lavender">
+              <p class="text-xs font-light text-subtext1">
                 First name
               </p>
               <input
@@ -61,8 +61,8 @@ export default function Account() {
                 class="bg-base text-text outline-none"
               />
             </div>
-            <div class="flex flex-col gap-y-1 bg-base p-3 rounded-lg border-surface0 border hover:border-lavender transition">
-              <p class="text-subtext1 font-light text-xs">
+            <div class="flex flex-col gap-y-1 border border-surface0 rounded-lg bg-base p-3 transition hover:border-lavender">
+              <p class="text-xs font-light text-subtext1">
                 Last name
               </p>
               <input
@@ -74,8 +74,8 @@ export default function Account() {
               />
             </div>
           </div>
-          <div class="flex flex-col gap-y-1 bg-base p-3 rounded-lg border-surface0 border hover:border-lavender transition">
-            <p class="text-subtext1 font-light text-xs">
+          <div class="flex flex-col gap-y-1 border border-surface0 rounded-lg bg-base p-3 transition hover:border-lavender">
+            <p class="text-xs font-light text-subtext1">
               Username
             </p>
             <input
@@ -86,39 +86,39 @@ export default function Account() {
               class="bg-base text-text outline-none"
             />
           </div>
-          <div class="flex flex-row gap-4 mt-2 justify-end">
-            <button class="px-4 py-2 rounded-md bg-lavender text-base">Save Changes</button>
+          <div class="mt-2 flex flex-row justify-end gap-4">
+            <button class="rounded-md bg-lavender px-4 py-2 text-base">Save Changes</button>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-x-5">
-          <div class="flex flex-col gap-y-4 mt-8">
+          <div class="mt-8 flex flex-col gap-y-4">
             <h2 class="text-xl font-semibold text-[#0f0f0f]">User Details</h2>
             <div class="flex flex-col gap-y-1">
-              <p class="text-subtext1 font-light text-xs">
+              <p class="text-xs font-light text-subtext1">
                 Email
               </p>
               <span class="text-text">{userEmail()}</span>
             </div>
-            <div class="flex flex-col gap-y-1 ">
-              <p class="text-subtext1 font-light text-xs">
+            <div class="flex flex-col gap-y-1">
+              <p class="text-xs font-light text-subtext1">
                 User ID
               </p>
               <span class="text-text">{auth.profile?.user_id}</span>
             </div>
           </div>
-          <div class="flex flex-col gap-y-2 mt-8">
+          <div class="mt-8 flex flex-col gap-y-2">
             <h2 class="text-xl font-semibold text-[#0f0f0f]">Account Token</h2>
-            <p class="text-maroon mb-2">This is your account token. This token provides FULL ACCESS to your account to any application - DO NOT give this token away to strangers.</p>
-            <div class="flex flex-col gap-y-1 bg-base p-3 rounded-lg border-surface0 border hover:border-lavender transition">
-              <p class="text-subtext1 font-light text-xs">
+            <p class="mb-2 text-maroon">This is your account token. This token provides FULL ACCESS to your account to any application - DO NOT give this token away to strangers.</p>
+            <div class="flex flex-col gap-y-1 border border-surface0 rounded-lg bg-base p-3 transition hover:border-lavender">
+              <p class="text-xs font-light text-subtext1">
                 Your account's token is:
               </p>
 
               <span class="text-text">{auth.profile?.api_token}</span>
             </div>
-            <div class="flex flex-row gap-4 mt-2 justify-end">
-              <button class="px-4 py-2 rounded-md bg-lavender text-base">Regenerate</button>
-              <button class="px-4 py-2 rounded-md bg-lavender text-base">Copy</button>
+            <div class="mt-2 flex flex-row justify-end gap-4">
+              <button class="rounded-md bg-lavender px-4 py-2 text-base">Regenerate</button>
+              <button class="rounded-md bg-lavender px-4 py-2 text-base">Copy</button>
             </div>
           </div>
         </div>
