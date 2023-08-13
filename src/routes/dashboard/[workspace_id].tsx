@@ -301,7 +301,7 @@ const Page: Component = () => {
               <section class="block p-4 pt-3">
                 <div class="w-full h-auto pl-10 pb-1 px-2 flex flex-row justify-between items-center gap-1 text-sm text-subtext0">
                   <div class="flex flex-row">
-                    <span class="w-142">Name</span>
+                    <span class="lg:w-142 w-92">Name</span>
                     <span>Date added</span>
                   </div>
                   <span>Actions</span>
@@ -313,9 +313,11 @@ const Page: Component = () => {
                         {(file) => (
                           <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0/50">
                             <div class="flex flex-row">
-                              <div class="flex flex-row gap-2 text-[#0f0f0f] w-150">
+                              <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-150 w-100">
                                 {getFileIcon(file())}
-                                <p class="text-sm mt-0.5">{file().name}</p>
+                                <p class="text-sm mt-0.5 lg:w-130 w-80 truncate text-ellipsis ">
+                                  {file().name}
+                                </p>
                               </div>
                               <div class="flex flex-row gap-2 text-text">
                                 <p class="text-sm mt-0.5">
@@ -444,7 +446,7 @@ const Page: Component = () => {
                               >
                                 <IconArrowULeftTop class="text-lg mb-0.5" />
                               </Show>
-                              <p class="text-sm my-auto text-[#0f0f0f]">
+                              <p class="text-sm mt-0.5 lg:w-130 w-80 truncate text-ellipsis text-[#0f0f0f]">
                                 {getWorkspaceName(workspace().name)}
                               </p>
                             </div>
