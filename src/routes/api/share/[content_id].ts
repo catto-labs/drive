@@ -18,7 +18,7 @@ export const PATCH = async ({ request, params }: APIEvent) => {
       message: "API key should be wrong."
     }, { status: 403 });
   
-    const body = await new Response(request.body).json() as {
+    const body = await request.json() as {
       type: "workspace" | "file",
       is_public: boolean,
       shared_uids: string[]
