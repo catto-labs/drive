@@ -14,7 +14,10 @@ import {
 import { A, Title, useNavigate, useParams } from "solid-start";
 import { Motion, Presence } from "@motionone/solid";
 
-import IconDotsHorizontalCircleOutline from "~icons/mdi/dots-horizontal-circle-outline";
+import { autofocus } from "@solid-primitives/autofocus";
+// prevents from being tree-shaken by TS
+autofocus
+
 import IconStarOutline from "~icons/mdi/star-outline";
 import IconShareVariantOutline from "~icons/mdi/share-variant-outline";
 import IconChevronRight from "~icons/mdi/chevron-right";
@@ -34,6 +37,7 @@ import IconClose from "~icons/mdi/close";
 import IconFolderOutline from "~icons/mdi/folder-outline";
 import IconArrowULeftTop from "~icons/mdi/arrow-u-left-top";
 import IconLogout from "~icons/mdi/logout"
+import IconFolderPlusOutline from "~icons/mdi/folder-plus-outline"
 import cattoDriveBox from "@/assets/icon/box.png";
 import cattoDriveCatto from "@/assets/icon/catto.png";
 import SpinnerRingResize from "~icons/svg-spinners/ring-resize";
@@ -59,7 +63,7 @@ import { auth, logOutUser } from "@/stores/auth";
 import { getUserFrom, saveUploadSharingPreferences } from "@/utils/users";
 
 const Page: Component = () => {
-  const [view, setView] = createSignal("name");
+  const [newFolderName, setNewFolderName] = createSignal("");
 
   const params = useParams();
   const navigate = useNavigate();
@@ -102,6 +106,57 @@ const Page: Component = () => {
 
     return name;
   };
+
+  const [openNewFolderModal] = createModal(({ CloseButton, close }) => (
+    <>
+      <div class="text-text flex justify-between">
+        <h1 class="text-xl font-semibold my-auto">
+          Create a new folder
+        </h1>
+        <CloseButton class="p-2 hover:bg-maroon/20 my-auto rounded-lg">
+          <IconClose class="text-lg" />
+        </CloseButton>
+      </div>
+      <form
+        class="flex flex-col w-full justify-end gap-x-4 mt-2"
+        onSubmit={async (event) => {
+          event.preventDefault();
+          
+          const workspace = await createWorkspace(
+            params.workspace_id,
+            newFolderName()
+          );
+          const item: WorkspaceContent = {
+            type: "workspace",
+            data: workspace,
+          };
+
+          setWorkspaces(params.workspace_id, "content", (prev) =>
+            prev ? [...prev, item] : [item]
+          );
+
+          setNewFolderName("");
+          close();
+        }}
+      >
+        <input use:autofocus autofocus placeholder="Enter a name for your folder..." value={newFolderName()} onInput={event => setNewFolderName(event.target.value)} class="px-1 py-2 rounded-md text-text mb-2" />
+        <div class="flex flex-row gap-2 items-center justify-end">
+          <button
+            type="submit"
+            class="py-2 px-4 border-surface1 bg-lavender/80 hover:bg-lavender border transition-all hover:border-lavender my-auto rounded-lg"
+          >
+            Create folder
+          </button>
+          <CloseButton
+            type="button"
+            class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
+          >
+            Cancel
+          </CloseButton>
+        </div>
+      </form>
+    </>
+  ));
 
   const [openDeleteModal] = createModal<UploadedFile>(({ Description, CloseButton, data: file, close }) => (
     <>
@@ -186,7 +241,7 @@ const Page: Component = () => {
             <KSwitch.Label
               class="ml-2 text-text text-lg select-none font-medium"
             >
-              Public to <strong class="font-semibold">everyone who have the link</strong>
+              Public to <strong class="font-semibold">everyone who has the link</strong>
             </KSwitch.Label>
           </KSwitch.Root>
         </Show>
@@ -356,7 +411,7 @@ const Page: Component = () => {
               )}
             </h1>
             <div class="flex flex-row gap-x-2 mr-4 w-full md:w-fit items-center">
-              <DropdownMenu.Root>
+              {/*<DropdownMenu.Root>
                 <DropdownMenu.Trigger>
                   <button
                     type="button"
@@ -443,7 +498,15 @@ const Page: Component = () => {
                     </DropdownMenu.Item>
                   </DropdownMenu.Content>
                 </DropdownMenu.Portal>
-              </DropdownMenu.Root>
+                    </DropdownMenu.Root>*/}
+              <button 
+                type="button"
+                title="New folder"
+                onClick={() => openNewFolderModal(setNewFolderName(""))}
+                class="mr-2 md:block hidden hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
+              >
+                <IconFolderPlusOutline class="text-xl text-text" />
+              </button>
               <input
                 type="search"
                 placeholder="Search..."

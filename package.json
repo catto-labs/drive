@@ -25,6 +25,7 @@
     "@iconify-json/svg-spinners": "^1.1.2",
     "@kobalte/core": "^0.9.8",
     "@motionone/solid": "^10.16.2",
+    "@solid-primitives/autofocus": "^0.0.108",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
     "@supabase/supabase-js": "^2.32.0",

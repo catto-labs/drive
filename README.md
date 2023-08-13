@@ -35,7 +35,7 @@ The main tech stack is Solid JS with Solid Start using TypeScript, UnoCSS, Kobal
 
 Features of Supabase have been utilized as follows:
 
-* Authentication: Made a full user system with email + OAuth login and a tutorial process upon your first log-in
+* Authentication: Made a full user system with email + OAuth login.
 * Database: Used to store all information necessary for the users, such as uploads, workspaces, and profiles themselves.
 * Edge Functions: Used to handle all upload tasks to Supabase storage.
 * Storage: Used to store all user uploaded files.

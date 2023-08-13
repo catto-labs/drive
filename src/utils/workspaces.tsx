@@ -27,9 +27,9 @@ export const getWorkspace = async (workspace_id: string): Promise<Workspace> => 
   };
 };
 
-export const createWorkspace = async (parent_workspace_id: string) => {
+export const createWorkspace = async (parent_workspace_id: string, workspace_name: string) => {
   const response = await fetch(
-    `/api/workspace/create?parent_workspace_id=${parent_workspace_id}`,
+    `/api/workspace/create?parent_workspace_id=${parent_workspace_id}&workspace_name=${workspace_name}`,
     {
       method: "POST",
       headers: { authorization: auth.profile!.api_token }

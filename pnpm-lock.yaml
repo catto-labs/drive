@@ -20,6 +20,9 @@ dependencies:
   '@motionone/solid':
     specifier: ^10.16.2
     version: 10.16.2(solid-js@1.7.8)
+  '@solid-primitives/autofocus':
+    specifier: ^0.0.108
+    version: 0.0.108(solid-js@1.7.8)
   '@solidjs/meta':
     specifier: ^0.28.2
     version: 0.28.2(solid-js@1.7.8)
@@ -1915,6 +1918,15 @@ packages:
 
   /@sideway/pinpoint@2.0.0:
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
+
+  /@solid-primitives/autofocus@0.0.108(solid-js@1.7.8):
+    resolution: {integrity: sha512-ZWPOwyas6jw6SgwzTTSQKmdf9bJU540+dEMSA4dwA7MHvbksh38Z4Tyjo8YiJmVfbzKzJXgO18g81I1lLR28jw==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/utils': 6.2.1(solid-js@1.7.8)
+      solid-js: 1.7.8
+    dev: false
 
   /@solid-primitives/event-listener@2.2.14(solid-js@1.7.8):
     resolution: {integrity: sha512-lmp64jDT6xY5/Y557HNykDgxkNfT6MgQOp6PsvChMKX4/HHcTGjv1VhzMmQj//oABDKRlITrmwh9DOJPamliqA==}
