@@ -46,13 +46,23 @@ This usage is covering all major feature areas of Supabase, and many of these fe
 
 ### Upload as anonymous through the homepage
 
+https://github.com/catto-labs/drive/assets/59152884/a18372a7-4951-479b-9237-fea8059a9ef0
+
 ### Upload as anonymous through ShareX
+
+https://github.com/catto-labs/drive/assets/59152884/4c6a8f64-6f70-436d-a9de-a66ee9ca3d41
 
 ### Upload as authenticated through dashboard and make it public
 
+https://github.com/catto-labs/drive/assets/59152884/1dda4cdc-6b7f-4fc3-aea0-614b4a094fea
+
 ### Upload as authenticated through ShareX
 
+https://github.com/catto-labs/drive/assets/59152884/f2c01cf2-c4eb-49f1-a3c6-6c1d091cc92d
+
 ### Upload as authenticated through cURL
+
+https://github.com/catto-labs/drive/assets/59152884/fcc8ae92-83ae-402b-8595-d1cab83ce6a3
 
 ## Using the API
 

@@ -377,20 +377,6 @@ const Page: Component = () => {
                 <span>My Workspace</span>
               </A>
               <A
-                href="/dashboard/shared"
-                class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition-all rounded-md"
-              >
-                <IconAccountMultipleOutline class="w-6 h-6" />
-                <span>Shared</span>
-              </A>
-              <A
-                href="/dashboard/favorites"
-                class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition-all rounded-md"
-              >
-                <IconStarOutline class="w-6 h-6" />
-                <span>Favorites</span>
-              </A>
-              <A
                 href="/dashboard/trash"
                 class="py-2 pl-2 pr-4 flex flex-row items-center gap-2 hover:bg-gradient-to-r from-lavender/30 transition-all rounded-md"
               >
