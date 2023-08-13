@@ -28,9 +28,10 @@ import IconGamepad from "~icons/mdi/gamepad";
 import IconPrinter3d from "~icons/mdi/printer-3d";
 import IconSquareRootBox from "~icons/mdi/square-root-box";
 import IconZipBoxOutline from "~icons/mdi/zip-box-outline";
+import type { UploadedFile } from "@/types/api";
 
-export const getFileIcon = (file: any) => {
-  const fileExtension = file.name.split(".").pop().toLowerCase();
+export const getFileIcon = (file: UploadedFile) => {
+  const fileExtension = file.name.split(".").pop()!.toLowerCase();
 
   const application = [
     "apk",

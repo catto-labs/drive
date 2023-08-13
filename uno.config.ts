@@ -17,6 +17,10 @@ export default defineConfig({
   transformers: [transformerVariantGroup()],
 
   theme: {
+    fontFamily: {
+      sans: "Quicksand"
+    },
+
     animation: {
       keyframes: {
         "scale-in": "{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}",
