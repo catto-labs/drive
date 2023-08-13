@@ -1,7 +1,7 @@
 
 import { type APIEvent, json } from "solid-start"
 import { supabase, getUserProfile } from "@/supabase/server"
-import type { Workspace } from "@/types/api";
+import type { WorkspaceMeta } from "@/types/api";
 
 /**
  * POST /api/workspace/create
@@ -51,6 +51,6 @@ export const POST = async ({ request }: APIEvent) => {
 
   return json({
     success: true,
-    data: created_workspace![0] as Workspace
+    data: created_workspace![0] as WorkspaceMeta
   });
 };

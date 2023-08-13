@@ -1,6 +1,6 @@
 import { type APIEvent, json } from "solid-start"
 import { supabase, getUserProfile } from "@/supabase/server";
-import type { UploadedFile, UserProfile, Workspace, WorkspaceContent } from "@/types/api";
+import type { UploadedFile, UserProfile, WorkspaceMeta, WorkspaceContent } from "@/types/api";
 
 export const GET = async ({ request }: APIEvent): Promise<Response> => {
   let api_token = request.headers.get("authorization");
@@ -19,7 +19,7 @@ export const GET = async ({ request }: APIEvent): Promise<Response> => {
     .select()
     .eq("id", workspace_id)
     .limit(1)
-    .single<Workspace>();
+    .single<WorkspaceMeta>();
   
   if (!workspace_data || workspace_data.creator !== user_profile.user_id) return json({
     success: false,
@@ -45,7 +45,7 @@ export const GET = async ({ request }: APIEvent): Promise<Response> => {
     .select()
     .eq("parent_workspace_id", workspace_data.id);
 
-  (_workspaces as Workspace[]).forEach(workspace => content.push({
+  (_workspaces as WorkspaceMeta[]).forEach(workspace => content.push({
     type: "workspace",
     data: {
       ...workspace,
@@ -60,7 +60,7 @@ export const GET = async ({ request }: APIEvent): Promise<Response> => {
       .select()
       .eq("id", workspace_data.parent_workspace_id)
       .limit(1)
-      .single<Workspace>();
+      .single<WorkspaceMeta>();
 
     content.push({
       type: "workspace",
@@ -73,6 +73,9 @@ export const GET = async ({ request }: APIEvent): Promise<Response> => {
 
   return json({
     success: true,
-    data: content
+    data: {
+      meta: workspace_data,
+      content
+    }
   });
 }

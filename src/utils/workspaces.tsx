@@ -1,7 +1,7 @@
 import { auth } from "@/stores/auth";
-import type { Workspace, WorkspaceContent } from "@/types/api";
+import type { Workspace, WorkspaceMeta } from "@/types/api";
 
-export const getContentOfWorkspace = async (workspace_id: string) => {
+export const getWorkspace = async (workspace_id: string) => {
   const response = await fetch(
     `/api/workspace?workspace_id=${workspace_id}`,
     {
@@ -11,7 +11,7 @@ export const getContentOfWorkspace = async (workspace_id: string) => {
   );
 
   const json = await response.json();
-  return json.data as WorkspaceContent[];
+  return json.data as Workspace;
 };
 
 export const createWorkspace = async (parent_workspace_id: string) => {
@@ -24,5 +24,5 @@ export const createWorkspace = async (parent_workspace_id: string) => {
   );
 
   const json = await response.json();
-  return json.data as Workspace;
+  return json.data as WorkspaceMeta;
 };

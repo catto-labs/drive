@@ -18,7 +18,7 @@ export interface UploadedFile {
   workspace_id: string | null;
 }
 
-export interface Workspace {
+export interface WorkspaceMeta {
   id: string;
   created_at: string;
   parent_workspace_id: string | null;
@@ -27,7 +27,12 @@ export interface Workspace {
   creator: string;
 }
 
+export interface Workspace {
+  meta: WorkspaceMeta
+  content: WorkspaceContent[]
+}
+
 export type WorkspaceContent = (
   | { type: "file", data: UploadedFile }
-  | { type: "workspace", data: Workspace }
+  | { type: "workspace", data: WorkspaceMeta }
 );
