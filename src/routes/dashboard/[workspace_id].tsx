@@ -442,9 +442,9 @@ const Page: Component = () => {
                                 when={workspace().name === "../"}
                                 fallback={<IconFolderOutline class="text-lg" />}
                               >
-                                <IconArrowULeftTop class="text-lg" />
+                                <IconArrowULeftTop class="text-lg mb-0.5" />
                               </Show>
-                              <p class="text-sm mt-0.5 text-[#0f0f0f]">
+                              <p class="text-sm my-auto text-[#0f0f0f]">
                                 {getWorkspaceName(workspace().name)}
                               </p>
                             </div>
