@@ -1,4 +1,3 @@
-import Header from "@/components/landing/Header";
 import { DropdownMenu } from "@kobalte/core";
 import { A } from "solid-start";
 
