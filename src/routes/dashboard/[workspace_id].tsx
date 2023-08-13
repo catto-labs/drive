@@ -110,50 +110,52 @@ const Page: Component = () => {
     window.scrollTo(0, 0);
   });
 
-  const [openDeleteModal] = createModal<UploadedFile>(({ Description, CloseButton, data: file }) => (
-    <>
-      <div class="text-text flex justify-between">
-        <h1 class="text-xl font-semibold my-auto">
-          Delete file
-        </h1>
-        <CloseButton class="p-2 hover:bg-maroon/20 my-auto rounded-lg">
-          <IconClose class="text-lg" />
-        </CloseButton>
-      </div>
-      <Description class="text-subtext0">
-        Are you sure you want to
-        permanently delete this file? You
-        won't be able to restore this from
-        the trash bin later on.
-      </Description>
-      <form
-        class="flex w-full justify-end gap-x-4 mt-2"
-        onSubmit={async (event) => {
-          event.preventDefault();
-          await removePermanentlyFile(file!.id);
+  const [openDeleteModal] = createModal<UploadedFile>(
+    ({ Description, CloseButton, data: file }) => (
+      <>
+        <div class="text-text flex justify-between">
+          <h1 class="text-xl font-semibold my-auto">Delete file</h1>
+          <CloseButton class="p-2 hover:bg-maroon/20 my-auto rounded-lg">
+            <IconClose class="text-lg" />
+          </CloseButton>
+        </div>
+        <Description class="text-subtext0">
+          Are you sure you want to permanently delete this file? You won't be
+          able to restore this from the trash bin later on.
+        </Description>
+        <form
+          class="flex w-full justify-end gap-x-4 mt-2"
+          onSubmit={async (event) => {
+            event.preventDefault();
+            await removePermanentlyFile(file!.id);
 
-          setWorkspaceContent((prev) => prev
-            ? prev.filter(item =>
-                item.type === "workspace" ||
-                (item.type === "file" && item.data.id !== file!.id)
-              )
-            : []
-          );
-        }}
-      >
-        <CloseButton type="submit"
-          class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
+            setWorkspaceContent((prev) =>
+              prev
+                ? prev.filter(
+                    (item) =>
+                      item.type === "workspace" ||
+                      (item.type === "file" && item.data.id !== file!.id)
+                  )
+                : []
+            );
+          }}
         >
-          Yes
-        </CloseButton>
-        <CloseButton type="button"
-          class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
-        >
-          No
-        </CloseButton>
-      </form>
-    </>
-  ))
+          <CloseButton
+            type="submit"
+            class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
+          >
+            Yes
+          </CloseButton>
+          <CloseButton
+            type="button"
+            class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
+          >
+            No
+          </CloseButton>
+        </form>
+      </>
+    )
+  );
 
   return (
     <>
@@ -356,7 +358,7 @@ const Page: Component = () => {
                     <Switch>
                       <Match when={content.type === "file" && content.data}>
                         {(file) => (
-                          <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0/50">
+                          <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
                             <div class="flex flex-row">
                               <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-150 w-100">
                                 {getFileIcon(file())}
@@ -407,7 +409,8 @@ const Page: Component = () => {
                                       <IconStarOutline class="text-lg" />
                                       Favorite
                                     </DropdownMenu.Item>
-                                    <DropdownMenu.Item class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
+                                    <DropdownMenu.Item
+                                      class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
                                       onSelect={() => openDeleteModal(file())}
                                     >
                                       <IconDeleteOutline class="text-lg" />
@@ -425,7 +428,7 @@ const Page: Component = () => {
                       >
                         {(workspace) => (
                           <A
-                            class="w-full h-auto py-3 px-2 flex flex-row justify-between text-text items-center gap-1 border-b border-surface2  hover:bg-surface0/50"
+                            class="w-full h-auto py-3 px-2 flex flex-row justify-between text-text items-center gap-1 md:border-b border-surface2  hover:bg-surface0/50"
                             href={`/dashboard/${workspace().id}`}
                           >
                             <div class="flex flex-row gap-2 pl-0.5 text-text">
