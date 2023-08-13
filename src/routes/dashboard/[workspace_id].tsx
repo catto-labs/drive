@@ -27,12 +27,14 @@ import IconDeleteOutline from "~icons/mdi/delete-outline";
 import IconDotsHorizontal from "~icons/mdi/dots-horizontal";
 import IconClose from "~icons/mdi/close";
 import IconFolderOutline from "~icons/mdi/folder-outline";
+import IconArrowULeftTop from "~icons/mdi/arrow-u-left-top";
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
 import FullscreenLoader from "@/components/FullscreenLoader";
 
 import { getFileIcon } from "@/utils/getFileIcons";
+import { relativeTime } from "@/utils/relativeTime";
 
 import { DropdownMenu, Dialog } from "@kobalte/core";
 
@@ -88,6 +90,18 @@ const Page: Component = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const getWorkspaceName = (name: string) => {
+    if (name === "../") {
+      return "Go back to parent folder";
+    }
+
+    if (name.startsWith("./")) {
+      return name.substring(2);
+    }
+
+    return name;
   };
 
   createEffect(() => {
@@ -177,7 +191,7 @@ const Page: Component = () => {
                   <DropdownMenu.Portal>
                     <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
                       <DropdownMenu.Item
-                        class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between"
+                        class="px-4 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between"
                         onSelect={async () => {
                           const workspace = await createWorkspace(
                             params.workspace_id
@@ -195,7 +209,7 @@ const Page: Component = () => {
                         New Folder <span class="text-subtext1">⌘ N</span>
                       </DropdownMenu.Item>
                       <DropdownMenu.Sub overlap gutter={4} shift={-8}>
-                        <DropdownMenu.SubTrigger class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] hover:bg-opacity-50 rounded-md flex justify-between w-full overview-dropdown-submenu">
+                        <DropdownMenu.SubTrigger class="px-4 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md flex justify-between w-full overview-dropdown-submenu">
                           Sort By...
                           <IconChevronRight class="text-subtext1 text-lg my-auto" />
                         </DropdownMenu.SubTrigger>
@@ -207,7 +221,7 @@ const Page: Component = () => {
                               class="flex flex-col w-40 text-sm"
                             >
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="name"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -216,7 +230,7 @@ const Page: Component = () => {
                                 <p class="ml-1">Name</p>
                               </DropdownMenu.RadioItem>
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="date-modified"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -225,7 +239,7 @@ const Page: Component = () => {
                                 <p class="ml-1">Date modified</p>
                               </DropdownMenu.RadioItem>
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="kind"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -234,7 +248,7 @@ const Page: Component = () => {
                                 <p class="ml-1">Kind</p>
                               </DropdownMenu.RadioItem>
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="size"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -246,7 +260,7 @@ const Page: Component = () => {
                           </DropdownMenu.SubContent>
                         </DropdownMenu.Portal>
                       </DropdownMenu.Sub>
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
+                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md">
                         Workspace properties
                       </DropdownMenu.Item>
                     </DropdownMenu.Content>
@@ -299,13 +313,13 @@ const Page: Component = () => {
                         {(file) => (
                           <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0/50">
                             <div class="flex flex-row">
-                              <div class="flex flex-row gap-2 text-text w-150">
+                              <div class="flex flex-row gap-2 text-[#0f0f0f] w-150">
                                 {getFileIcon(file())}
                                 <p class="text-sm mt-0.5">{file().name}</p>
                               </div>
                               <div class="flex flex-row gap-2 text-text">
                                 <p class="text-sm mt-0.5">
-                                  {file().created_at}
+                                  {relativeTime(file().created_at)}
                                 </p>
                               </div>
                             </div>
@@ -420,12 +434,19 @@ const Page: Component = () => {
                       >
                         {(workspace) => (
                           <A
-                            class="w-full h-auto py-3 px-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0"
+                            class="w-full h-auto py-3 px-2 flex flex-row justify-between text-text items-center gap-1 border-b border-surface2  hover:bg-surface0/50"
                             href={`/dashboard/${workspace().id}`}
                           >
-                            <div class="flex flex-row gap-2 pl-0.5">
-                              <IconFolderOutline class="text-lg" />
-                              <p class="text-sm mt-0.5">{workspace().name}</p>
+                            <div class="flex flex-row gap-2 pl-0.5 text-text">
+                              <Show
+                                when={workspace().name === "../"}
+                                fallback={<IconFolderOutline class="text-lg" />}
+                              >
+                                <IconArrowULeftTop class="text-lg mb-0.5" />
+                              </Show>
+                              <p class="text-sm my-auto text-[#0f0f0f]">
+                                {getWorkspaceName(workspace().name)}
+                              </p>
                             </div>
                           </A>
                         )}
