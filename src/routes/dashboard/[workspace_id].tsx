@@ -286,8 +286,11 @@ const Page: Component = () => {
             <main class="overflow-auto">
               <section class="block p-4 pt-3">
                 <div class="w-full h-auto pl-10 pb-1 px-2 flex flex-row justify-between items-center gap-1 text-sm text-subtext0">
-                  Name
-                  <div class="flex flex-row gap-1">Actions</div>
+                  <div class="flex flex-row">
+                    <span class="w-142">Name</span>
+                    <span>Date added</span>
+                  </div>
+                  <span>Actions</span>
                 </div>
                 <For each={workspaceContent()!}>
                   {(content) => (
@@ -295,9 +298,16 @@ const Page: Component = () => {
                       <Match when={content.type === "file" && content.data}>
                         {(file) => (
                           <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0/50">
-                            <div class="flex flex-row gap-2 text-text">
-                              {getFileIcon(file())}
-                              <p class="text-sm mt-0.5">{file().name}</p>
+                            <div class="flex flex-row">
+                              <div class="flex flex-row gap-2 text-text w-150">
+                                {getFileIcon(file())}
+                                <p class="text-sm mt-0.5">{file().name}</p>
+                              </div>
+                              <div class="flex flex-row gap-2 text-text">
+                                <p class="text-sm mt-0.5">
+                                  {file().created_at}
+                                </p>
+                              </div>
                             </div>
                             <div class="flex flex-row gap-1">
                               <button
