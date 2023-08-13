@@ -368,8 +368,8 @@ const Page: Component = () => {
                                   {getFileIcon(file())}
                                 </div>
                                 <div class="flex flex-col md:flex-row">
-                                  <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-142 w-100">
-                                    <p class="text-sm mt-0.5 lg:w-122 w-80 truncate text-ellipsis ">
+                                  <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-142 md:w-100">
+                                    <p class="text-sm mt-0.5 lg:w-122 md:w-80 truncate text-ellipsis ">
                                       {file().name}
                                     </p>
                                   </div>
@@ -451,7 +451,7 @@ const Page: Component = () => {
                                 >
                                   <IconArrowULeftTop class="text-lg mb-0.5" />
                                 </Show>
-                                <p class="text-sm mt-0.5 lg:w-122 w-80 truncate text-ellipsis text-[#0f0f0f]">
+                                <p class="text-sm mt-0.5 lg:w-122 md:w-80 truncate text-ellipsis text-[#0f0f0f]">
                                   {getWorkspaceName(workspace().name)}
                                 </p>
                               </div>
