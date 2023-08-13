@@ -110,51 +110,54 @@ const Page: Component = () => {
     window.scrollTo(0, 0);
   });
 
-  const [openDeleteModal] = createModal<UploadedFile>(
-    ({ Description, CloseButton, data: file }) => (
-      <>
-        <div class="text-text flex justify-between">
-          <h1 class="text-xl font-semibold my-auto">Delete file</h1>
-          <CloseButton class="p-2 hover:bg-maroon/20 my-auto rounded-lg">
-            <IconClose class="text-lg" />
-          </CloseButton>
-        </div>
-        <Description class="text-subtext0">
-          Are you sure you want to permanently delete this file? You won't be
-          able to restore this from the trash bin later on.
-        </Description>
-        <form
-          class="flex w-full justify-end gap-x-4 mt-2"
-          onSubmit={async (event) => {
-            event.preventDefault();
-            await removePermanentlyFile(file!.id);
+  const [openDeleteModal] = createModal<UploadedFile>(({ Description, CloseButton, data: file, close }) => (
+    <>
+      <div class="text-text flex justify-between">
+        <h1 class="text-xl font-semibold my-auto">
+          Delete file
+        </h1>
+        <CloseButton class="p-2 hover:bg-maroon/20 my-auto rounded-lg">
+          <IconClose class="text-lg" />
+        </CloseButton>
+      </div>
+      <Description class="text-subtext0">
+        Are you sure you want to
+        permanently delete this file? You
+        won't be able to restore this from
+        the trash bin later on.
+      </Description>
+      <form
+        class="flex w-full justify-end gap-x-4 mt-2"
+        onSubmit={async (event) => {
+          event.preventDefault();
+          await removePermanentlyFile(file!.id);
 
-            setWorkspaceContent((prev) =>
-              prev
-                ? prev.filter(
-                  (item) =>
-                    item.type === "workspace" ||
-                    (item.type === "file" && item.data.id !== file!.id)
-                )
-                : []
-            );
-          }}
+          setWorkspaceContent((prev) =>
+            prev
+              ? prev.filter(
+                (item) =>
+                  item.type === "workspace" ||
+                  (item.type === "file" && item.data.id !== file!.id)
+              )
+              : []
+          );
+        }}
+      >
+        <CloseButton
+          type="submit"
+          class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
         >
-          <CloseButton
-            type="submit"
-            class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
-          >
-            Yes
-          </CloseButton>
-          <CloseButton
-            type="button"
-            class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
-          >
-            No
-          </CloseButton>
-        </form>
-      </>
-    )
+          Yes
+        </CloseButton>
+        <CloseButton
+          type="button"
+          class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
+        >
+          No
+        </CloseButton>
+      </form>
+    </>
+  )
   );
 
   return (
