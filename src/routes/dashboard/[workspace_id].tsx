@@ -33,6 +33,7 @@ import cattoDriveLogo from "@/assets/icon/logo.png";
 import FullscreenLoader from "@/components/FullscreenLoader";
 
 import { getFileIcon } from "@/utils/getFileIcons";
+import { relativeTime } from "@/utils/relativeTime";
 
 import { DropdownMenu, Dialog } from "@kobalte/core";
 
@@ -305,7 +306,7 @@ const Page: Component = () => {
                               </div>
                               <div class="flex flex-row gap-2 text-text">
                                 <p class="text-sm mt-0.5">
-                                  {file().created_at}
+                                  {relativeTime(file().created_at)}
                                 </p>
                               </div>
                             </div>
