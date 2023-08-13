@@ -24,13 +24,12 @@ const json = <T>(data: T, options?: { status: number }) => new Response(
  */
 serve(async (req: Request) => {
   if (req.method === "PUT") {
-    const api_token = req.headers.get("authorization");
-  
-    let user_profile: UserProfile | undefined;
-    if (api_token) (user_profile = await getUserProfile(api_token));
-  
     const formData = await req.formData();
     const formDataFiles = formData.getAll("files") as File[];
+    const formDataApiToken = formData.get("api_token") as string | undefined;
+    
+    let user_profile: UserProfile | undefined;
+    if (formDataApiToken) (user_profile = await getUserProfile(formDataApiToken));
   
     const workspaceId = (formData.get("workspace_id") as string | undefined) ?? user_profile?.root_workspace_id ?? undefined;
   
