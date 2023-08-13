@@ -20,6 +20,9 @@ export const POST = async ({ request }: APIEvent) => {
     message: "You need to provide the parent workspace ID."
   }, { status: 400 });
 
+  let workspace_name = new URL(request.url).searchParams.get("workspace_name");
+  if (!workspace_name) workspace_name = "New Folder";
+
   const user_profile = await getUserProfile(api_token);
   if (!user_profile) return json({
     success: false,
@@ -44,6 +47,7 @@ export const POST = async ({ request }: APIEvent) => {
   const { data: created_workspace } = await supabase
     .from("workspaces")
     .insert([{
+      name: workspace_name,
       parent_workspace_id,
       creator: user_profile.user_id
     }])
