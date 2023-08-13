@@ -284,7 +284,11 @@ const Page: Component = () => {
             </header>
 
             <main class="overflow-auto">
-              <section class="block p-4">
+              <section class="block p-4 pt-3">
+                <div class="w-full h-auto pl-10 pb-1 px-2 flex flex-row justify-between items-center gap-1 text-sm text-subtext0">
+                  Name
+                  <div class="flex flex-row gap-1">Actions</div>
+                </div>
                 <For each={workspaceContent()!}>
                   {(content) => (
                     <Switch>
