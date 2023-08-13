@@ -299,7 +299,7 @@ const Page: Component = () => {
 
             <main class="overflow-auto">
               <section class="block p-4 pt-3">
-                <div class="w-full h-auto pl-10 pb-1 px-2 flex flex-row justify-between items-center gap-1 text-sm text-subtext0">
+                <div class="w-full h-auto pl-10 pb-1 px-2 md:flex hidden flex-row justify-between items-center gap-1 text-sm text-subtext0">
                   <div class="flex flex-row">
                     <span class="lg:w-142 w-92">Name</span>
                     <span>Date added</span>
