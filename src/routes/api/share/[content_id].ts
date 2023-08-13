@@ -1,7 +1,6 @@
 
 import { type APIEvent, json } from "solid-start"
 import { supabase, getUserProfile } from "@/supabase/server"
-import type { WorkspaceMeta } from "@/types/api";
 
 export const PATCH = async ({ request, params }: APIEvent) => {
   try {
