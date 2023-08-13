@@ -44,10 +44,9 @@ export default function Header() {
               Dashboard
             </A>
             <A
-              href="/"
+              href="/account"
               class="text-text inline-flex gap-x-1 bg-surface0 hover:bg-surface1 border border-surface1 pl-3 pr-4 py-2 rounded-md h-fit my-auto shadow-inner shadow-lg transform duration-150"
             >
-              {/* this can be substituted for the user's profile picture instead */}
               <IconAccount class="text-[16px] my-auto" />
               My Account
             </A>
