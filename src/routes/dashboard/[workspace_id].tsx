@@ -346,7 +346,7 @@ const Page: Component = () => {
 
             <main class="overflow-auto">
               <section class="block p-4 pt-3">
-                <div class="w-full h-auto pl-10 pb-1 px-2 flex flex-row justify-between items-center gap-1 text-sm text-subtext0">
+                <div class="w-full h-auto pl-10 pb-1 px-2 md:flex hidden flex-row justify-between items-center gap-1 text-sm text-subtext0">
                   <div class="flex flex-row">
                     <span class="lg:w-142 w-92">Name</span>
                     <span>Date added</span>
@@ -358,7 +358,7 @@ const Page: Component = () => {
                     <Switch>
                       <Match when={content.type === "file" && content.data}>
                         {(file) => (
-                          <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0/50">
+                          <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
                             <div class="flex flex-row">
                               <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-150 w-100">
                                 {getFileIcon(file())}
@@ -409,7 +409,8 @@ const Page: Component = () => {
                                       <IconStarOutline class="text-lg" />
                                       Favorite
                                     </DropdownMenu.Item>
-                                    <DropdownMenu.Item class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
+                                    <DropdownMenu.Item
+                                      class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
                                       onSelect={() => openDeleteModal(file())}
                                     >
                                       <IconDeleteOutline class="text-lg" />
@@ -427,7 +428,7 @@ const Page: Component = () => {
                       >
                         {(workspace) => (
                           <A
-                            class="w-full h-auto py-3 px-2 flex flex-row justify-between text-text items-center gap-1 border-b border-surface2  hover:bg-surface0/50"
+                            class="w-full h-auto py-3 px-2 flex flex-row justify-between text-text items-center gap-1 md:border-b border-surface2  hover:bg-surface0/50"
                             href={`/dashboard/${workspace().id}`}
                           >
                             <div class="flex flex-row gap-2 pl-0.5 text-text">
