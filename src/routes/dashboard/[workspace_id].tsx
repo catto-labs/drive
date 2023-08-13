@@ -1,6 +1,8 @@
+import type { UploadedFile, WorkspaceContent } from "@/types/api";
+
 import {
   type Component,
-  onMount,
+  Switch,
   createSignal,
   createEffect,
   Show,
@@ -8,8 +10,9 @@ import {
   on,
   Match,
 } from "solid-js";
-import { A, Title, useNavigate } from "solid-start";
-import { auth, logOutUser } from "@/stores/auth";
+
+import { A, Title, useNavigate, useParams } from "solid-start";
+import { Motion, Presence } from "@motionone/solid";
 
 import IconDotsHorizontalCircleOutline from "~icons/mdi/dots-horizontal-circle-outline";
 import IconStarOutline from "~icons/mdi/star-outline";
@@ -31,19 +34,12 @@ import IconArrowULeftTop from "~icons/mdi/arrow-u-left-top";
 import cattoDriveBox from "@/assets/icon/box.png";
 import cattoDriveCatto from "@/assets/icon/catto.png";
 import SpinnerRingResize from "~icons/svg-spinners/ring-resize";
-
-
 import cattoDriveLogo from "@/assets/icon/logo.png";
-
-import FullscreenLoader from "@/components/FullscreenLoader";
 
 import { getFileIcon } from "@/utils/getFileIcons";
 import { relativeTime } from "@/utils/relativeTime";
 
-import { DropdownMenu, Dialog } from "@kobalte/core";
-
-import { useParams } from "solid-start";
-
+import { DropdownMenu } from "@kobalte/core";
 import { createModal } from "@/primitives/modal";
 
 import {
@@ -54,21 +50,19 @@ import {
   removePermanentlyFile,
 } from "@/utils/files";
 
-import { getContentOfWorkspace, createWorkspace } from "@/utils/workspaces";
-import { workspaces, setWorkspaces } from "@/stores/workspaces";
+import { getWorkspace, createWorkspace } from "@/utils/workspaces";
 
-import type { UploadedFile, WorkspaceContent } from "@/types/api";
-import { Switch } from "solid-js";
-import { Motion, Presence } from "@motionone/solid";
+import { workspaces, setWorkspaces } from "@/stores/workspaces";
+import { auth, logOutUser } from "@/stores/auth";
 
 const Page: Component = () => {
-  const [view, setView] = createSignal<string>("name");
-  const params = useParams();
+  const [view, setView] = createSignal("name");
 
+  const params = useParams();
   const navigate = useNavigate();
 
   createEffect(on(() => params.workspace_id, async (workspaceId: string) => {
-    const workspace_content = await getContentOfWorkspace(workspaceId);
+    const workspace_content = await getWorkspace(workspaceId);
     setWorkspaces(workspaceId, workspace_content);
   }));
 
@@ -86,7 +80,7 @@ const Page: Component = () => {
         data: file,
       }));
 
-      setWorkspaces(params.workspace_id, (files) =>
+      setWorkspaces(params.workspace_id, "content", (files) =>
         files ? [...files, ...new_content] : new_content
       );
     } catch (error) {
@@ -132,7 +126,7 @@ const Page: Component = () => {
           event.preventDefault();
           await removePermanentlyFile(file!.id);
 
-          setWorkspaces(params.workspace_id, (prev) =>
+          setWorkspaces(params.workspace_id, "content", (prev) =>
             prev
               ? prev.filter(
                 (item) =>
@@ -141,6 +135,8 @@ const Page: Component = () => {
               )
               : []
           );
+
+          close();
         }}
       >
         <button
@@ -157,25 +153,30 @@ const Page: Component = () => {
         </CloseButton>
       </form>
     </>
-  )
-  );
+  ));
 
   return (
     <>
       <Title>Dashboard - Drive</Title>
 
-      {/* <Show
-        when={workspaces[params.workspace_id]}
-        fallback={
-          <FullscreenLoader message="Please wait, our cats are finding your files!" />
-        }
-      > */}
       <div class="md:backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
-        
-
         <div class="text-text bg-surface0/80 min-w-64 w-1/5 shrink-0 md:block hidden">
           <header class="px-4 pt-6 pb-2 shrink-0 sticky top-0 w-full h-14 flex flex-row flex flex-row gap-[10px] items-center w-full">
-            <img src={cattoDriveLogo} class="w-10 h-10 -ml-1 mt-1" />
+          
+          <div class="relative w-10 h-10">
+            <img src={cattoDriveBox} class="absolute inset-0 -bottom-4 mx-auto my-auto z-10" />
+
+            <img
+              src={cattoDriveCatto}
+              class="absolute transition-all transition-duration-500"
+              classList={{
+                "-mt-2.5": workspaces[params.workspace_id] !== undefined, // Loaded.
+                "-mt-0": !workspaces[params.workspace_id] // Loading.
+              }}
+            />
+          </div>
+          
+            
             <span class="text-lg">
               <span class="font-bold text-2xl">Drive </span>
               <span class="mr-[10px] font-light text-[15px]">
@@ -229,7 +230,11 @@ const Page: Component = () => {
         <div class="flex flex-col h-full bg-base border-l border-surface2 w-full md:w-4/5 z-20">
           <header class="sticky z-20 top-0 bg-surface0/30 border-b border-surface1 w-full h-16 md:pl-0 pl-2 flex flex-row justify-between shadow-sm">
             <h1 class="md:flex hidden border-base font-semibold h-full justify-center flex-col ml-4 text-text">
-              My Workspace
+              {params.workspace_id === auth.profile!.root_workspace_id ? "My workspace" : (
+                workspaces[params.workspace_id]
+                  ? (workspaces[params.workspace_id].meta.name || workspaces[params.workspace_id].meta.id)
+                  : "Loading..."
+              )}
             </h1>
             <div class="flex flex-row gap-x-2 mr-4 w-full md:w-fit items-center">
               <DropdownMenu.Root>
@@ -255,7 +260,7 @@ const Page: Component = () => {
                           data: workspace,
                         };
 
-                        setWorkspaces(params.workspace_id, (prev) =>
+                        setWorkspaces(params.workspace_id, "content", (prev) =>
                           prev ? [...prev, item] : [item]
                         );
                       }}
@@ -368,21 +373,11 @@ const Page: Component = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.1 }}
                   >
-                    {/* <Motion.div
-                      class="z-50 bg-surface0 fixed inset-0 flex items-center justify-center"
-                      initial={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ delay: 0.6, duration: 0.5 }}
-                    > */}
                       <img src={cattoDriveBox} class="absolute mx-auto my-auto w-48 z-10" />
 
                       <img
                         src={cattoDriveCatto}
                         class="absolute mx-auto my-auto w-41 -mt-48 transition-all transition-duration-500"
-                        // classList={{
-                        //   "-mt-48": loaderData().finished,
-                        //   "-mt-10": !loaderData().finished,
-                        // }}
                       />
 
                       <div class="mt-56 text-center">
@@ -397,7 +392,6 @@ const Page: Component = () => {
                           Our cats are gathering the files for this workspace!
                         </p>
                       </div>
-                    {/* </Motion.div> */}
                   </Motion.section>
                 }
               >
@@ -410,7 +404,7 @@ const Page: Component = () => {
                     <span>Actions</span>
                   </div>
                   <div class="flex flex-col gap-y-3 md:gap-y-0">
-                    <For each={workspaces[params.workspace_id]}>
+                    <For each={workspaces[params.workspace_id].content}>
                       {(content) => (
                         <Switch>
                           <Match when={content.type === "file" && content.data}>
@@ -552,7 +546,6 @@ const Page: Component = () => {
           </footer>
         </div>
       </div>
-      {/* </Show> */}
     </>
   );
 };
