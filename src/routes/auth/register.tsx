@@ -134,7 +134,7 @@ const Page: Component = () => {
                   placeholder="What's your e-mail?"
                   name="email"
                   autofocus
-                  class="py-2 px-4 rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
+                  class="py-2 px-4 outline-none rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
                 />
 
                 <input
@@ -146,7 +146,7 @@ const Page: Component = () => {
                   }
                   placeholder="What about your password?"
                   name="password"
-                  class="py-2 px-4 rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
+                  class="py-2 px-4 outline-none rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
                 />
 
                 <input
@@ -158,7 +158,7 @@ const Page: Component = () => {
                   }
                   placeholder="Confirm your password again."
                   name="confirm_password"
-                  class="py-2 px-4 rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
+                  class="py-2 px-4 outline-none rounded-xl bg-surface0 border border-surface1 focus-border-surface2 text-text placeholder-text-subtext1"
                 />
 
                 <Show when={state.error}>

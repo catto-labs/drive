@@ -342,7 +342,7 @@ const Page: Component = () => {
                 placeholder="Search..."
                 name="search"
                 autofocus
-                class="py-1 px-4 rounded-xl w-full md:w-84 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
+                class="py-1 px-4 outline-none rounded-xl w-full md:w-84 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
               />
               <DropdownMenu.Root>
                 <DropdownMenu.Trigger>
