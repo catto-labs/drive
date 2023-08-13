@@ -19,7 +19,6 @@ export const GET = async ({ request }: APIEvent) => {
     .select()
     .contains("shared_with", [user_profile.user_id]);
 
-  console.log(user_profile.user_id);
   shared_files = shared_files ?? [];
 
   let { data: shared_workspaces } = await supabase
