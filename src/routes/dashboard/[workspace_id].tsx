@@ -171,6 +171,15 @@ const Page: Component = () => {
         }
       >
         <div class="md:backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
+          <div class="absolute z-30 bottom-20 right-4">
+            <button
+              onClick={() => createFileImporter(fileUploadHandler)}
+              class="p-2 rounded-full flex md:hidden flex-row gap-1 text-crust bg-lavender hover:bg-[#5f72d9] transition"
+            >
+              <IconPlus class="text-2xl" />
+            </button>
+          </div>
+
           <div class="text-text bg-surface0/80 min-w-64 w-1/5 shrink-0 md:block hidden">
             <header class="px-4 pt-6 pb-2 shrink-0 sticky top-0 w-full h-14 flex flex-row flex flex-row gap-[10px] items-center w-full">
               <img src={cattoDriveLogo} class="w-10 h-10 -ml-1 mt-1" />
