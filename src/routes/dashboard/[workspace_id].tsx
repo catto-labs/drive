@@ -475,7 +475,7 @@ const Page: Component = () => {
             </main>
           </div>
 
-          <footer class="fixed z-20 bottom-0 shrink-0 bg-surface0/30 backdrop-blur-md border-t border-surface1 w-full h-16 flex flex-row justify-between px-4
+          <footer class="fixed z-20 bottom-0 shrink-0 bg-surface0/30 backdrop-blur-md border-t border-surface1 w-full h-16 flex md:hidden flex-row justify-between px-4
            shadow-sm">
             <A
               href={`/dashboard/${auth.profile!.root_workspace_id}`}
