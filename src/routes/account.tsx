@@ -1,12 +1,17 @@
 import { DropdownMenu } from "@kobalte/core";
-import { A } from "solid-start";
+import { A, useNavigate } from "solid-start";
+
+import { logOutUser } from "@/stores/auth";
 
 import IconAccount from "~icons/mdi/account"
 import IconMenuDown from "~icons/mdi/menu-down"
+import IconLogout from "~icons/mdi/logout"
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
 export default function Account() {
+  const navigate = useNavigate();
+
   return (
     <div class="w-full h-screen bg-surface0/80 backdrop-blur-md text-text">
       <header class="sticky z-20 top-0 bg-base/40 border-b border-surface0 w-full h-16 md:pl-0 pl-2 flex flex-row justify-between shadow-sm">
@@ -30,8 +35,22 @@ export default function Account() {
             <DropdownMenu.Portal>
               <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
                 <DropdownMenu.Item
-                  class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                  onClick={async () => {
+                    navigate("/account");
+                  }}
+                  class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
                 >
+                  <IconAccount class="text-lg" />
+                  My Account
+                </DropdownMenu.Item>
+                <DropdownMenu.Item
+                  onClick={async () => {
+                    await logOutUser();
+                    navigate("/");
+                  }}
+                  class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                >
+                  <IconLogout class="text-lg" />
                   Sign out
                 </DropdownMenu.Item>
               </DropdownMenu.Content>
