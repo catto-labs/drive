@@ -290,7 +290,7 @@ const Page: Component = () => {
                     <Switch>
                       <Match when={content.type === "file" && content.data}>
                         {(file) => (
-                          <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0">
+                          <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0/50">
                             <div class="flex flex-row gap-2">
                               {getFileIcon(file())}
                               <p class="text-sm mt-0.5">{file().name}</p>
