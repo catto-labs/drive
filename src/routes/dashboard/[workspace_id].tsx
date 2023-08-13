@@ -151,8 +151,21 @@ const Page: Component = () => {
     </>
   ));
 
-  const [openSharingModal] = createModal<WorkspaceContent>(() => (
-    <p></p>
+  const [openSharingModal] = createModal<WorkspaceContent>(({ data: content }) => (
+    <div class="flex flex-col gap-2">
+      <h1 class="text-xl font-medium">
+        Sharing
+      </h1>
+      <div class="flex gap-2 items-center justify-center">
+        {content!.type === "file" ? getFileIcon(content!.data) : <IconFolderOutline />}
+        <p class="text-sm text-text">
+          {content?.data.name || content?.data.id}
+        </p>
+      </div>
+
+      <h2>Should it be public to anyone ?</h2>
+
+    </div>
   ))
 
   return (
@@ -433,7 +446,12 @@ const Page: Component = () => {
                                     type="button"
                                     title="Share"
                                     class="p-1 hover:bg-surface1 rounded-md"
-                                    onClick={() => openSharingModal(file())}
+                                    onClick={(event) => {
+                                      event.stopPropagation();
+                                      event.preventDefault();
+
+                                      openSharingModal(file())
+                                    }}
                                   >
                                     <IconShareVariantOutline class="text-lg text-text" />
                                   </button>
@@ -442,7 +460,7 @@ const Page: Component = () => {
                                       <button
                                         type="button"
                                         title="Actions"
-                                        class="p-1 hover:bg-surface1 rounded-md"
+                                        class="p-1 hover:bg-surface1 ui-expanded:bg-surface1 rounded-md"
                                       >
                                         <IconDotsHorizontal class="text-lg text-text" />
                                       </button>
@@ -487,13 +505,13 @@ const Page: Component = () => {
                             )}
                           </Match>
                           <Match
-                            when={content.type === "workspace" && content.data}
+                            when={content.type === "workspace" && content}
                           >
                             {(workspace) => (
-                              <A href={`/dashboard/${workspace().id}`} class="w-full h-auto p-2 px-4 md:px-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
+                              <A href={`/dashboard/${workspace().data.id}`} class="w-full h-auto p-2 px-4 md:px-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
                                 <div class="flex flex-row gap-x-2 truncate text-ellipsis">
                                   <Show
-                                    when={workspace().name === "../"}
+                                    when={workspace().data.name === "../"}
                                     fallback={
                                       <IconFolderOutline class="text-lg min-w-6" />
                                     }
@@ -501,7 +519,7 @@ const Page: Component = () => {
                                     <IconArrowULeftTop class="text-lg mb-0.5 min-w-6" />
                                   </Show>
                                   <p class="text-sm mt-0.5 lg:w-122 md:w-80 truncate text-ellipsis text-[#0f0f0f]">
-                                    {getWorkspaceName(workspace().name)}
+                                    {getWorkspaceName(workspace().data.name)}
                                   </p>
                                 </div>
 
@@ -510,8 +528,11 @@ const Page: Component = () => {
                                     type="button"
                                     title="Share"
                                     class="p-1 hover:bg-surface1 rounded-md"
-                                    onClick={async () => {
-                                      // share modal
+                                    onClick={(event) => {
+                                      event.stopPropagation();
+                                      event.preventDefault();
+
+                                      openSharingModal(workspace())
                                     }}
                                   >
                                     <IconShareVariantOutline class="text-lg text-text" />
@@ -534,7 +555,7 @@ const Page: Component = () => {
                                         </DropdownMenu.Item>
                                         <DropdownMenu.Item
                                           class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
-                                          onSelect={() => navigator.clipboard.writeText(workspace().id)}
+                                          onSelect={() => navigator.clipboard.writeText(workspace().data.id)}
                                         >
                                           <IconContentCopy class="text-lg" />
                                           Copy workspace ID
