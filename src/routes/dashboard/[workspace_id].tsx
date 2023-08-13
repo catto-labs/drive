@@ -191,7 +191,7 @@ const Page: Component = () => {
                   <DropdownMenu.Portal>
                     <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
                       <DropdownMenu.Item
-                        class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between"
+                        class="px-4 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between"
                         onSelect={async () => {
                           const workspace = await createWorkspace(
                             params.workspace_id
@@ -209,7 +209,7 @@ const Page: Component = () => {
                         New Folder <span class="text-subtext1">⌘ N</span>
                       </DropdownMenu.Item>
                       <DropdownMenu.Sub overlap gutter={4} shift={-8}>
-                        <DropdownMenu.SubTrigger class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] hover:bg-opacity-50 rounded-md flex justify-between w-full overview-dropdown-submenu">
+                        <DropdownMenu.SubTrigger class="px-4 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md flex justify-between w-full overview-dropdown-submenu">
                           Sort By...
                           <IconChevronRight class="text-subtext1 text-lg my-auto" />
                         </DropdownMenu.SubTrigger>
@@ -221,7 +221,7 @@ const Page: Component = () => {
                               class="flex flex-col w-40 text-sm"
                             >
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="name"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -230,7 +230,7 @@ const Page: Component = () => {
                                 <p class="ml-1">Name</p>
                               </DropdownMenu.RadioItem>
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="date-modified"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -239,7 +239,7 @@ const Page: Component = () => {
                                 <p class="ml-1">Date modified</p>
                               </DropdownMenu.RadioItem>
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="kind"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -248,7 +248,7 @@ const Page: Component = () => {
                                 <p class="ml-1">Kind</p>
                               </DropdownMenu.RadioItem>
                               <DropdownMenu.RadioItem
-                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                class="inline-flex pr-4 pl-5 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                 value="size"
                               >
                                 <DropdownMenu.ItemIndicator class="-ml-4 my-auto">
@@ -260,7 +260,7 @@ const Page: Component = () => {
                           </DropdownMenu.SubContent>
                         </DropdownMenu.Portal>
                       </DropdownMenu.Sub>
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md">
+                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender/50 text-text hover:text-[rgb(46,48,66)] rounded-md">
                         Workspace properties
                       </DropdownMenu.Item>
                     </DropdownMenu.Content>
