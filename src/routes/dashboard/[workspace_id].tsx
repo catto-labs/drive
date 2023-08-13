@@ -32,6 +32,7 @@ import IconContentCopy from "~icons/mdi/content-copy";
 import IconClose from "~icons/mdi/close";
 import IconFolderOutline from "~icons/mdi/folder-outline";
 import IconArrowULeftTop from "~icons/mdi/arrow-u-left-top";
+import IconLogout from "~icons/mdi/logout"
 import cattoDriveBox from "@/assets/icon/box.png";
 import cattoDriveCatto from "@/assets/icon/catto.png";
 import SpinnerRingResize from "~icons/svg-spinners/ring-resize";
@@ -188,8 +189,6 @@ const Page: Component = () => {
               }}
             />
           </div>
-          
-            
             <span class="text-lg">
               <span class="font-bold text-2xl">Drive </span>
               <span class="mr-[10px] font-light text-[15px]">
@@ -356,11 +355,21 @@ const Page: Component = () => {
                   <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
                     <DropdownMenu.Item
                       onClick={async () => {
+                        navigate("/account");
+                      }}
+                      class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                    >
+                      <IconAccount class="text-lg" />
+                      My Account
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item
+                      onClick={async () => {
                         await logOutUser();
                         navigate("/");
                       }}
-                      class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                      class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
                     >
+                      <IconLogout class="text-lg" />
                       Sign out
                     </DropdownMenu.Item>
                   </DropdownMenu.Content>
