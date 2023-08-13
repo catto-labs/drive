@@ -9,27 +9,24 @@ import {
   Match,
 } from "solid-js";
 import { A, Title, useNavigate } from "solid-start";
-import { auth, logOutUser } from "@/stores/auth";
+import { logOutUser } from "@/stores/auth";
 
-import IconPower from "~icons/mdi/power";
 import IconDotsHorizontalCircleOutline from "~icons/mdi/dots-horizontal-circle-outline";
 import IconStarOutline from "~icons/mdi/star-outline";
 import IconShareVariantOutline from "~icons/mdi/share-variant-outline";
 import IconChevronRight from "~icons/mdi/chevron-right";
 import IconCheck from "~icons/mdi/check";
-import IconFileUploadOutline from "~icons/mdi/file-upload-outline";
 import IconPlus from "~icons/mdi/plus";
 import IconFolderAccountOutline from "~icons/mdi/folder-account-outline";
 import IconAccountMultipleOutline from "~icons/mdi/account-multiple-outline";
 import IconTrashCanOutline from "~icons/mdi/trash-can-outline";
 import IconAccount from "~icons/mdi/account";
 import IconMenuDown from "~icons/mdi/menu-down";
-import IconFileOutline from "~icons/mdi/file-outline"
-import IconFileImageOutline from "~icons/mdi/file-image-outline"
-import IconFileDownloadOutline from "~icons/mdi/file-download-outline"
-import IconDeleteOutline from "~icons/mdi/delete-outline"
-import IconHomeExportOutline from "~icons/mdi/home-export-outline"
-import IconDotsHorizontal from "~icons/mdi/dots-horizontal"
+import IconFileOutline from "~icons/mdi/file-outline";
+import IconFileImageOutline from "~icons/mdi/file-image-outline";
+import IconFileDownloadOutline from "~icons/mdi/file-download-outline";
+import IconDeleteOutline from "~icons/mdi/delete-outline";
+import IconDotsHorizontal from "~icons/mdi/dots-horizontal";
 
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
@@ -47,10 +44,7 @@ import {
   removePermanentlyFile,
 } from "@/utils/files";
 
-import {
-  getContentOfWorkspace,
-  createWorkspace
-} from "@/utils/workspaces";
+import { getContentOfWorkspace, createWorkspace } from "@/utils/workspaces";
 
 import type { WorkspaceContent } from "@/types/api";
 import { Switch } from "solid-js";
@@ -59,27 +53,36 @@ const Page: Component = () => {
   const [view, setView] = createSignal<string>("name");
   const params = useParams();
 
-  const [workspaceContent, setWorkspaceContent] = createSignal<WorkspaceContent[] | null>(null);
+  const [workspaceContent, setWorkspaceContent] = createSignal<
+    WorkspaceContent[] | null
+  >(null);
   const navigate = useNavigate();
 
-  createEffect(on(() => params.workspace_id, async (workspaceId: string) => {
-    const workspace_content = await getContentOfWorkspace(workspaceId);
-    setWorkspaceContent(workspace_content);
-  }));
+  createEffect(
+    on(
+      () => params.workspace_id,
+      async (workspaceId: string) => {
+        const workspace_content = await getContentOfWorkspace(workspaceId);
+        setWorkspaceContent(workspace_content);
+      }
+    )
+  );
 
   const fileUploadHandler = async (files: FileList) => {
     try {
       const uploaded = await makeFileUpload(files, {
         workspace_id: params.workspace_id,
-        private: true
+        private: true,
       });
 
-      const new_content: WorkspaceContent[] = uploaded.map(file => ({
+      const new_content: WorkspaceContent[] = uploaded.map((file) => ({
         type: "file",
-        data: file
-      }))
+        data: file,
+      }));
 
-      setWorkspaceContent((files) => (files ? [...files, ...new_content] : new_content));
+      setWorkspaceContent((files) =>
+        files ? [...files, ...new_content] : new_content
+      );
     } catch (error) {
       console.error(error);
     }
@@ -90,12 +93,11 @@ const Page: Component = () => {
     const imageFileExtensions = ["png", "jpg", "jpeg", "gif", "webp"];
 
     if (imageFileExtensions.indexOf(fileExtension) !== -1) {
-      return <IconFileImageOutline class="text-xl" />
+      return <IconFileImageOutline class="text-xl" />;
+    } else {
+      return <IconFileOutline class="text-xl" />;
     }
-    else {
-      return <IconFileOutline class="text-xl" />
-    }
-  }
+  };
 
   createEffect(() => {
     window.scrollTo(0, 0);
@@ -181,15 +183,20 @@ const Page: Component = () => {
                   </DropdownMenu.Trigger>
                   <DropdownMenu.Portal>
                     <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col w-68 bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
-                      <DropdownMenu.Item class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between"
+                      <DropdownMenu.Item
+                        class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md w-full flex justify-between"
                         onSelect={async () => {
-                          const workspace = await createWorkspace(params.workspace_id);
+                          const workspace = await createWorkspace(
+                            params.workspace_id
+                          );
                           const item: WorkspaceContent = {
                             type: "workspace",
-                            data: workspace
+                            data: workspace,
                           };
 
-                          setWorkspaceContent(prev => prev ? [...prev, item] : [item]);
+                          setWorkspaceContent((prev) =>
+                            prev ? [...prev, item] : [item]
+                          );
                         }}
                       >
                         New Folder <span class="text-subtext1">⌘ N</span>
@@ -289,7 +296,7 @@ const Page: Component = () => {
                   {(content) => (
                     <Switch>
                       <Match when={content.type === "file" && content.data}>
-                        {file => (
+                        {(file) => (
                           <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0">
                             <div class="flex flex-row gap-2">
                               {getFileIcon(file())}
@@ -309,36 +316,43 @@ const Page: Component = () => {
                               </button>
                               <DropdownMenu.Root>
                                 <DropdownMenu.Trigger>
-                                <button
-                                  type="button"
-                                  title="Actions"
-                                  class="p-1 hover:bg-surface1 rounded-md"
-                                >
-                                  <IconDotsHorizontal class="text-lg text-text" />
-                                </button>
+                                  <button
+                                    type="button"
+                                    title="Actions"
+                                    class="p-1 hover:bg-surface1 rounded-md"
+                                  >
+                                    <IconDotsHorizontal class="text-lg text-text" />
+                                  </button>
                                 </DropdownMenu.Trigger>
                                 <DropdownMenu.Portal>
                                   <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-surface0/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
-                                  <DropdownMenu.Item
-                                      onClick={() => downloadUploadedFile(file())}
+                                    <DropdownMenu.Item
+                                      onClick={() =>
+                                        downloadUploadedFile(file())
+                                      }
                                       class="flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                     >
                                       <IconFileDownloadOutline class="text-lg" />
                                       Download
                                     </DropdownMenu.Item>
-                                    <DropdownMenu.Item
-                                      class="flex flex-row items-center gap-6 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
-                                    >
+                                    <DropdownMenu.Item class="flex flex-row items-center gap-6 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md">
                                       <IconStarOutline class="text-lg" />
                                       Favorite
                                     </DropdownMenu.Item>
                                     <DropdownMenu.Item
                                       class="cursor-pointer flex flex-row items-center gap-6 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                       onSelect={async () => {
-                                        await removePermanentlyFile(file().id)
-                                        setWorkspaceContent(prev => prev ?
-                                          prev.filter(item => item.type === "workspace" || (item.type === "file" && item.data.id !== file().id))
-                                        : [])
+                                        await removePermanentlyFile(file().id);
+                                        setWorkspaceContent((prev) =>
+                                          prev
+                                            ? prev.filter(
+                                                (item) =>
+                                                  item.type === "workspace" ||
+                                                  (item.type === "file" &&
+                                                    item.data.id !== file().id)
+                                              )
+                                            : []
+                                        );
                                       }}
                                     >
                                       <IconDeleteOutline class="text-lg" />
@@ -351,9 +365,12 @@ const Page: Component = () => {
                           </div>
                         )}
                       </Match>
-                      <Match when={content.type === "workspace" && content.data}>
-                        {workspace => (
-                          <A class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-text hover:bg-surface0"
+                      <Match
+                        when={content.type === "workspace" && content.data}
+                      >
+                        {(workspace) => (
+                          <A
+                            class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-text hover:bg-surface0"
                             href={`/dashboard/${workspace().id}`}
                           >
                             <div class="flex flex-row gap-2">
@@ -375,4 +392,3 @@ const Page: Component = () => {
 };
 
 export default Page;
-
