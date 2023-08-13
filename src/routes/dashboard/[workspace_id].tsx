@@ -138,7 +138,7 @@ const Page: Component = () => {
       >
         <button
           type="submit"
-          class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
+          class="py-2 px-4 border-surface1 bg-flamingo/80 hover:bg-flamingo border transition-all hover:border-lavender my-auto rounded-lg"
         >
           Yes
         </button>
