@@ -17,16 +17,17 @@ export const GET = async ({ request }: APIEvent) => {
   let { data: shared_files } = await supabase
     .from("uploads")
     .select()
-    .containedBy("shared_with", user_profile.user_id);
+    .contains("shared_with", [user_profile.user_id]);
 
+  console.log(user_profile.user_id);
   shared_files = shared_files ?? [];
 
   let { data: shared_workspaces } = await supabase
     .from("workspaces")
     .select()
-    .containedBy("shared_with", user_profile.user_id);
+    .contains("shared_with", [user_profile.user_id]);
 
-  shared_workspaces = shared_files ?? [];
+  shared_workspaces = shared_workspaces ?? [];
 
   return json({
     success: true,
