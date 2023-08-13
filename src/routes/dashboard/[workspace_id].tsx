@@ -110,7 +110,7 @@ const Page: Component = () => {
     window.scrollTo(0, 0);
   });
 
-  const [openDeleteModal] = createModal<UploadedFile>(({ Description, CloseButton, data: file }) => (
+  const [openDeleteModal] = createModal<UploadedFile>(({ Description, CloseButton, data: file, close }) => (
     <>
       <div class="text-text flex justify-between">
         <h1 class="text-xl font-semibold my-auto">
@@ -139,13 +139,15 @@ const Page: Component = () => {
               )
             : []
           );
+
+          close();
         }}
       >
-        <CloseButton type="submit"
+        <button type="submit"
           class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
         >
           Yes
-        </CloseButton>
+        </button>
         <CloseButton type="button"
           class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
         >
