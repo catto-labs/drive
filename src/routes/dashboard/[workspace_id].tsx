@@ -241,7 +241,7 @@ const Page: Component = () => {
             <KSwitch.Label
               class="ml-2 text-text text-lg select-none font-medium"
             >
-              Public to <strong class="font-semibold">everyone who have the link</strong>
+              Public to <strong class="font-semibold">everyone who has the link</strong>
             </KSwitch.Label>
           </KSwitch.Root>
         </Show>
