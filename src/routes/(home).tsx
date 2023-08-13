@@ -130,15 +130,14 @@ const Page: Component = () => {
                   >
                     <span class="text-text">Upload files by dragging them here</span>
                     <span class="text-subtext1">
-                      or select some{" "}
+                      or 
                       <button
                         type="button"
                         class="underline-dotted underline hover:underline-solid hover:underline-lavender hover:text-lavender"
                         onClick={() => createFileImporter(handleUploadedFiles)}
                       >
-                        files
+                        select some files yourself.
                       </button>
-                      {" "}yourself.
                     </span>
                   </Show>
                 </div>
