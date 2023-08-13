@@ -46,13 +46,21 @@ This usage is covering all major feature areas of Supabase, and many of these fe
 
 ### Upload as anonymous through the homepage
 
+[![Watch the video](https://drive.cattolabs.com/api/file/360ba0a3-f090-46b8-b528-f2159974187a)](https://drive.cattolabs.com/api/file/360ba0a3-f090-46b8-b528-f2159974187a)
+
 ### Upload as anonymous through ShareX
+
+[![Watch the video](https://drive.cattolabs.com/api/file/8b03b8c8-5535-43c4-b82b-cf4112348c3b)](https://drive.cattolabs.com/api/file/8b03b8c8-5535-43c4-b82b-cf4112348c3b)
 
 ### Upload as authenticated through dashboard and make it public
 
+[![Watch the video](https://drive.cattolabs.com/api/file/494e4ef0-15fd-4a27-b658-511e16e20e75)](https://drive.cattolabs.com/api/file/494e4ef0-15fd-4a27-b658-511e16e20e75)
+
 ### Upload as authenticated through ShareX
+[![Watch the video](https://drive.cattolabs.com/api/file/828297ac-85bd-4948-8b15-10856d663789)](https://drive.cattolabs.com/api/file/828297ac-85bd-4948-8b15-10856d663789)
 
 ### Upload as authenticated through cURL
+[![Watch the video](https://drive.cattolabs.com/api/file/65df2d5f-394b-43e1-87f5-063e00c341a0)](https://drive.cattolabs.com/api/file/65df2d5f-394b-43e1-87f5-063e00c341a0)
 
 ## Using the API
 
