@@ -40,6 +40,8 @@ import { DropdownMenu, Dialog } from "@kobalte/core";
 
 import { useParams } from "solid-start";
 
+import { createModal } from "@/primitives/modal";
+
 import {
   createFileImporter,
   downloadUploadedFile,
@@ -50,7 +52,7 @@ import {
 
 import { getContentOfWorkspace, createWorkspace } from "@/utils/workspaces";
 
-import type { WorkspaceContent } from "@/types/api";
+import type { UploadedFile, WorkspaceContent } from "@/types/api";
 import { Switch } from "solid-js";
 
 const Page: Component = () => {
@@ -108,7 +110,50 @@ const Page: Component = () => {
     window.scrollTo(0, 0);
   });
 
-  const [openDeletion, setOpenDeletion] = createSignal(false);
+  const [openDeleteModal] = createModal<UploadedFile>(({ Description, CloseButton, data: file }) => (
+    <>
+      <div class="text-text flex justify-between">
+        <h1 class="text-xl font-semibold my-auto">
+          Delete file
+        </h1>
+        <CloseButton class="p-2 hover:bg-maroon/20 my-auto rounded-lg">
+          <IconClose class="text-lg" />
+        </CloseButton>
+      </div>
+      <Description class="text-subtext0">
+        Are you sure you want to
+        permanently delete this file? You
+        won't be able to restore this from
+        the trash bin later on.
+      </Description>
+      <form
+        class="flex w-full justify-end gap-x-4 mt-2"
+        onSubmit={async (event) => {
+          event.preventDefault();
+          await removePermanentlyFile(file!.id);
+
+          setWorkspaceContent((prev) => prev
+            ? prev.filter(item =>
+                item.type === "workspace" ||
+                (item.type === "file" && item.data.id !== file!.id)
+              )
+            : []
+          );
+        }}
+      >
+        <CloseButton type="submit"
+          class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
+        >
+          Yes
+        </CloseButton>
+        <CloseButton type="button"
+          class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
+        >
+          No
+        </CloseButton>
+      </form>
+    </>
+  ))
 
   return (
     <>
@@ -362,68 +407,12 @@ const Page: Component = () => {
                                       <IconStarOutline class="text-lg" />
                                       Favorite
                                     </DropdownMenu.Item>
-                                    <Dialog.Root
-                                      open={openDeletion()}
-                                      onOpenChange={setOpenDeletion}
+                                    <DropdownMenu.Item class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
+                                      onSelect={() => openDeleteModal(file())}
                                     >
-                                      <Dialog.Trigger class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md">
-                                        <IconDeleteOutline class="text-lg" />
-                                        Delete permanently
-                                      </Dialog.Trigger>
-                                      <Dialog.Portal>
-                                        <Dialog.Overlay class="fixed inset-0 z-50 bg-text/75 dialog-overlay-animation" />
-                                        <div class="fixed inset-0 z-50 flex items-center justify-center">
-                                          <Dialog.Content class="dialog-content-animation z-50 flex flex-col gap-y-2 border rounded-lg bg-surface0 border-surface1 p-4 max-w-128">
-                                            <div class="text-text flex justify-between">
-                                              <h1 class="text-xl font-semibold my-auto">
-                                                Delete file
-                                              </h1>
-                                              <Dialog.CloseButton class="p-2 hover:bg-maroon/20 my-auto rounded-lg">
-                                                <IconClose class="text-lg" />
-                                              </Dialog.CloseButton>
-                                            </div>
-                                            <Dialog.Description class="text-subtext0">
-                                              Are you sure you want to
-                                              permanently delete this file? You
-                                              won't be able to restore this from
-                                              the trash bin later on.
-                                            </Dialog.Description>
-                                            <div class="flex w-full justify-end gap-x-4 mt-2">
-                                              <Dialog.CloseButton>
-                                                <button
-                                                  onClick={async () => {
-                                                    await removePermanentlyFile(
-                                                      file().id
-                                                    );
-                                                    setWorkspaceContent(
-                                                      (prev) =>
-                                                        prev
-                                                          ? prev.filter(
-                                                              (item) =>
-                                                                item.type ===
-                                                                  "workspace" ||
-                                                                (item.type ===
-                                                                  "file" &&
-                                                                  item.data
-                                                                    .id !==
-                                                                    file().id)
-                                                            )
-                                                          : []
-                                                    );
-                                                  }}
-                                                  class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg"
-                                                >
-                                                  Yes
-                                                </button>
-                                              </Dialog.CloseButton>
-                                              <Dialog.CloseButton class="py-2 px-4 border-surface1 bg-base/50 hover:bg-base border transition-all hover:border-lavender my-auto rounded-lg">
-                                                No
-                                              </Dialog.CloseButton>
-                                            </div>
-                                          </Dialog.Content>
-                                        </div>
-                                      </Dialog.Portal>
-                                    </Dialog.Root>
+                                      <IconDeleteOutline class="text-lg" />
+                                      Delete permanently
+                                    </DropdownMenu.Item>
                                   </DropdownMenu.Content>
                                 </DropdownMenu.Portal>
                               </DropdownMenu.Root>

@@ -64,6 +64,9 @@ devDependencies:
   unocss-catppuccin:
     specifier: ^0.2.0
     version: 0.2.0
+  unocss-preset-primitives:
+    specifier: 0.0.1-beta.10
+    version: 0.0.1-beta.10
   unplugin-icons:
     specifier: ^0.16.5
     version: 0.16.5
@@ -2164,6 +2167,10 @@ packages:
       unconfig: 0.3.10
     dev: true
 
+  /@unocss/core@0.53.6:
+    resolution: {integrity: sha512-wuaLjWCzKUisHUxo4pjIdzcimdSmVa2hMHA3V7wVFBiSFX96/s7l0bvhHGFF/gMjbOnvJ+y+lBl3VKqcj9kwbA==}
+    dev: true
+
   /@unocss/core@0.54.2:
     resolution: {integrity: sha512-PyyJOJtZ2K0BVSawAA/5X46w3Vgj/39jy+2EGKrT0KD4pbYid8oQo84OkXEEms5gAnIAAZHayGqs43zi/FRp0A==}
     dev: true
@@ -4176,6 +4183,12 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       '@catppuccin/palette': 0.2.0
+    dev: true
+
+  /unocss-preset-primitives@0.0.1-beta.10:
+    resolution: {integrity: sha512-dN+2DsFtXEmk51tj9MBpVdk49U9BTGfE9T8j4mKihj+k53PIroeNddFwTuv1pEVj9FyGQKFglS+qm0p3l6FHvg==}
+    dependencies:
+      '@unocss/core': 0.53.6
     dev: true
 
   /unocss@0.54.2(postcss@8.4.27)(rollup@3.27.2)(vite@4.4.6):
