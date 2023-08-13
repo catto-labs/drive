@@ -347,7 +347,7 @@ const Page: Component = () => {
               </div>
             </header>
 
-            <main class="overflow-auto">
+            <main class="overflow-auto mt-16">
               <section class="block md:p-4 pt-3">
                 <div class="w-full h-auto pl-10 pb-1 px-2 md:flex hidden flex-row justify-between items-center gap-1 text-sm text-subtext0">
                   <div class="flex flex-row">
