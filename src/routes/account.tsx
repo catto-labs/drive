@@ -1,18 +1,39 @@
-import { createSignal, onMount } from "solid-js";
+import { createEffect, createSignal, on, onMount } from "solid-js";
 
-import { auth } from "@/stores/auth";
+import { auth, setAuth } from "@/stores/auth";
 import { supabase } from "@/supabase/client";
 
 import Header from "@/components/landing/Header";
 
 export default function Account() {
 
+  const [username, setUsername] = createSignal(auth.profile?.username ?? "");
+  const [firstname, setFirstname] = createSignal(auth.profile?.first_name ?? "");
+  const [lastname, setLastname] = createSignal(auth.profile?.last_name ?? "");
   const [userEmail, setUserEmail] = createSignal("");
 
   onMount(async () => {
     const email = (await supabase.auth.getUser()).data.user?.email;
     setUserEmail(email || "");
   })
+
+  createEffect(on([username, firstname, lastname], async () => {
+    const response = await fetch(`/api/account`, {
+      method: "POST",
+      body: JSON.stringify({
+        username: username(),
+        first_name: firstname(),
+        last_name: lastname()
+      }),
+      headers: {
+        authorization: auth.profile!.api_token,
+        "Content-Type": "application/json"
+      }
+    });
+  
+    const json = await response.json()
+    setAuth("profile", json.data)
+  }));
 
   return (
     <div
@@ -34,7 +55,8 @@ export default function Account() {
               </p>
               <input
                 type="text"
-                value={auth.profile?.first_name}
+                value={firstname()}
+                onInput={(evt) => setFirstname(evt.currentTarget.value)}
                 placeholder="What's your first name?"
                 class="bg-base text-text outline-none"
               />
@@ -45,7 +67,8 @@ export default function Account() {
               </p>
               <input
                 type="text"
-                value={auth.profile?.last_name}
+                value={lastname()}
+                onInput={(evt) => setLastname(evt.currentTarget.value)}
                 placeholder="What's your last name?"
                 class="bg-base text-text outline-none"
               />
@@ -57,6 +80,8 @@ export default function Account() {
             </p>
             <input
               type="text"
+              value={username()}
+              onInput={(evt) => setUsername(evt.currentTarget.value)}
               placeholder="What do you want to be referred as?"
               class="bg-base text-text outline-none"
             />
