@@ -8,7 +8,7 @@ import {
   For,
 } from "solid-js";
 import { createStore } from "solid-js/store";
-import { A, useNavigate } from "solid-start";
+import { A } from "solid-start";
 
 import Header from "@/components/landing/Header";
 import {
@@ -36,8 +36,6 @@ const Page: Component = () => {
     view: "uploaded";
     uploads: UploadedFile[];
   }
-
-  const navigate = useNavigate();
 
   const [filesToUpload, setFilesToUpload] = createSignal<
     FileList | Array<File>
