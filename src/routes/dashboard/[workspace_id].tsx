@@ -348,7 +348,7 @@ const Page: Component = () => {
             </header>
 
             <main class="overflow-auto">
-              <section class="block p-4 pt-3">
+              <section class="block md:p-4 pt-3">
                 <div class="w-full h-auto pl-10 pb-1 px-2 md:flex hidden flex-row justify-between items-center gap-1 text-sm text-subtext0">
                   <div class="flex flex-row">
                     <span class="lg:w-142 w-100">Name</span>
@@ -356,18 +356,18 @@ const Page: Component = () => {
                   </div>
                   <span>Actions</span>
                 </div>
-                <div class="flex flex-col gap-y-2 md:gap-y-0">
+                <div class="flex flex-col gap-y-3 md:gap-y-0">
                   <For each={workspaceContent()!}>
                     {(content) => (
                       <Switch>
                         <Match when={content.type === "file" && content.data}>
                           {(file) => (
-                            <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
-                              <div class="flex flex-row gap-x-2">
+                            <div class="w-full h-auto p-2 px-4 md:px-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
+                              <div class="flex flex-row gap-x-2 truncate text-ellipsis">
                                 <div class="my-auto">
                                   {getFileIcon(file())}
                                 </div>
-                                <div class="flex flex-col md:flex-row">
+                                <div class="flex flex-col md:flex-row truncate pr-4">
                                   <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-142 md:w-100">
                                     <p class="text-sm mt-0.5 lg:w-122 md:w-80 truncate text-ellipsis ">
                                       {file().name}
@@ -381,7 +381,7 @@ const Page: Component = () => {
                                 </div>
                               </div>
 
-                              <div class="flex flex-row gap-1">
+                              <div class="flex flex-row gap-1 w-16">
                                 <button
                                   type="button"
                                   title="Share"
@@ -439,17 +439,17 @@ const Page: Component = () => {
                         >
                           {(workspace) => (
                             <A
-                              class="w-full h-auto py-3 px-2 flex flex-row justify-between text-text items-center gap-1 md:border-b border-surface2  hover:bg-surface0/50"
+                              class="w-full h-auto py-3 md:px-2 px-4 flex flex-row justify-between text-text items-center gap-1 md:border-b border-surface2  hover:bg-surface0/50"
                               href={`/dashboard/${workspace().id}`}
                             >
-                              <div class="flex flex-row gap-2 pl-0.5 text-text">
+                              <div class="flex flex-row gap-x-2 truncate text-ellipsis">
                                 <Show
                                   when={workspace().name === "../"}
                                   fallback={
-                                    <IconFolderOutline class="text-lg" />
+                                    <IconFolderOutline class="text-lg min-w-6" />
                                   }
                                 >
-                                  <IconArrowULeftTop class="text-lg mb-0.5" />
+                                  <IconArrowULeftTop class="text-lg mb-0.5 min-w-6" />
                                 </Show>
                                 <p class="text-sm mt-0.5 lg:w-122 md:w-80 truncate text-ellipsis text-[#0f0f0f]">
                                   {getWorkspaceName(workspace().name)}
