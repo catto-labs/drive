@@ -165,8 +165,8 @@ const Page: Component = () => {
           <FullscreenLoader message="Please wait, our cats are finding your files!" />
         }
       >
-        <div class="backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
-          <div class="text-text bg-surface0/80 min-w-64 w-1/5 shrink-0">
+        <div class="md:backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
+          <div class="text-text bg-surface0/80 min-w-64 w-1/5 shrink-0 md:block hidden">
             <header class="px-4 pt-6 pb-2 shrink-0 sticky top-0 w-full h-14 flex flex-row flex flex-row gap-[10px] items-center w-full">
               <img src={cattoDriveLogo} class="w-10 h-10 -ml-1 mt-1" />
               <span class="text-lg">
@@ -217,18 +217,18 @@ const Page: Component = () => {
             </div>
           </div>
 
-          <div class="flex flex-col h-full bg-base border-l border-surface2 w-4/5 z-20">
-            <header class="shrink-0 sticky top-0 bg-surface0 border-b border-surface1 w-full h-16 flex flex-row justify-between shadow-sm">
-              <h1 class="border-base font-semibold h-full justify-center flex flex-col ml-4 text-text">
+          <div class="flex flex-col h-full bg-base border-l border-surface2 w-full md:w-4/5 z-20">
+            <header class="shrink-0 sticky top-0 bg-surface0 border-b border-surface1 w-full h-16 md:pl-0 pl-2 flex flex-row justify-between shadow-sm">
+              <h1 class="md:flex hidden border-base font-semibold h-full justify-center flex-col ml-4 text-text">
                 My Workspace
               </h1>
-              <div class="flex flex-row gap-x-2 mr-4 items-center">
+              <div class="flex flex-row gap-x-2 mr-4 w-full md:w-fit items-center">
                 <DropdownMenu.Root>
                   <DropdownMenu.Trigger>
                     <button
                       type="button"
                       title="Perform tasks with the selected items"
-                      class="mr-2 hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
+                      class="mr-2 md:block hidden hover:text-text text-subtext1 transition hover:bg-surface2 p-1.5 h-fit rounded-lg"
                     >
                       <IconDotsHorizontalCircleOutline class="text-xl" />
                     </button>
@@ -316,7 +316,7 @@ const Page: Component = () => {
                   placeholder="Search..."
                   name="search"
                   autofocus
-                  class="py-1 px-4 rounded-xl w-84 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
+                  class="py-1 px-4 rounded-xl w-full md:w-84 bg-surface1 transition border-2 border-overlay0 hover:bg-overlay0 text-text placeholder-text-subtext1"
                 />
                 <DropdownMenu.Root>
                   <DropdownMenu.Trigger>
@@ -346,7 +346,7 @@ const Page: Component = () => {
               <section class="block p-4 pt-3">
                 <div class="w-full h-auto pl-10 pb-1 px-2 flex flex-row justify-between items-center gap-1 text-sm text-subtext0">
                   <div class="flex flex-row">
-                    <span class="w-142">Name</span>
+                    <span class="lg:w-142 w-92">Name</span>
                     <span>Date added</span>
                   </div>
                   <span>Actions</span>
@@ -358,9 +358,11 @@ const Page: Component = () => {
                         {(file) => (
                           <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 border-b border-surface2 hover:bg-surface0/50">
                             <div class="flex flex-row">
-                              <div class="flex flex-row gap-2 text-[#0f0f0f] w-150">
+                              <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-150 w-100">
                                 {getFileIcon(file())}
-                                <p class="text-sm mt-0.5">{file().name}</p>
+                                <p class="text-sm mt-0.5 lg:w-130 w-80 truncate text-ellipsis ">
+                                  {file().name}
+                                </p>
                               </div>
                               <div class="flex flex-row gap-2 text-text">
                                 <p class="text-sm mt-0.5">
@@ -433,7 +435,7 @@ const Page: Component = () => {
                               >
                                 <IconArrowULeftTop class="text-lg mb-0.5" />
                               </Show>
-                              <p class="text-sm my-auto text-[#0f0f0f]">
+                              <p class="text-sm mt-0.5 lg:w-130 w-80 truncate text-ellipsis text-[#0f0f0f]">
                                 {getWorkspaceName(workspace().name)}
                               </p>
                             </div>
