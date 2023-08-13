@@ -223,7 +223,7 @@ const Page: Component = () => {
           </div>
 
           <div class="flex flex-col h-full bg-base border-l border-surface2 w-full md:w-4/5 z-20">
-            <header class="shrink-0 sticky top-0 bg-surface0/30 backdrop-blur-md border-b border-surface1 w-full h-16 md:pl-0 pl-2 flex flex-row justify-between shadow-sm">
+            <header class="shrink-0 fixed z-20 top-0 bg-surface0/30 backdrop-blur-md border-b border-surface1 w-full h-16 md:pl-0 pl-2 flex flex-row justify-between shadow-sm">
               <h1 class="md:flex hidden border-base font-semibold h-full justify-center flex-col ml-4 text-text">
                 My Workspace
               </h1>
