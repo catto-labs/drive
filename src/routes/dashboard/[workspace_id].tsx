@@ -32,6 +32,7 @@ import IconContentCopy from "~icons/mdi/content-copy";
 import IconClose from "~icons/mdi/close";
 import IconFolderOutline from "~icons/mdi/folder-outline";
 import IconArrowULeftTop from "~icons/mdi/arrow-u-left-top";
+import IconLogout from "~icons/mdi/logout"
 import cattoDriveBox from "@/assets/icon/box.png";
 import cattoDriveCatto from "@/assets/icon/catto.png";
 import SpinnerRingResize from "~icons/svg-spinners/ring-resize";
@@ -151,6 +152,10 @@ const Page: Component = () => {
     </>
   ));
 
+  const [openSharingModal] = createModal<WorkspaceContent>(() => (
+    <p></p>
+  ))
+
   return (
     <>
       <Title>Dashboard - Drive</Title>
@@ -171,8 +176,6 @@ const Page: Component = () => {
               }}
             />
           </div>
-          
-            
             <span class="text-lg">
               <span class="font-bold text-2xl">Drive </span>
               <span class="mr-[10px] font-light text-[15px]">
@@ -339,11 +342,21 @@ const Page: Component = () => {
                   <DropdownMenu.Content class="overview-dropdown-content bg-surface0 border border-surface2 p-2 flex flex-col bg-opacity-50 gap-y-1 backdrop-blur-md rounded-lg text-sm">
                     <DropdownMenu.Item
                       onClick={async () => {
+                        navigate("/account");
+                      }}
+                      class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                    >
+                      <IconAccount class="text-lg" />
+                      My Account
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item
+                      onClick={async () => {
                         await logOutUser();
                         navigate("/");
                       }}
-                      class="px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
+                      class="flex flex-row gap-4 px-4 py-1 hover:bg-lavender text-text hover:text-[rgb(46,48,66)] rounded-md"
                     >
+                      <IconLogout class="text-lg" />
                       Sign out
                     </DropdownMenu.Item>
                   </DropdownMenu.Content>
@@ -403,22 +416,22 @@ const Page: Component = () => {
                     <For each={workspaces[params.workspace_id].content}>
                       {(content) => (
                         <Switch>
-                          <Match when={content.type === "file" && content.data}>
+                          <Match when={content.type === "file" && content}>
                             {(file) => (
                               <div class="w-full h-auto p-2 px-4 md:px-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
                                 <div class="flex flex-row gap-x-2 truncate text-ellipsis">
                                   <div class="my-auto">
-                                    {getFileIcon(file())}
+                                    {getFileIcon(file().data)}
                                   </div>
                                   <div class="flex flex-col md:flex-row truncate pr-4">
                                     <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-142 md:w-100">
                                       <p class="text-sm mt-0.5 lg:w-122 md:w-80 truncate text-ellipsis ">
-                                        {file().name}
+                                        {file().data.name}
                                       </p>
                                     </div>
                                     <div class="flex-row gap-2 text-text">
                                       <p class="text-sm mt-0.5">
-                                        {relativeTime(file().created_at)}
+                                        {relativeTime(file().data.created_at)}
                                       </p>
                                     </div>
                                   </div>
@@ -429,12 +442,7 @@ const Page: Component = () => {
                                     type="button"
                                     title="Share"
                                     class="p-1 hover:bg-surface1 rounded-md"
-                                    onClick={async () => {
-                                      const url = getUploadedFileURL(file());
-                                      await navigator.clipboard.writeText(
-                                        url.href
-                                      );
-                                    }}
+                                    onClick={() => openSharingModal(file())}
                                   >
                                     <IconShareVariantOutline class="text-lg text-text" />
                                   </button>
@@ -451,9 +459,7 @@ const Page: Component = () => {
                                     <DropdownMenu.Portal>
                                       <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-base/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
                                         <DropdownMenu.Item
-                                          onClick={() =>
-                                            downloadUploadedFile(file())
-                                          }
+                                          onClick={() => downloadUploadedFile(file().data)}
                                           class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
                                         >
                                           <IconDownload class="text-lg" />
@@ -463,9 +469,21 @@ const Page: Component = () => {
                                           <IconStarOutline class="text-lg" />
                                           Favorite
                                         </DropdownMenu.Item>
+                                        <Show when={!file().data.private}>
+                                          <DropdownMenu.Item
+                                            class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                            onSelect={async () => {
+                                              const url = getUploadedFileURL(file().data);
+                                              await navigator.clipboard.writeText(url.href);
+                                            }}
+                                          >
+                                            <IconContentCopy class="text-lg" />
+                                            Copy public URL
+                                          </DropdownMenu.Item>
+                                        </Show>
                                         <DropdownMenu.Item
                                           class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
-                                          onSelect={() => openDeleteModal(file())}
+                                          onSelect={() => openDeleteModal(file().data)}
                                         >
                                           <IconDeleteOutline class="text-lg" />
                                           Delete permanently
