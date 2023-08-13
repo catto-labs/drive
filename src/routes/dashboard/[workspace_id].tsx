@@ -132,10 +132,10 @@ const Page: Component = () => {
             setWorkspaceContent((prev) =>
               prev
                 ? prev.filter(
-                    (item) =>
-                      item.type === "workspace" ||
-                      (item.type === "file" && item.data.id !== file!.id)
-                  )
+                  (item) =>
+                    item.type === "workspace" ||
+                    (item.type === "file" && item.data.id !== file!.id)
+                )
                 : []
             );
           }}
@@ -348,106 +348,117 @@ const Page: Component = () => {
               <section class="block p-4 pt-3">
                 <div class="w-full h-auto pl-10 pb-1 px-2 md:flex hidden flex-row justify-between items-center gap-1 text-sm text-subtext0">
                   <div class="flex flex-row">
-                    <span class="lg:w-142 w-92">Name</span>
+                    <span class="lg:w-142 w-100">Name</span>
                     <span>Date added</span>
                   </div>
                   <span>Actions</span>
                 </div>
-                <For each={workspaceContent()!}>
-                  {(content) => (
-                    <Switch>
-                      <Match when={content.type === "file" && content.data}>
-                        {(file) => (
-                          <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
-                            <div class="flex flex-row">
-                              <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-150 w-100">
-                                {getFileIcon(file())}
-                                <p class="text-sm mt-0.5 lg:w-130 w-80 truncate text-ellipsis ">
-                                  {file().name}
+                <div class="flex flex-col gap-y-2 md:gap-y-0">
+                  <For each={workspaceContent()!}>
+                    {(content) => (
+                      <Switch>
+                        <Match when={content.type === "file" && content.data}>
+                          {(file) => (
+                            <div class="w-full h-auto p-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
+                              <div class="flex flex-row gap-x-2">
+                                <div class="my-auto">
+                                  {getFileIcon(file())}
+                                </div>
+                                <div class="flex flex-col md:flex-row">
+                                  <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-142 w-100">
+                                    <p class="text-sm mt-0.5 lg:w-122 w-80 truncate text-ellipsis ">
+                                      {file().name}
+                                    </p>
+                                  </div>
+                                  <div class="flex-row gap-2 text-text">
+                                    <p class="text-sm mt-0.5">
+                                      {relativeTime(file().created_at)}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="flex flex-row gap-1">
+                                <button
+                                  type="button"
+                                  title="Share"
+                                  class="p-1 hover:bg-surface1 rounded-md"
+                                  onClick={async () => {
+                                    const url = getUploadedFileURL(file());
+                                    await navigator.clipboard.writeText(
+                                      url.href
+                                    );
+                                  }}
+                                >
+                                  <IconShareVariantOutline class="text-lg text-text" />
+                                </button>
+                                <DropdownMenu.Root>
+                                  <DropdownMenu.Trigger>
+                                    <button
+                                      type="button"
+                                      title="Actions"
+                                      class="p-1 hover:bg-surface1 rounded-md"
+                                    >
+                                      <IconDotsHorizontal class="text-lg text-text" />
+                                    </button>
+                                  </DropdownMenu.Trigger>
+                                  <DropdownMenu.Portal>
+                                    <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-base/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                                      <DropdownMenu.Item
+                                        onClick={() =>
+                                          downloadUploadedFile(file())
+                                        }
+                                        class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                      >
+                                        <IconDownload class="text-lg" />
+                                        Download
+                                      </DropdownMenu.Item>
+                                      <DropdownMenu.Item class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md">
+                                        <IconStarOutline class="text-lg" />
+                                        Favorite
+                                      </DropdownMenu.Item>
+                                      <DropdownMenu.Item
+                                        class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
+                                        onSelect={() => openDeleteModal(file())}
+                                      >
+                                        <IconDeleteOutline class="text-lg" />
+                                        Delete permanently
+                                      </DropdownMenu.Item>
+                                    </DropdownMenu.Content>
+                                  </DropdownMenu.Portal>
+                                </DropdownMenu.Root>
+                              </div>
+                            </div>
+                          )}
+                        </Match>
+                        <Match
+                          when={content.type === "workspace" && content.data}
+                        >
+                          {(workspace) => (
+                            <A
+                              class="w-full h-auto py-3 px-2 flex flex-row justify-between text-text items-center gap-1 md:border-b border-surface2  hover:bg-surface0/50"
+                              href={`/dashboard/${workspace().id}`}
+                            >
+                              <div class="flex flex-row gap-2 pl-0.5 text-text">
+                                <Show
+                                  when={workspace().name === "../"}
+                                  fallback={
+                                    <IconFolderOutline class="text-lg" />
+                                  }
+                                >
+                                  <IconArrowULeftTop class="text-lg mb-0.5" />
+                                </Show>
+                                <p class="text-sm mt-0.5 lg:w-122 w-80 truncate text-ellipsis text-[#0f0f0f]">
+                                  {getWorkspaceName(workspace().name)}
                                 </p>
                               </div>
-                              <div class="flex flex-row gap-2 text-text">
-                                <p class="text-sm mt-0.5">
-                                  {relativeTime(file().created_at)}
-                                </p>
-                              </div>
-                            </div>
-                            <div class="flex flex-row gap-1">
-                              <button
-                                type="button"
-                                title="Share"
-                                class="p-1 hover:bg-surface1 rounded-md"
-                                onClick={async () => {
-                                  const url = getUploadedFileURL(file());
-                                  await navigator.clipboard.writeText(url.href);
-                                }}
-                              >
-                                <IconShareVariantOutline class="text-lg text-text" />
-                              </button>
-                              <DropdownMenu.Root>
-                                <DropdownMenu.Trigger>
-                                  <button
-                                    type="button"
-                                    title="Actions"
-                                    class="p-1 hover:bg-surface1 rounded-md"
-                                  >
-                                    <IconDotsHorizontal class="text-lg text-text" />
-                                  </button>
-                                </DropdownMenu.Trigger>
-                                <DropdownMenu.Portal>
-                                  <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-base/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
-                                    <DropdownMenu.Item
-                                      onClick={() =>
-                                        downloadUploadedFile(file())
-                                      }
-                                      class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
-                                    >
-                                      <IconDownload class="text-lg" />
-                                      Download
-                                    </DropdownMenu.Item>
-                                    <DropdownMenu.Item class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md">
-                                      <IconStarOutline class="text-lg" />
-                                      Favorite
-                                    </DropdownMenu.Item>
-                                    <DropdownMenu.Item
-                                      class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
-                                      onSelect={() => openDeleteModal(file())}
-                                    >
-                                      <IconDeleteOutline class="text-lg" />
-                                      Delete permanently
-                                    </DropdownMenu.Item>
-                                  </DropdownMenu.Content>
-                                </DropdownMenu.Portal>
-                              </DropdownMenu.Root>
-                            </div>
-                          </div>
-                        )}
-                      </Match>
-                      <Match
-                        when={content.type === "workspace" && content.data}
-                      >
-                        {(workspace) => (
-                          <A
-                            class="w-full h-auto py-3 px-2 flex flex-row justify-between text-text items-center gap-1 md:border-b border-surface2  hover:bg-surface0/50"
-                            href={`/dashboard/${workspace().id}`}
-                          >
-                            <div class="flex flex-row gap-2 pl-0.5 text-text">
-                              <Show
-                                when={workspace().name === "../"}
-                                fallback={<IconFolderOutline class="text-lg" />}
-                              >
-                                <IconArrowULeftTop class="text-lg mb-0.5" />
-                              </Show>
-                              <p class="text-sm mt-0.5 lg:w-130 w-80 truncate text-ellipsis text-[#0f0f0f]">
-                                {getWorkspaceName(workspace().name)}
-                              </p>
-                            </div>
-                          </A>
-                        )}
-                      </Match>
-                    </Switch>
-                  )}
-                </For>
+                            </A>
+                          )}
+                        </Match>
+                      </Switch>
+                    )}
+                  </For>
+                </div>
               </section>
             </main>
           </div>
