@@ -32,11 +32,7 @@ serve(async (req: Request) => {
     const formData = await req.formData();
     const formDataFiles = formData.getAll("files") as File[];
   
-    const workspaceId = formData.get("workspace_id") as string | undefined;
-    if (user_profile && !workspaceId) return json({
-      success: false,
-      message: "Authenticated users should always specify a workspace ID."
-    });
+    const workspaceId = (formData.get("workspace_id") as string | undefined) ?? user_profile?.root_workspace_id ?? undefined;
   
     const isPrivate = parseInt((formData.get("private") as string | null) ?? "1");
     const newUploadsInDatabase: UploadedFile[] = [];
