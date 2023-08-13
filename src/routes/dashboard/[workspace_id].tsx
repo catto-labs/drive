@@ -21,6 +21,7 @@ import IconChevronRight from "~icons/mdi/chevron-right";
 import IconCheck from "~icons/mdi/check";
 import IconPlus from "~icons/mdi/plus";
 import IconFolderAccountOutline from "~icons/mdi/folder-account-outline";
+import IconAccountPlusOutline from "~icons/mdi/account-plus-outline";
 import IconAccountMultipleOutline from "~icons/mdi/account-multiple-outline";
 import IconTrashCanOutline from "~icons/mdi/trash-can-outline";
 import IconAccount from "~icons/mdi/account";
@@ -40,7 +41,7 @@ import SpinnerRingResize from "~icons/svg-spinners/ring-resize";
 import { getFileIcon } from "@/utils/getFileIcons";
 import { relativeTime } from "@/utils/relativeTime";
 
-import { DropdownMenu } from "@kobalte/core";
+import { DropdownMenu, Switch as KSwitch } from "@kobalte/core";
 import { createModal } from "@/primitives/modal";
 
 import {
@@ -55,6 +56,7 @@ import { getWorkspace, createWorkspace } from "@/utils/workspaces";
 
 import { workspaces, setWorkspaces } from "@/stores/workspaces";
 import { auth, logOutUser } from "@/stores/auth";
+import { getUserFrom, saveUploadSharingPreferences } from "@/utils/users";
 
 const Page: Component = () => {
   const [view, setView] = createSignal("name");
@@ -152,22 +154,127 @@ const Page: Component = () => {
     </>
   ));
 
-  const [openSharingModal] = createModal<WorkspaceContent>(({ data: content }) => (
-    <div class="flex flex-col gap-2">
-      <h1 class="text-xl font-medium">
-        Sharing
-      </h1>
-      <div class="flex gap-2 items-center justify-center">
-        {content!.type === "file" ? getFileIcon(content!.data) : <IconFolderOutline />}
-        <p class="text-sm text-text">
-          {content?.data.name || content?.data.id}
-        </p>
+  const [openSharingModal] = createModal<WorkspaceContent>(({ data: content, close }) => {
+    // We only check for files, since workspaces are always private.
+    // The only way to share workspaces is sharing the access to someone.
+    const [isPublic, setIsPublic] = createSignal(content.type === "file" ? !content.data.private : false);
+    const [uidShared, setUidShared] = createSignal(content.data.shared_with);
+    const [uidToAdd, setUidToAdd] = createSignal("");
+
+    return (
+      <div class="flex flex-col gap-4">
+        <h1 class="text-2xl font-semibold text-center">
+          Sharing
+        </h1>
+        <div class="flex gap-2 items-center justify-center px-3 py-1 bg-crust rounded-lg w-fit mx-auto mb-2">
+          {content.type === "file" ? getFileIcon(content.data) : <IconFolderOutline />}
+          <p class="text-text">
+            {content.data.name || content.data.id}
+          </p>
+        </div>
+
+        <Show when={content.type === "file"}>
+          <KSwitch.Root
+            class="inline-flex items-center cursor-pointer mx-auto"
+            checked={isPublic()}
+            onChange={setIsPublic}
+          >
+            <KSwitch.Input />
+            <KSwitch.Control class="inline-flex items-center h-[24px] w-[44px] border border-text rounded-xl py-0 px-.5 bg-text ui-checked:(bg-lavender border-lavender) transition">
+              <KSwitch.Thumb class="h-[20px] w-[20px] rounded-2.5 bg-base ui-checked:translate-x-[calc(100%-1px)] transition" />
+            </KSwitch.Control>
+            <KSwitch.Label
+              class="ml-2 text-text text-lg select-none font-medium"
+            >
+              Public to <strong class="font-semibold">everyone who have the link</strong>
+            </KSwitch.Label>
+          </KSwitch.Root>
+        </Show>
+
+        <Show when={content.type === "workspace" || (content.type === "file" && !isPublic())}>
+          <div class="flex flex-col">
+            <p class="text-text select-none">Give access to this {content.type} to some users</p>
+            <p class="text-text text-sm font-medium">Note that those users will <strong class="font-semibold">have full access to the {content.type}</strong>, but won't be able to delete it.</p>
+          
+            <form
+              class="flex w-full mt-2"
+              onSubmit={async (event) => {
+                event.preventDefault();
+                const user_data = await getUserFrom(uidToAdd());
+                if (!user_data) {
+                  alert("This user doesn't exist!");
+                  return;
+                }
+
+                if (user_data.user_id === auth.profile!.user_id) {
+                  alert("You can't add yourself!");
+                  return;
+                }
+
+                if (uidShared().includes(user_data.user_id)) {
+                  alert("You can't add multiple times the same person!");
+                  return;
+                }
+
+                setUidShared(prev => [...prev, user_data.user_id]);
+                setUidToAdd("");
+              }}
+            >
+              <input
+                class="w-full rounded-l bg-base outline-none px-3 py-2"
+                type="text"
+                placeholder="Enter email or user ID"
+                value={uidToAdd()}
+                onInput={(event) => setUidToAdd(event.currentTarget.value)}
+              />
+              <button
+                class="rounded-r bg-base shrink-0 outline-none px-2 py-2"
+                type="submit"
+              >
+                <div class="p-1.5 bg-lavender rounded">
+                  <IconAccountPlusOutline class="text-base" />
+                </div>
+              </button>
+            </form>
+
+            <For each={uidShared()}>
+              {uid => (
+                <div class="flex items-center gap-2 text-text ml-2 mt-2">
+                  <IconAccount/> 
+                  <p class="font-medium">
+                    {uid}
+                  </p>
+                </div>
+              )}
+            </For>
+          </div>
+        </Show>
+
+        <div class="flex flex-col gap-2 text-center mt-4">
+          <button type="button"
+            class="bg-lavender bg-opacity-90 hover:bg-opacity-100 text-base px-2 py-2 rounded-lg transition"
+            onClick={async () => {
+              const new_data = await saveUploadSharingPreferences(content.type, content.data.id, isPublic(), uidShared())
+              if (!new_data) return;
+
+              setWorkspaces(params.workspace_id, "content", item => item.data.id === content.data.id, "data", new_data);
+              
+              close();
+            }}
+          >
+            Save
+          </button>
+          <button type="button"
+            class="text-text px-2 py-1 hover:bg-text/10 transition rounded-lg"
+            onClick={close}
+          >
+            Forget about it
+          </button>
+        </div>
+
       </div>
-
-      <h2>Should it be public to anyone ?</h2>
-
-    </div>
-  ))
+    )
+  })
 
   return (
     <>
@@ -438,9 +545,14 @@ const Page: Component = () => {
                                   </div>
                                   <div class="flex flex-col md:flex-row truncate pr-4">
                                     <div class="flex flex-row gap-2 text-[#0f0f0f] lg:w-142 md:w-100">
-                                      <p class="text-sm mt-0.5 lg:w-122 md:w-80 truncate text-ellipsis ">
+                                      <p class="flex gap-2 items-center text-sm mt-0.5 lg:w-122 md:w-80 truncate text-ellipsis">
                                         {file().data.name}
+                                        <Show when={!file().data.private}>
+                                          <IconAccountMultipleOutline class="text-text" />
+                                          {/* <span class="ml-2 bg-lavender text-base rounded px-1.5 py-0.5 font-medium text-xs">Public</span> */}
+                                        </Show>
                                       </p>
+
                                     </div>
                                     <div class="flex-row gap-2 text-text">
                                       <p class="text-sm mt-0.5">

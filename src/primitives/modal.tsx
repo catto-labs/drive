@@ -32,7 +32,7 @@ export const createModal = <T,>(createModalContent: (components: {
   Title: typeof Modal["Title"]
   Description: typeof Modal["Description"]
   CloseButton: typeof Modal["CloseButton"],
-  data: T | null,
+  data: T,
   close: () => void
 }) => JSX.Element) => {
   const [data, setData] = createSignal<T | null>(null);
@@ -42,29 +42,23 @@ export const createModal = <T,>(createModalContent: (components: {
   document.body.appendChild(portal);
 
   const dispose = render(() => (
-    <Modal open={open()} onOpenChange={(open) => batch(() => {
-      setOpen(open);
-      if (!open) setData(null);
-    })}>
+    <Modal open={open()} onOpenChange={setOpen}>
       {createModalContent({
         Title: Modal.Title,
         Description: Modal.Description,
         CloseButton: Modal.CloseButton,
-        data: data(),
+        data: data() as T,
         close: hide
       })}
     </Modal>
   ), portal);
 
-  const show = (new_data?: T) => batch(() => {
+  const show = (new_data: T) => batch(() => {
     setOpen(true);
-    setData(() => (new_data ?? null));
+    setData(() => new_data);
   });
 
-  const hide = () => batch(() => {
-    setOpen(false);
-    setData(null);
-  });
+  const hide = () => setOpen(false);
 
   onCleanup(() => {
     dispose();

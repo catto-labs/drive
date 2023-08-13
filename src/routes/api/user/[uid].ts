@@ -50,7 +50,7 @@ export const GET = async ({ request, params }: APIEvent): Promise<Response> => {
     return json({
       success: true,
       data: {
-        id: user_profile.user_id,
+        user_id: user_profile.user_id,
         username: user_profile.username,
         first_name: user_profile.first_name,
         last_name: user_profile.last_name
