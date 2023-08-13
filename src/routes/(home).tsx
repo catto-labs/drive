@@ -115,7 +115,7 @@ const Page: Component = () => {
                 </button>
 
                 <div class="flex flex-col gap-1">
-                  <h1 class="text-xl font-semibold text-text">
+                  <h1 class="text-xl font-semibold text-[#0f0f0f]">
                     {!(state as MainState).dragging
                       ? "Drop it like it's hot."
                       : "Ready for blast off!"}
@@ -123,22 +123,21 @@ const Page: Component = () => {
                   <Show
                     when={!(state as MainState).dragging}
                     fallback={
-                      <p class="text-subtext0">
+                      <p class="text-subtext1">
                         Drop the files to upload them!
                       </p>
                     }
                   >
-                    <span class="text-subtext0">Upload files by dragging them here</span>
+                    <span class="text-text">Upload files by dragging them here</span>
                     <span class="text-subtext1">
-                      or select some{" "}
+                      or 
                       <button
                         type="button"
                         class="underline-dotted underline hover:underline-solid hover:underline-lavender hover:text-lavender"
                         onClick={() => createFileImporter(handleUploadedFiles)}
                       >
-                        files
+                        select some files yourself.
                       </button>
-                      {" "}yourself.
                     </span>
                   </Show>
                 </div>
@@ -236,9 +235,9 @@ const Page: Component = () => {
                 </For>
               </div>
               <button onClick={() => batch(() => {
-                  setState({ view: "main", dragging: false });
-                  setFilesToUpload([]);
-                })} 
+                setState({ view: "main", dragging: false });
+                setFilesToUpload([]);
+              })}
                 class="w-full mt-4 px-4 py-2 rounded border border-lavender text-text hover:bg-lavender hover:text-crust"
               >
                 Go back & upload more files (*ᴗ͈ˬᴗ͈)ꕤ*.ﾟ
