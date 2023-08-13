@@ -16,7 +16,7 @@ import IconFileKeyOutline from "~icons/mdi/file-key-outline";
 import IconFileLinkOutline from "~icons/mdi/file-link-outline";
 import IconFileLockOutline from "~icons/mdi/file-lock-outline";
 import IconFileMarkerOutline from "~icons/mdi/file-marker-outline";
-import IconFileMusicOutline from "~icons/mdi/file-marker-outline";
+import IconFileMusicOutline from "~icons/mdi/file-music-outline";
 import IconFilePdfBox from "~icons/mdi/file-pdf-box";
 import IconFilePowerpointOutline from "~icons/mdi/file-powerpoint-outline";
 import IconFilePresentationBox from "~icons/mdi/file-presentation-box";
