@@ -20,6 +20,7 @@
     "vite": "^4.4.6"
   },
   "dependencies": {
+    "@fontsource/quicksand": "^5.0.8",
     "@iconify-json/fa6-brands": "^1.1.13",
     "@iconify-json/svg-spinners": "^1.1.2",
     "@kobalte/core": "^0.9.8",

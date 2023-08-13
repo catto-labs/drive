@@ -1,4 +1,9 @@
 // @refresh reload
+import "@fontsource/quicksand/300.css";
+import "@fontsource/quicksand/400.css";
+import "@fontsource/quicksand/500.css";
+import "@fontsource/quicksand/600.css";
+import "@fontsource/quicksand/700.css";
 import "@unocss/reset/tailwind.css";
 import "virtual:uno.css";
 import "@/styles.css";
@@ -49,7 +54,7 @@ export default function Root() {
         <Meta name="msapplication-TileColor" content="#7287fd" />
         <Meta name="theme-color" content="#ffffff" />
       </Head>
-      <Body class="min-h-screen h-full bg-[url(https://source.unsplash.com/collection/175083)] bg-no-repeat bg-cover bg-center bg-crust">
+      <Body class="font-sans min-h-screen h-full bg-[url(https://source.unsplash.com/collection/175083)] bg-no-repeat bg-cover bg-center bg-crust">
         <FullscreenLoaderEntry />
 
         <Suspense fallback={
