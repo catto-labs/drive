@@ -12,21 +12,22 @@ Drive - a versatile file-sharing platform inspired by Google Drive and WeTransfe
 ## Table of Contents
 Buckle up your seatbelt, this'll be a long one.
 
-  - [Tech Stack](#tech-stack)
-  - [Using the API](#using-the-api)
-    - [Differences between anonymous and authenticated users on the API](#differences-between-anonymous-and-authenticated-users-on-the-api)
-    - [Where do I find the API token?](#where-do-i-find-the-api-token)
-    - [Get a workspace ID](#get-a-workspace-id)
-    - [Integration with ShareX](#integration-with-sharex)
-      - [Manual](#manual)
-      - [Pre-made: Anonymously upload public files](#pre-made-anonymously-upload-public-files)
-    - [Integration with cURL](#integration-with-curl)
-      - [Upload as anonymous](#upload-as-anonymous)
-      - [Upload as authenticated to a certain workspace](#upload-as-authenticated-to-a-certain-workspace)
-  - [Meet The Team](#meet-the-team)
-  - [Project setup and development](#project-setup-and-development)
-    - [Recommended IDE Setup:](#recommended-ide-setup)
-    - [Development setup:](#development-setup)
+- [Tech Stack](#tech-stack)
+- [Demo Videos](#demo-videos)
+- [Using the API](#using-the-api)
+  - [Differences between anonymous and authenticated users on the API](#differences-between-anonymous-and-authenticated-users-on-the-api)
+  - [Where do I find the API token?](#where-do-i-find-the-api-token)
+  - [Get a workspace ID](#get-a-workspace-id)
+  - [Integration with ShareX](#integration-with-sharex)
+    - [Manual](#manual)
+    - [Pre-made: Anonymously upload public files](#pre-made-anonymously-upload-public-files)
+  - [Integration with cURL](#integration-with-curl)
+    - [Upload as anonymous](#upload-as-anonymous)
+    - [Upload as authenticated to a certain workspace](#upload-as-authenticated-to-a-certain-workspace)
+- [Meet The Team](#meet-the-team)
+- [Project setup and development](#project-setup-and-development)
+  - [Recommended IDE Setup:](#recommended-ide-setup)
+  - [Development setup:](#development-setup)
 
 
 ## Tech Stack
@@ -40,6 +41,18 @@ Features of Supabase have been utilized as follows:
 * Storage: Used to store all user uploaded files.
 
 This usage is covering all major feature areas of Supabase, and many of these features like the database, edge functions and storage are heavily used across the product.
+
+## Demo Videos
+
+### Upload as anonymous through the homepage
+
+### Upload as anonymous through ShareX
+
+### Upload as authenticated through dashboard and make it public
+
+### Upload as authenticated through ShareX
+
+### Upload as authenticated through cURL
 
 ## Using the API
 
