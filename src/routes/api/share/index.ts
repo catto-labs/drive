@@ -28,11 +28,11 @@ export const GET = async ({ request }: APIEvent) => {
 
   shared_workspaces = shared_files ?? [];
 
-  return {
+  return json({
     success: true,
     data: {
       shared_workspaces,
       shared_files
     }
-  };
+  });
 };
