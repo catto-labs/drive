@@ -22,8 +22,6 @@ import IconAccountMultipleOutline from "~icons/mdi/account-multiple-outline";
 import IconTrashCanOutline from "~icons/mdi/trash-can-outline";
 import IconAccount from "~icons/mdi/account";
 import IconMenuDown from "~icons/mdi/menu-down";
-import IconFileOutline from "~icons/mdi/file-outline";
-import IconFileImageOutline from "~icons/mdi/file-image-outline";
 import IconDownload from "~icons/mdi/download";
 import IconDeleteOutline from "~icons/mdi/delete-outline";
 import IconDotsHorizontal from "~icons/mdi/dots-horizontal";
@@ -32,6 +30,7 @@ import IconClose from "~icons/mdi/close";
 import cattoDriveLogo from "@/assets/icon/logo.png";
 
 import FullscreenLoader from "@/components/FullscreenLoader";
+import { getFileIcon } from "@/utils/getFileIcons";
 
 import { DropdownMenu, Dialog } from "@kobalte/core";
 
@@ -86,17 +85,6 @@ const Page: Component = () => {
       );
     } catch (error) {
       console.error(error);
-    }
-  };
-
-  const getFileIcon = (file: any) => {
-    const fileExtension = file.name.split(".").pop().toLowerCase();
-    const imageFileExtensions = ["png", "jpg", "jpeg", "gif", "webp"];
-
-    if (imageFileExtensions.indexOf(fileExtension) !== -1) {
-      return <IconFileImageOutline class="text-xl" />;
-    } else {
-      return <IconFileOutline class="text-xl" />;
     }
   };
 
