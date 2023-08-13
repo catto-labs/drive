@@ -28,13 +28,13 @@ import IconMenuDown from "~icons/mdi/menu-down";
 import IconDownload from "~icons/mdi/download";
 import IconDeleteOutline from "~icons/mdi/delete-outline";
 import IconDotsHorizontal from "~icons/mdi/dots-horizontal";
+import IconContentCopy from "~icons/mdi/content-copy";
 import IconClose from "~icons/mdi/close";
 import IconFolderOutline from "~icons/mdi/folder-outline";
 import IconArrowULeftTop from "~icons/mdi/arrow-u-left-top";
 import cattoDriveBox from "@/assets/icon/box.png";
 import cattoDriveCatto from "@/assets/icon/catto.png";
 import SpinnerRingResize from "~icons/svg-spinners/ring-resize";
-import cattoDriveLogo from "@/assets/icon/logo.png";
 
 import { getFileIcon } from "@/utils/getFileIcons";
 import { relativeTime } from "@/utils/relativeTime";
@@ -100,10 +100,6 @@ const Page: Component = () => {
     return name;
   };
 
-  createEffect(() => {
-    window.scrollTo(0, 0);
-  });
-
   const [openDeleteModal] = createModal<UploadedFile>(({ Description, CloseButton, data: file, close }) => (
     <>
       <div class="text-text flex justify-between">
@@ -158,7 +154,7 @@ const Page: Component = () => {
   return (
     <>
       <Title>Dashboard - Drive</Title>
-      
+
       <div class="md:backdrop-blur-xl w-screen h-screen relative flex overflow-hidden">
         <div class="text-text bg-surface0/80 min-w-64 w-1/5 shrink-0 md:block hidden">
           <header class="px-4 pt-6 pb-2 shrink-0 sticky top-0 w-full h-14 flex flex-row flex flex-row gap-[10px] items-center w-full">
@@ -485,10 +481,7 @@ const Page: Component = () => {
                             when={content.type === "workspace" && content.data}
                           >
                             {(workspace) => (
-                              <A
-                                class="w-full h-auto py-3 md:px-2 px-4 flex flex-row justify-between text-text items-center gap-1 md:border-b border-surface2  hover:bg-surface0/50"
-                                href={`/dashboard/${workspace().id}`}
-                              >
+                              <A href={`/dashboard/${workspace().id}`} class="w-full h-auto p-2 px-4 md:px-2 flex flex-row justify-between items-center gap-1 md:border-b border-surface2 hover:bg-surface0/50">
                                 <div class="flex flex-row gap-x-2 truncate text-ellipsis">
                                   <Show
                                     when={workspace().name === "../"}
@@ -501,6 +494,51 @@ const Page: Component = () => {
                                   <p class="text-sm mt-0.5 lg:w-122 md:w-80 truncate text-ellipsis text-[#0f0f0f]">
                                     {getWorkspaceName(workspace().name)}
                                   </p>
+                                </div>
+
+                                <div class="flex flex-row gap-1 w-16">
+                                  <button
+                                    type="button"
+                                    title="Share"
+                                    class="p-1 hover:bg-surface1 rounded-md"
+                                    onClick={async () => {
+                                      // share modal
+                                    }}
+                                  >
+                                    <IconShareVariantOutline class="text-lg text-text" />
+                                  </button>
+                                  <DropdownMenu.Root>
+                                    <DropdownMenu.Trigger>
+                                      <button
+                                        type="button"
+                                        title="Actions"
+                                        class="p-1 hover:bg-surface1 ui-expanded:bg-surface1 transition-colors rounded-md"
+                                      >
+                                        <IconDotsHorizontal class="text-lg text-text" />
+                                      </button>
+                                    </DropdownMenu.Trigger>
+                                    <DropdownMenu.Portal>
+                                      <DropdownMenu.Content class="overview-dropdown-content min-w-[120px] bg-base/50 border border-surface2 p-2 flex flex-col gap-y-1 backdrop-blur-md rounded-lg text-sm">
+                                        <DropdownMenu.Item class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md">
+                                          <IconStarOutline class="text-lg" />
+                                          Favorite
+                                        </DropdownMenu.Item>
+                                        <DropdownMenu.Item
+                                          class="flex flex-row items-center gap-2 pl-2 pr-4 px-4 py-1 hover:bg-lavender/30 text-text hover:text-[rgb(46,48,66)] rounded-md"
+                                          onSelect={() => navigator.clipboard.writeText(workspace().id)}
+                                        >
+                                          <IconContentCopy class="text-lg" />
+                                          Copy workspace ID
+                                        </DropdownMenu.Item>
+                                        <DropdownMenu.Item
+                                          class="flex flex-row items-center gap-2 pl-2 pr-4 py-1 hover:bg-maroon/20 text-maroon rounded-md"
+                                        >
+                                          <IconDeleteOutline class="text-lg" />
+                                          Delete permanently
+                                        </DropdownMenu.Item>
+                                      </DropdownMenu.Content>
+                                    </DropdownMenu.Portal>
+                                  </DropdownMenu.Root>
                                 </div>
                               </A>
                             )}
