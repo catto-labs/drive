@@ -44,7 +44,7 @@ export default function Account() {
         <h1 class="text-4xl font-bold mb-0.5">My Account <span class="text-lavender text-xl">ᓚᘏᗢ</span></h1>
         <p class="text-subtext0 mb-6">Let our cats know who you are by updating your account information! &nbsp; ฅ^•ﻌ•^ฅ </p>
 
-        <div class="flex flex-col gap-4 mb-6">
+        <div class="flex flex-col gap-4 mb-4">
           <div>Your Email: &nbsp; <span class="text-[#0e0e0e]">PogPog@pogpog.com</span></div>
           <div>Your User ID: &nbsp; <span class="text-[#0e0e0e]">029385092835235</span></div>
           <div>Your Username: &nbsp; 
@@ -74,6 +74,8 @@ export default function Account() {
             </div>
           </div>
         </div>
+
+        <button class="mb-8 px-4 py-2 rounded-md bg-lavender text-crust">Save changes</button>
 
         <h2 class="text-2xl font-bold">Your API Key</h2>
         <p class="text-subtext0 mb-4">This is the key used to upload things to your account, e.g. for the ShareX integration. Please do not share this with anyone to prevent unwanted uploads to your account!</p>
