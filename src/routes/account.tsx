@@ -19,7 +19,7 @@ export default function Account() {
       class="h-screen w-screen relative text-sm">
       <Header />
       <main
-        class=" border-2 rounded-lg shadow-xl mx-64 border-surface0 bg-base/80 h-fit p-4 m-auto transition-all absolute left-0 right-0 top-16 bottom-0 backdrop-blur-lg"
+        class=" border-2 rounded-lg shadow-xl lg:mx-64 md:mx-32 border-surface0 bg-base/80 h-fit p-4 m-auto transition-all absolute left-0 right-0 top-16 bottom-0 backdrop-blur-lg"
       >
         <h1 class="text-2xl font-semibold text-[#0f0f0f] mb-1">My Account <span class="text-lavender ml-2 text-sm">ᓚᘏᗢ</span></h1>
         <p class="text-text">
