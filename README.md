@@ -46,21 +46,23 @@ This usage is covering all major feature areas of Supabase, and many of these fe
 
 ### Upload as anonymous through the homepage
 
-[![Watch the video](https://drive.cattolabs.com/api/file/360ba0a3-f090-46b8-b528-f2159974187a)](https://drive.cattolabs.com/api/file/360ba0a3-f090-46b8-b528-f2159974187a)
+https://github.com/catto-labs/drive/assets/59152884/a18372a7-4951-479b-9237-fea8059a9ef0
 
 ### Upload as anonymous through ShareX
 
-[![Watch the video](https://drive.cattolabs.com/api/file/8b03b8c8-5535-43c4-b82b-cf4112348c3b)](https://drive.cattolabs.com/api/file/8b03b8c8-5535-43c4-b82b-cf4112348c3b)
+https://github.com/catto-labs/drive/assets/59152884/4c6a8f64-6f70-436d-a9de-a66ee9ca3d41
 
 ### Upload as authenticated through dashboard and make it public
 
-[![Watch the video](https://drive.cattolabs.com/api/file/494e4ef0-15fd-4a27-b658-511e16e20e75)](https://drive.cattolabs.com/api/file/494e4ef0-15fd-4a27-b658-511e16e20e75)
+https://github.com/catto-labs/drive/assets/59152884/1dda4cdc-6b7f-4fc3-aea0-614b4a094fea
 
 ### Upload as authenticated through ShareX
-[![Watch the video](https://drive.cattolabs.com/api/file/828297ac-85bd-4948-8b15-10856d663789)](https://drive.cattolabs.com/api/file/828297ac-85bd-4948-8b15-10856d663789)
+
+https://github.com/catto-labs/drive/assets/59152884/f2c01cf2-c4eb-49f1-a3c6-6c1d091cc92d
 
 ### Upload as authenticated through cURL
-[![Watch the video](https://drive.cattolabs.com/api/file/65df2d5f-394b-43e1-87f5-063e00c341a0)](https://drive.cattolabs.com/api/file/65df2d5f-394b-43e1-87f5-063e00c341a0)
+
+https://github.com/catto-labs/drive/assets/59152884/fcc8ae92-83ae-402b-8595-d1cab83ce6a3
 
 ## Using the API
 
