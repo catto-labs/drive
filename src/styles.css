@@ -10,6 +10,8 @@ blockquote:before {
 
 .overview-dropdown-content {
   animation: contentHide 150ms ease-in forwards;
+  transform-origin: var(--kb-menu-content-transform-origin);
+  z-index: 50;
 }
 
 .overview-dropdown-content[data-expanded] {
