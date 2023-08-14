@@ -25,10 +25,11 @@ import SpinnerRingResize from "~icons/svg-spinners/ring-resize";
 import FullscreenLoader from "@/components/FullscreenLoader";
 import { createFileImporter, makeFileUpload } from "@/utils/files";
 import { setWorkspaces, workspaces } from "@/stores/workspaces";
-import { WorkspaceContent } from "@/types/api";
+import { UploadedFile, WorkspaceContent } from "@/types/api";
 import { DropdownMenu } from "@kobalte/core";
 import { createModal } from "@/primitives/modal";
 import { createWorkspace } from "@/utils/workspaces";
+import toast from "solid-toast";
 
 export const [layoutLoading, setLayoutLoading] = createSignal(true);
 
@@ -37,11 +38,26 @@ export const fileUploadHandler = async (workspace_id: string | undefined, files:
   if (!workspace_id) return;
 
   try {
-    const uploaded = await makeFileUpload(files, {
-      workspace_id: workspace_id,
-      private: true,
-    });
+    let uploaded: UploadedFile[] | null = null;
 
+    await toast.promise(
+      makeFileUpload(files, {
+        workspace_id: workspace_id,
+        private: true,
+      }),
+      {
+        loading: "Uploading your file...",
+        success: (val) => {
+          uploaded = val;
+          console.log(val);
+          return <span>Upload successful!</span>;
+        },
+        error: <span>Theme could not be saved</span>
+      }
+    )
+    if (!uploaded) return;
+
+    // @ts-ignore
     const new_content: WorkspaceContent[] = uploaded.map((file) => ({
       type: "file",
       data: file,
