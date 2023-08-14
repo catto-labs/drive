@@ -385,7 +385,7 @@ const Layout: Component = () => {
                 </DropdownMenu.Root>
               </div>
             </header>
-            <div class="mt-16"><Outlet /></div>
+            <div class="overflow-y-auto py-3 md:py-0"><Outlet /></div>
             
             <footer class="fixed bottom-0 h-16 w-full flex shrink-0 flex-row gap-x-24 backdrop-blur-md justify-center border-t border-surface1 bg-surface0/30 px-4 shadow-sm md:hidden">
               <A
