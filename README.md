@@ -90,7 +90,8 @@ grab your "API Token" from there.
 
 ### Get a workspace ID
 
-> TODO
+In your dashboard, you can simply copy a workspace/folder ID using the three dots on a folder and selection the option "Copy workspace ID"
+Using this ID, you can upload to certain workspaces with our API, examples can be found below.
 
 ### Integration with [ShareX](https://getsharex.com/)
 
