@@ -352,9 +352,9 @@ const Page: Component = () => {
                                     <Show when={!file().data.private}>
                                       <DropdownMenu.Item
                                         class="flex flex-row items-center gap-2 rounded-md px-4 py-1 pl-2 pr-4 text-text hover:bg-lavender/30 hover:text-[rgb(46,48,66)]"
-                                        onSelect={async () => {
+                                        onSelect={() => {
                                           const url = getUploadedFileURL(file().data);
-                                          await navigator.clipboard.writeText(url.href);
+                                          navigator.clipboard.writeText(url.href);
                                         }}
                                       >
                                         <IconContentCopy class="text-lg" />
