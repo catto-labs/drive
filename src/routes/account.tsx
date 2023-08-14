@@ -135,7 +135,7 @@ export default function Account() {
                 <span class="text-text">{auth.profile?.api_token}</span>
               </div>
               <div class="mt-2 flex flex-row justify-end gap-4">
-                <button class="rounded-md bg-lavender px-4 py-2 text-base">Regenerate</button>
+                <button class="rounded-md bg-lavender px-4 py-2 text-base" onClick={() => toast.error("Not implemented yet. If your token has been compromised, please contact us at support@cattolabs.com")}>Regenerate</button>
                 <button class="rounded-md bg-lavender px-4 py-2 text-base">Copy</button>
               </div>
             </div>
