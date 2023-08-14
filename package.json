@@ -38,7 +38,8 @@
     "@supabase/supabase-js": "^2.32.0",
     "@unocss/reset": "^0.54.2",
     "solid-js": "^1.7.11",
-    "solid-start": "^0.2.30"
+    "solid-start": "^0.2.30",
+    "solid-toast": "^0.5.0"
   },
   "engines": {
     "node": ">=16"

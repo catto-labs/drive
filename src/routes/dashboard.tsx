@@ -126,7 +126,7 @@ const Layout: Component = () => {
         }}
       >
         <input type="text"
-          class="mb-3 rounded-md px-3 py-2 text-text outline-none"
+          class="mb-3 rounded-md px-3 py-2 text-text bg-base outline-none placeholder-text-subtext1"
           placeholder="Enter a name for your folder..."
           value={newFolderName()}
           onInput={event => setNewFolderName(event.target.value)}

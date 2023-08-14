@@ -26,6 +26,7 @@ import {
 import FullscreenLoader, { FullscreenLoaderEntry } from "@/components/FullscreenLoader";
 import { getProfileWithSession, supabase } from "@/supabase/client";
 import { setAuth } from "@/stores/auth";
+import { Toaster } from "solid-toast";
 
 export default function Root() {
   onMount(async () => {
@@ -55,6 +56,7 @@ export default function Root() {
         <Meta name="theme-color" content="#ffffff" />
       </Head>
       <Body class="h-full min-h-screen bg-crust bg-[url(https://source.unsplash.com/collection/175083)] bg-cover bg-center bg-no-repeat font-sans">
+        <Toaster/>
         <FullscreenLoaderEntry />
 
         <Suspense fallback={

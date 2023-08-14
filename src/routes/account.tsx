@@ -4,6 +4,7 @@ import { auth, setAuth } from "@/stores/auth";
 
 import Header from "@/components/landing/Header";
 import FullscreenLoader from "@/components/FullscreenLoader";
+import toast from "solid-toast";
 
 export default function Account() {
   const [username, setUsername] = createSignal(auth.profile?.username ?? "");
@@ -38,6 +39,7 @@ export default function Account() {
   
     const json = await response.json();
     setAuth("profile", json.data);
+    toast.success("Updated your account data.");
   };
 
   return (
