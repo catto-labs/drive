@@ -393,8 +393,8 @@ const Layout: Component = () => {
               >
                 <IconFolderAccountOutline class="h-7 w-13 rounded-full "
                   classList={{
-                    "from-lavender/30 to-mauve/20 bg-gradient-to-r": location.pathname.startsWith("/dashboard/shared"),
-                    "hover:bg-gradient-to-r from-lavender/30": !location.pathname.startsWith("/dashboard/shared")
+                    "from-lavender/30 to-mauve/20 bg-gradient-to-r": typeof params.workspace_id !== "undefined",
+                    "hover:bg-gradient-to-r from-lavender/30": typeof params.workspace_id === "undefined"
                   }} />
                 <span class="text-[0.8rem]">My Workspace</span>
               </A>
