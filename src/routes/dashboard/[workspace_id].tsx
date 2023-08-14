@@ -111,12 +111,14 @@ const Page: Component = () => {
           close();
         }}
       >
-        <button
-          type="submit"
-          class="my-auto border border-surface1 rounded-lg bg-flamingo/80 px-4 py-2 transition-all hover:border-lavender hover:bg-flamingo"
-        >
+        <Modal.CloseButton class="my-auto rounded-lg p-2 hover:bg-maroon/20">
+          <button
+            type="submit"
+            class="my-auto border border-surface1 rounded-lg bg-flamingo/80 px-4 py-2 transition-all hover:border-lavender hover:bg-flamingo"
+          >
           Yes
-        </button>
+          </button>
+        </Modal.CloseButton>
         <Modal.CloseButton
           type="button"
           class="my-auto border border-surface1 rounded-lg bg-base/50 px-4 py-2 transition-all hover:border-lavender hover:bg-base"
