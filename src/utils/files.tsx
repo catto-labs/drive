@@ -91,7 +91,7 @@ export const downloadUploadedFile = (file: UploadedFile) => {
 
   toast.custom(() => (
     <div 
-      class="relative flex flex-col gap-2 rounded-md bg-base px-6 py-3 pr-12 font-medium shadow-md">
+      class="relative flex flex-col gap-2 rounded-md bg-base px-6 py-3 pr-12 font-medium text-text shadow-md">
         Downloading... {downloadProgress()}%
       <progress value={downloadProgress()} max={100} class="bg-lavender" />
     </div>

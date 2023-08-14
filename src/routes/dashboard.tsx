@@ -386,7 +386,7 @@ const Layout: Component = () => {
             </header>
             <div class="overflow-y-auto py-3 md:py-0"><Outlet /></div>
             
-            <footer class="fixed bottom-0 h-16 w-full flex shrink-0 flex-row gap-x-24 backdrop-blur-md justify-center border-t border-surface1 bg-surface0/30 px-4 shadow-sm md:hidden">
+            <footer class="fixed bottom-0 h-16 w-full flex shrink-0 flex-row gap-x-24 backdrop-blur-md justify-center border-t text-text border-surface1 bg-surface0/30 px-4 shadow-sm md:hidden">
               <A
                 href={`/dashboard/${auth.profile!.root_workspace_id}`}
                 class="flex flex-col items-center gap-1 rounded-md px-2 py-2 transition"
