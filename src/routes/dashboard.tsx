@@ -242,7 +242,7 @@ const Layout: Component = () => {
           </div>
 
           <div class="z-20 h-full w-full flex flex-col border-l border-surface2 bg-base md:w-4/5">
-            <header class="fixed top-0 z-20 h-16 w-full flex flex-row justify-between border-b backdrop-blur-md border-surface1 bg-surface0/30 pl-2 shadow-sm md:pl-0">
+            <header class="fixed md:sticky top-0 z-20 h-16 w-4/5 right-0 w-full flex flex-row justify-between border-b backdrop-blur-md border-surface1 bg-surface0/30 pl-2 shadow-sm md:pl-0">
               <h1 class="ml-4 hidden h-full flex-col justify-center border-base font-semibold text-text md:flex">
                 {params.workspace_id === auth.profile!.root_workspace_id ? "My workspace" : (
                   params.workspace_id ? workspaces[params.workspace_id]
