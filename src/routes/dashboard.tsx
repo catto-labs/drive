@@ -49,7 +49,6 @@ export const fileUploadHandler = async (workspace_id: string | undefined, files:
         loading: "Uploading your file...",
         success: (val) => {
           uploaded = val;
-          console.log(val);
           return <span>Upload successful!</span>;
         },
         error: <span>Theme could not be saved</span>
