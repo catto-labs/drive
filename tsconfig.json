@@ -26,6 +26,6 @@
     ],
   },
 
-  "include": ["src", ".eslintrc.cjs", "vite.config.ts", "uno.config.ts"],
+  "include": ["src", "supabase", ".eslintrc.cjs", "vite.config.ts", "uno.config.ts"],
   "exclude": ["node_modules/**", "dist/**", ".solid/**"]
 }

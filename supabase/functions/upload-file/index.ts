@@ -1,14 +1,13 @@
-
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 import type { UploadedFile, UserProfile } from "../../../src/types/api.ts";
 import { supabase, getUserProfile } from "../_shared/supabase.ts";
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'PUT',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info',
-}
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "PUT",
+  "Access-Control-Allow-Headers": "authorization, x-client-info",
+};
 
 const json = <T>(data: T, options?: { status: number }) => new Response(
   JSON.stringify(data),
@@ -55,9 +54,9 @@ serve(async (req: Request) => {
       newUploadsInDatabase.push(upload);
   
       await supabase.storage
-        .from('uploads')
+        .from("uploads")
         .upload(`${user_profile?.user_id ?? "anon"}/${upload.id}.${file_extension}`, file, {
-          cacheControl: '3600',
+          cacheControl: "3600",
           upsert: true
         });
     }
@@ -71,5 +70,5 @@ serve(async (req: Request) => {
   return json({
     success: false,
     message: "Unknown method."
-  })
-})
+  });
+});
