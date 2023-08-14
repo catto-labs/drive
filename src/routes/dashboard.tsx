@@ -46,12 +46,12 @@ export const fileUploadHandler = async (workspace_id: string | undefined, files:
         private: true,
       }),
       {
-        loading: "Uploading your file...",
+        loading: "Uploading...",
         success: (val) => {
           uploaded = val;
           return <span>Upload successful!</span>;
         },
-        error: <span>Theme could not be saved</span>
+        error: <span>File could not be uploaded!</span>
       }
     )
     if (!uploaded) return;
