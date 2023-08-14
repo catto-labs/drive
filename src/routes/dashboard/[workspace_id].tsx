@@ -274,7 +274,7 @@ const Page: Component = () => {
           <Show when={workspaces[params.workspace_id]}
             fallback={<LoadingSection message="Our cats are gathering the files for this workspace!" />}
           >
-            <section class="block h-full overflow-y-auto py-3 md:p-4">
+            <section class="block h-full overflow-y-auto py-16 md:p-4 md:py-3">
               <div class="hidden h-auto w-full flex-row items-center justify-between gap-1 px-2 pb-1 pl-10 text-sm text-subtext0 md:flex">
                 <div class="flex flex-row">
                   <span class="w-100 lg:w-142">Name</span>
