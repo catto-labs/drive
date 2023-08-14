@@ -1,6 +1,5 @@
 import { auth } from "@/stores/auth";
 import type { UploadedFile } from "@/types/api";
-import { createSignal } from "solid-js";
 import toast from "solid-toast";
 
 export const createFileImporter = (onFileUploaded: (files: FileList) => unknown) => {
@@ -80,8 +79,6 @@ export const getUploadedFileURL = (file: UploadedFile) => {
   return url;
 };
 
-const [downloadProgress, setDownloadProgress] = createSignal(0);
-
 export const downloadUploadedFile = (file: UploadedFile) => {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "/api/file/" + file.id, true);
@@ -92,8 +89,7 @@ export const downloadUploadedFile = (file: UploadedFile) => {
   toast.custom(() => (
     <div 
       class="relative flex flex-col gap-2 rounded-md bg-base px-6 py-3 pr-12 font-medium text-text shadow-md">
-        Downloading... {downloadProgress()}%
-      <progress value={downloadProgress()} max={100} class="bg-lavender" />
+        Downloading your file, please wait...
     </div>
   ), {
     unmountDelay: 0
@@ -121,7 +117,6 @@ export const downloadUploadedFile = (file: UploadedFile) => {
   xhr.onprogress = (event) => {
     if (event.lengthComputable) {
       console.info(file.name, `${event.loaded}/${event.total} (${event.loaded * 100 / event.total}%)`);
-      setDownloadProgress(Math.floor(event.loaded * 100 / event.total));
 
       if (event.loaded === 1) {
         toast.dismiss();
