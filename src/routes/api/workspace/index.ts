@@ -1,6 +1,7 @@
 import { type APIEvent, json } from "solid-start";
 import { supabase, getUserProfile } from "@/supabase/server";
 import type { UploadedFile, UserProfile, WorkspaceMeta, WorkspaceContent } from "@/types/api";
+import { getPermissionForWorkspace } from "@/supabase/server/utils";
 
 export const GET = async ({ request }: APIEvent): Promise<Response> => {
   const api_token = request.headers.get("authorization");
@@ -20,16 +21,8 @@ export const GET = async ({ request }: APIEvent): Promise<Response> => {
     .eq("id", workspace_id)
     .limit(1)
     .single<WorkspaceMeta>();
-
-  const getPermissionForWorkspace = (data: WorkspaceMeta | undefined) => {
-    if (!data || !user_profile) return false;
-    const isCreator = data.creator === user_profile.user_id;
-    const isSharedWith = data.shared_with.includes(user_profile.user_id);
-    if (!isCreator && !isSharedWith) return false;
-    return true;
-  };
   
-  if (!getPermissionForWorkspace(workspace_data!)) return json({
+  if (!getPermissionForWorkspace(workspace_data, user_profile)) return json({
     success: false,
     message: "Not allowed to get that workspace."
   }, { status: 403 });
@@ -69,7 +62,7 @@ export const GET = async ({ request }: APIEvent): Promise<Response> => {
     .single<WorkspaceMeta>();
 
   // If it's not the root folder, then show a back workspace.
-  if (parent_workspace_data && getPermissionForWorkspace(parent_workspace_data)) {
+  if (parent_workspace_data && getPermissionForWorkspace(parent_workspace_data, user_profile)) {
     content.push({
       type: "workspace",
       data:  {

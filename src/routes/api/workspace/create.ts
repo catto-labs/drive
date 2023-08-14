@@ -1,6 +1,6 @@
 
 import { type APIEvent, json } from "solid-start";
-import { supabase, getUserProfile } from "@/supabase/server";
+import { supabase, getUserProfile, getPermissionForWorkspace } from "@/supabase/server";
 import type { WorkspaceMeta } from "@/types/api";
 
 /**
@@ -34,27 +34,28 @@ export const POST = async ({ request }: APIEvent) => {
     .select()
     .eq("id", parent_workspace_id)
     .limit(1)
-    .single();
+    .single<WorkspaceMeta>();
 
-  const isCreatorOfWorkspace = workspace_data.creator === user_profile.user_id;
-
-  // Check if we're the owner of the file.
-  if (!isCreatorOfWorkspace) return json({
+  if (!getPermissionForWorkspace(workspace_data, user_profile)) return json({
     success: false,
     message: "You're not allowed to access this file."
   }, { status: 403 });
+
+  const isCreatorOfCurrentWorkspace = workspace_data?.creator === user_profile.user_id;
 
   const { data: created_workspace } = await supabase
     .from("workspaces")
     .insert([{
       name: workspace_name,
       parent_workspace_id,
-      creator: user_profile.user_id
-    }])
-    .select();
+      creator: user_profile.user_id,
+      shared_with: !isCreatorOfCurrentWorkspace ? [workspace_data?.creator] : undefined
+    } as WorkspaceMeta])
+    .select()
+    .single<WorkspaceMeta>();
 
   return json({
     success: true,
-    data: created_workspace![0] as WorkspaceMeta
+    data: created_workspace
   });
 };

@@ -1,20 +1,14 @@
-import { type UserProfile } from "../../../src/types/api.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.32.0";
+import { createClient } from "@supabase/supabase-js";
 
 export const supabase = createClient(
-  Deno.env.get('SUPABASE_URL') as string,
-  Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') as string,
+  Deno.env.get("SUPABASE_URL") as string,
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") as string,
   {
-    auth: { persistSession: false },
+    auth: { persistSession: false }
   }
 );
 
-export const getUserProfile = async (token: string) => {
-  const { data: user_profile } = await supabase.from("profiles")
-    .select()
-    .eq("api_token", token)
-    .limit(1)
-    .single();
+import { getUserProfile as _getUserProfile } from "../../../src/supabase/server/utils.ts";
+export const getUserProfile = (token: string) => _getUserProfile(supabase, token);
 
-  return user_profile as UserProfile;
-};
+export { getPermissionForWorkspace } from "../../../src/supabase/server/utils.ts";
