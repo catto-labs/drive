@@ -386,22 +386,30 @@ const Layout: Component = () => {
               </div>
             </header>
             <Outlet />
-            <footer class="h-16 w-full flex shrink-0 flex-row justify-between border-t border-surface1 bg-surface0/30 px-4 shadow-sm md:hidden">
+            <footer class="h-16 w-full flex shrink-0 flex-row gap-x-24 justify-center border-t border-surface1 bg-surface0/30 px-4 shadow-sm md:hidden">
               <A
                 href={`/dashboard/${auth.profile!.root_workspace_id}`}
                 class="flex flex-col items-center gap-1 rounded-md px-2 py-2 transition"
               >
-                <IconFolderAccountOutline class="h-7 w-13 rounded-full from-lavender/30 to-mauve/20 bg-gradient-to-r" />
+                <IconFolderAccountOutline class="h-7 w-13 rounded-full "
+                  classList={{
+                    "from-lavender/30 to-mauve/20 bg-gradient-to-r": location.pathname.startsWith("/dashboard/shared"),
+                    "hover:bg-gradient-to-r from-lavender/30": !location.pathname.startsWith("/dashboard/shared")
+                  }} />
                 <span class="text-[0.8rem]">My Workspace</span>
               </A>
               <A
                 href="/dashboard/shared"
                 class="flex flex-col items-center gap-1 rounded-md px-2 py-2 transition"
               >
-                <IconFolderAccountOutline class="h-7 w-13" />
+                  <IconAccountMultipleOutline class="h-7 w-13 rounded-full"
+                  classList={{
+                    "from-lavender/30 to-mauve/20 bg-gradient-to-r": location.pathname.startsWith("/dashboard/shared"),
+                    "hover:bg-gradient-to-r from-lavender/30": !location.pathname.startsWith("/dashboard/shared")
+                  }} />
                 <span class="text-[0.8rem]">Shared</span>
               </A>
-              <A
+              {/* <A
                 href="/dashboard/favorites"
                 class="flex flex-col items-center gap-1 rounded-md px-2 py-2 transition"
               >
@@ -414,7 +422,7 @@ const Layout: Component = () => {
               >
                 <IconTrashCanOutline class="h-6 w-6" />
                 <span class="text-[0.8rem]">Recycle Bin</span>
-              </A>
+              </A> */}
             </footer>
           </div>
         </div>
