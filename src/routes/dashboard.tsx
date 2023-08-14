@@ -153,7 +153,7 @@ const Layout: Component = () => {
         <div class="flex flex-row items-center justify-end gap-2">
           <Modal.CloseButton
             type="button"
-            class="my-auto border border-surface1 rounded-lg bg-base/50 px-4 py-2 transition hover:bg-base/70"
+            class="my-auto border border-surface1 rounded-lg bg-base/50 px-4 py-2 transition text-subtext0 hover:bg-base/70"
           >
             Cancel
           </Modal.CloseButton>

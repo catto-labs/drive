@@ -384,10 +384,10 @@ const Page: Component = () => {
                               <Show
                                 when={workspace().data.name === "../"}
                                 fallback={
-                                  <IconFolderOutline class="min-w-6 text-lg" />
+                                  <IconFolderOutline class="min-w-6 text-lg text-text" />
                                 }
                               >
-                                <IconArrowULeftTop class="mb-0.5 min-w-6 text-lg" />
+                                <IconArrowULeftTop class="mb-0.5 min-w-6 text-lg text-text" />
                               </Show>
                               <p class="mt-0.5 truncate text-ellipsis text-sm text-[#0f0f0f] lg:w-122 md:w-80">
                                 {getWorkspaceName(workspace().data.name)}
