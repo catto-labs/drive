@@ -1,5 +1,5 @@
 import { auth } from "@/stores/auth";
-import { UploadedFile, UserProfile, Workspace } from "@/types/api";
+import { UploadedFile, UserProfile, WorkspaceMeta } from "@/types/api";
 
 export const getUserFrom = async (uid: string) => {
   const response = await fetch(`/api/user/${uid}`, {
@@ -25,6 +25,6 @@ export const saveUploadSharingPreferences = async (type: "workspace" | "file", c
     }
   });
 
-  const json = await response.json() as { success: boolean, data: Workspace | UploadedFile | undefined };
+  const json = await response.json() as { success: boolean, data: WorkspaceMeta | UploadedFile | undefined };
   return json.data;
 };

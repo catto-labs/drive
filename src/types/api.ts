@@ -35,3 +35,8 @@ export type WorkspaceContent = (
   | { type: "file", data: UploadedFile }
   | { type: "workspace", data: WorkspaceMeta }
 );
+
+export interface SharedData {
+  shared_files: UploadedFile[]
+  shared_workspaces: WorkspaceMeta[]
+}
