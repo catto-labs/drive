@@ -20,6 +20,7 @@ import {
 import IconPlus from "~icons/mdi/plus";
 import { auth } from "@/stores/auth";
 import type { UploadedFile } from "@/types/api";
+import toast from "solid-toast";
 
 const Page: Component = () => {
   interface MainState {
@@ -149,9 +150,22 @@ const Page: Component = () => {
               class="flex flex-col gap-2"
               onSubmit={async (event) => {
                 event.preventDefault();
-                const uploads = await makeFileUpload(filesToUpload(), {
-                  private: (state as UploadingState).private,
-                });
+                let uploads: UploadedFile[] | null = null;
+
+                await toast.promise(
+                  makeFileUpload(filesToUpload(), {
+                    private: (state as UploadingState).private,
+                  }),
+                  {
+                    loading: "Uploading...",
+                    success: (val) => {
+                      uploads = val;
+                      return <span>Upload successful!</span>;
+                    },
+                    error: <span>File could not be uploaded!</span>
+                  }
+                );
+                if (!uploads) return;
 
                 setState({ view: "uploaded", uploads });
               }}
