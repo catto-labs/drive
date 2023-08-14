@@ -49,7 +49,7 @@ export const POST = async ({ request }: APIEvent) => {
       name: workspace_name,
       parent_workspace_id,
       creator: user_profile.user_id,
-      shared_with: !isCreatorOfCurrentWorkspace ? [workspace_data?.creator] : undefined
+      shared_with: !isCreatorOfCurrentWorkspace ? [workspace_data?.creator] : []
     } as WorkspaceMeta])
     .select()
     .single<WorkspaceMeta>();
