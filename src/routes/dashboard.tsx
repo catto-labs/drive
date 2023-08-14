@@ -385,7 +385,8 @@ const Layout: Component = () => {
                 </DropdownMenu.Root>
               </div>
             </header>
-            <Outlet />
+            <div class="mt-16"><Outlet /></div>
+            
             <footer class="h-16 w-full flex shrink-0 flex-row gap-x-24 justify-center border-t border-surface1 bg-surface0/30 px-4 shadow-sm md:hidden">
               <A
                 href={`/dashboard/${auth.profile!.root_workspace_id}`}
