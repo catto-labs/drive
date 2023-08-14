@@ -17,7 +17,7 @@
     "@unocss/transformer-variant-group": "^0.54.2",
     "eslint": "^8.47.0",
     "eslint-plugin-solid": "^0.12.1",
-    "solid-start-vercel": "^0.3.2",
+    "solid-start-vercel": "^0.2.30",
     "supabase": "^1.83.7",
     "typescript": "^4.9.4",
     "unocss": "^0.54.2",
@@ -38,7 +38,7 @@
     "@supabase/supabase-js": "^2.32.0",
     "@unocss/reset": "^0.54.2",
     "solid-js": "^1.7.11",
-    "solid-start": "^0.3.2"
+    "solid-start": "^0.2.30"
   },
   "engines": {
     "node": ">=16"

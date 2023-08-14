@@ -39,8 +39,8 @@ dependencies:
     specifier: ^1.7.11
     version: 1.7.11
   solid-start:
-    specifier: ^0.3.2
-    version: 0.3.2(@solidjs/meta@0.28.6)(@solidjs/router@0.8.3)(solid-js@1.7.11)(solid-start-vercel@0.3.2)(vite@4.4.9)
+    specifier: ^0.2.30
+    version: 0.2.30(@solidjs/meta@0.28.6)(@solidjs/router@0.8.3)(solid-js@1.7.11)(solid-start-vercel@0.2.30)(vite@4.4.9)
 
 devDependencies:
   '@iconify-json/mdi':
@@ -77,8 +77,8 @@ devDependencies:
     specifier: ^0.12.1
     version: 0.12.1(eslint@8.47.0)(typescript@4.9.4)
   solid-start-vercel:
-    specifier: ^0.3.2
-    version: 0.3.2(solid-start@0.3.2)(vite@4.4.9)
+    specifier: ^0.2.30
+    version: 0.2.30(solid-start@0.2.30)(vite@4.4.9)
   supabase:
     specifier: ^1.83.7
     version: 1.83.7
@@ -4387,9 +4387,6 @@ packages:
       braces: 3.0.2
       picomatch: 2.3.1
 
-  /micromorph@0.3.1:
-    resolution: {integrity: sha512-dbX4sz405e/QQtbHFMJj0SaVP+xuBBpSpR44AQYTjsrPek8oKyeRXkbtYN1XyFVdV7WjHp5DZMwxJOJiBfH1Jw==}
-
   /mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
     engines: {node: '>= 0.6'}
@@ -5004,8 +5001,8 @@ packages:
       '@babel/types': 7.22.5
       solid-js: 1.7.11
 
-  /solid-start-vercel@0.3.2(solid-start@0.3.2)(vite@4.4.9):
-    resolution: {integrity: sha512-+m5YeMf+q3ee2Cr3A7bS5EG+VDruZS9CDB1J3BWvLk8jJvaC39nXKda8ykYyV5HOiG2YuXERoIvUcnASsEzWog==}
+  /solid-start-vercel@0.2.30(solid-start@0.2.30)(vite@4.4.9):
+    resolution: {integrity: sha512-svvWHvi7G6DBb2txh4b0TnyFiZEPZaDdujHZqEBJYu07OvEjRNkq5+pBqUl+9DOAr3YlevtR+yB5CZg5237AYA==}
     peerDependencies:
       solid-start: '*'
       vite: '*'
@@ -5017,15 +5014,15 @@ packages:
       fast-glob: 3.2.12
       micromatch: 4.0.5
       rollup: 3.27.2
-      solid-start: 0.3.2(@solidjs/meta@0.28.6)(@solidjs/router@0.8.3)(solid-js@1.7.11)(solid-start-vercel@0.3.2)(vite@4.4.9)
+      solid-start: 0.2.30(@solidjs/meta@0.28.6)(@solidjs/router@0.8.3)(solid-js@1.7.11)(solid-start-vercel@0.2.30)(vite@4.4.9)
       terser: 5.19.2
       vite: 4.4.9(@types/node@20.5.0)
     transitivePeerDependencies:
       - encoding
       - supports-color
 
-  /solid-start@0.3.2(@solidjs/meta@0.28.6)(@solidjs/router@0.8.3)(solid-js@1.7.11)(solid-start-vercel@0.3.2)(vite@4.4.9):
-    resolution: {integrity: sha512-5sYkrnVbZLtFY/RlVWic0FNLlrdpSFfv5x3pz1kiBr2MoDcKLGiH5muydkkmCJwBa8I05mK/oDytoLZ/qIA36Q==}
+  /solid-start@0.2.30(@solidjs/meta@0.28.6)(@solidjs/router@0.8.3)(solid-js@1.7.11)(solid-start-vercel@0.2.30)(vite@4.4.9):
+    resolution: {integrity: sha512-/kLq28UdXPSurgCRQfZTFf/LZVBZxSAk06G/Dd9/o2Uku23nGmGiuQf1YfZO4ZPzAunoHCLQwII1Ni/z7VLCIQ==}
     hasBin: true
     peerDependencies:
       '@solidjs/meta': ^0.28.0
@@ -5079,7 +5076,6 @@ packages:
       esbuild-plugin-solid: 0.5.0(esbuild@0.17.19)(solid-js@1.7.11)
       fast-glob: 3.3.1
       get-port: 6.1.2
-      micromorph: 0.3.1
       parse-multipart-data: 1.5.0
       picocolors: 1.0.0
       rollup: 3.27.2
@@ -5089,7 +5085,7 @@ packages:
       set-cookie-parser: 2.6.0
       sirv: 2.0.3
       solid-js: 1.7.11
-      solid-start-vercel: 0.3.2(solid-start@0.3.2)(vite@4.4.9)
+      solid-start-vercel: 0.2.30(solid-start@0.2.30)(vite@4.4.9)
       terser: 5.19.2
       undici: 5.23.0
       vite: 4.4.9(@types/node@20.5.0)
