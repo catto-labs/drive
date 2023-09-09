@@ -5,8 +5,8 @@ import { supabase, getUserProfile, getPermissionForWorkspace } from "../_shared/
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "PUT",
-  "Access-Control-Allow-Headers": "authorization, x-client-info",
+  "Access-Control-Allow-Methods": "PUT, OPTIONS",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 const json = <T>(data: T, options?: { status: number }) => new Response(
@@ -79,6 +79,10 @@ serve(async (req: Request) => {
       success: true,
       data: { uploaded: newUploadsInDatabase }
     });
+  }
+  
+  else if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
   }
 
   return json({
